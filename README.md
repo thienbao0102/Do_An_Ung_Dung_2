@@ -1,7 +1,7 @@
 # 📊 **ScoreSense - Hệ thống dự đoán đậu rớt của sinh viên**
 
 <div align="center">
-  <img src="" alt="Project Banner" width="300"/>
+  <img src="https://github.com/machhoai/Stride-Sync/blob/bee1e22eac4b325bf811a765d863863723a8b367/public/header.png" alt="Project Banner" width="500"/>
 </div>
 
 ## 🏫 Văn Lang University
