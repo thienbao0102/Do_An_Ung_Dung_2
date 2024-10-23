@@ -131,9 +131,9 @@ class _FormData5State extends State<FormData5> {
   Widget _buildRadioButtonGroup(String label, List<String> options,
       String selectedValue, Function(String) onChanged) {
     return SizedBox(
-      width: 220,
+      width: 164,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             label,
