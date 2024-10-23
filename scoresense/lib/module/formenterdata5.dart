@@ -23,7 +23,7 @@ class _FormData5State extends State<FormData5> {
         ),
         const SizedBox(height: 50),
 
-      _buildRadioButtonGroup(
+      _buildLabeledCheckboxRow(
             "School support",
             ['Yes', 'No'],
             GlobalData().schoolSupport,
@@ -34,7 +34,7 @@ class _FormData5State extends State<FormData5> {
             },
           ),
         const SizedBox(height: 30),
-          _buildRadioButtonGroup(
+          _buildLabeledCheckboxRow(
             "Family support",
             ['Yes', 'No'],
             GlobalData().familySupport,
@@ -44,9 +44,9 @@ class _FormData5State extends State<FormData5> {
               });
             },
           ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 40),
 
-            _buildRadioButtonGroup(
+            _buildLabeledCheckboxRow(
               "Extra paid classes",
               ['Yes', 'No'],
               GlobalData().paidClasses,
@@ -56,7 +56,7 @@ class _FormData5State extends State<FormData5> {
                 });
               },
             ),
-              _buildRadioButtonGroup(
+              _buildLabeledCheckboxRow(
               "Extracurricular activities",
               ['Yes', 'No'],
               GlobalData().extracurricularActivities,
@@ -66,7 +66,7 @@ class _FormData5State extends State<FormData5> {
                 });
               },
             ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 40),
 
         // Navigation Buttons
         Row(
@@ -128,58 +128,54 @@ class _FormData5State extends State<FormData5> {
   }
 
   // Helper method to build radio button groups
-  Widget _buildRadioButtonGroup(String label, List<String> options,
+ Widget _buildLabeledCheckboxRow(String label, List<String> options,
       String selectedValue, Function(String) onChanged) {
-    return SizedBox(
-      width: 164,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 180,
+          child: Text(
             label,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color(0xFF0062FF),
-            ),
+            style: const TextStyle(fontSize: 16),
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFF0062FF)),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Wrap(
-                spacing: 10,
-                children: options.map((option) {
-                  return GestureDetector(
-                    onTap: () => {onChanged(option)},
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: selectedValue == option
-                            ? const Color(0xFF0062FF)
-                            : Colors.transparent,
-                        // border: Border.all(color: const Color(0xFF0062FF)),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        option,
-                        style: TextStyle(
-                          color: selectedValue == option
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xFF0062FF)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Wrap(
+            spacing: 10,
+            children: options.map((option) {
+              return GestureDetector(
+                onTap: () {
+                  onChanged(option);
+                },
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: selectedValue == option
+                        ? const Color(0xFF0062FF)
+                        : Colors.transparent,
+                    // border: Border.all(color: const Color(0xFF0062FF)),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    option,
+                    style: TextStyle(
+                      color:
+                          selectedValue == option ? Colors.white : Colors.black,
                     ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ]),
-        ],
-      ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }
