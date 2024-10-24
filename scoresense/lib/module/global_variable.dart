@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+
 class GlobalData {
   static final GlobalData _instance = GlobalData._internal();
   String fileName = '';
   double progress = 0.0;
 
 //index chuyen giua cac form
-  int indexedStack = 0;
+  ValueNotifier<int> indexedStackNotifier = ValueNotifier<int>(0);
 
 
   //bien data enter
@@ -22,6 +24,11 @@ class GlobalData {
   int freeTimeIndex = 0;
   int travelTimeIndex = 0;
   int goOutIndex = 0;
+  int workdayAlcohol = 0;
+  int weekendAlcohol = 0;
+  int currentHealth = 0;
+  String familySize = "Greater than 3";
+  int familyQuality = 0;
 
   // Private constructor
   GlobalData._internal();
