@@ -34,8 +34,8 @@ class _EnterFormDataState extends State<EnterFormData> {
                 ),
                 Center(
                   child: Container(
-                      width: 1040,
-                      height: 600,
+                      width: MediaQuery.of(context).size.width * 0.65,
+                      height: MediaQuery.of(context).size.height * 0.77,
                       margin: const EdgeInsets.only(top: 70),
                       padding: const EdgeInsets.only(left: 80, right: 80),
                       decoration: BoxDecoration(
@@ -111,7 +111,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                                         7) {
                                       GlobalData().indexedStackNotifier.value++;
                                     }
-                                    print("value" + GlobalData().firstName);
+                                    print("value" + (MediaQuery.of(context).size.height).toString() + "x" + (MediaQuery.of(context).size.width).toString());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(

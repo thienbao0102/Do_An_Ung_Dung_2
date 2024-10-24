@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoresense/module/activity.dart';
 import 'package:scoresense/module/content_try_predict.dart';
 import 'package:scoresense/module/footer.dart';
 
@@ -17,7 +18,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ContentAndTry(),
+              ContentAndTry(),   
+              Activity(),          
               Footer()
             ],
           ),

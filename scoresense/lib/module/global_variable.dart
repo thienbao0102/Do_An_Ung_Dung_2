@@ -19,7 +19,7 @@ class GlobalData {
   String lastName = '';
   String gender = 'Male';
   String location = 'Urban';
-  String school = 'Van Lang University';
+  String school = '';
   String age = '';
   String schoolSupport = 'No';
   String familySupport = 'No';

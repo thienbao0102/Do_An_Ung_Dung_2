@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/header.dart';
+import 'package:scoresense/pages/choosepredictmethod.dart';
 
 class ContentAndTry extends StatefulWidget {
   const ContentAndTry({super.key});
@@ -90,7 +91,12 @@ class ActionButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Choosepredictmethod()),
+              );
+            },
             child: const Text(
               'Start Your Test Now',
               style: TextStyle(
@@ -108,7 +114,8 @@ class ActionButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+            },
             child: const Text(
               'See More',
               style: TextStyle(

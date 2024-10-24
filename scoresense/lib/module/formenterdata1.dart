@@ -10,12 +10,13 @@ class FormData1 extends StatefulWidget {
 }
 
 class _FormData1State extends State<FormData1> {
-  
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 70,),
+        const SizedBox(
+          height: 70,
+        ),
         const Text(
           "Give me your information",
           style: TextStyle(
@@ -27,32 +28,37 @@ class _FormData1State extends State<FormData1> {
         const SizedBox(height: 50),
 
         // First Name & Last Name Fields
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            UiDesign.buildTextField(
-              "Your First name",
-              (value) {
-                setState(() {
-                  GlobalData().firstName = value;
-                });
-              },
-            ),
-            UiDesign.buildTextField(
-              "Your Last name",
-              (value) {
-                setState(() {
-                  GlobalData().lastName = value;
-                });
-              },
-            ),
-          ],
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,            
+            children: [
+              UiDesign.buildTextField(
+                "Your First name",
+                (value) {
+                  setState(() {
+                    GlobalData().firstName = value;
+                  });
+                },
+              ),
+              UiDesign.buildTextField(
+                "Your Last name",
+                (value) {
+                  setState(() {
+                    GlobalData().lastName = value;
+                  });
+                },
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 60),
 
         // Gender and Location Fields
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
           children: [
             UiDesign.buildRadioButtonGroup(
               "Gender?",
@@ -84,6 +90,7 @@ class _FormData1State extends State<FormData1> {
             ),
           ],
         ),
+        ),
         const SizedBox(height: 60),
 
         // School Name
@@ -100,8 +107,6 @@ class _FormData1State extends State<FormData1> {
             ),
           ],
         ),
-
-       
       ],
     );
   }

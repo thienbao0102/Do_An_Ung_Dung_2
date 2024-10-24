@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/pages/homepage.dart';
 import 'package:scoresense/pages/predictformdata.dart';
 import 'package:scoresense/pages/predictimportfile.dart';
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
       title: 'Score Sense',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(        
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const EnterFormData()
+      home: const HomePage()
     );
   }
 }
