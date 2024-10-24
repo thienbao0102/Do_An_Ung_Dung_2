@@ -99,7 +99,7 @@ class UiDesign {
             label,
             style: const TextStyle(fontSize: 16),
           ),
-        ),
+        ), 
         Container(
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
@@ -212,4 +212,55 @@ class UiDesign {
       ],
     );
   }
+  static Widget buildRadioButtonSupport(String label, List<String> options,
+      String selectedValue, Function(String) onChanged) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 300,
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 20),
+          ),
+        ), SizedBox(width: 155),
+        Container(
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xFF0062FF)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Wrap(
+            //spacing: 10,
+            children: options.map((option) {
+              return GestureDetector(
+                onTap: () {
+                  onChanged(option);
+                },
+                child: Container(
+                  padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      //option.length < 4? const EdgeInsets.symmetric(horizontal: 36, vertical: 8):const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: selectedValue == option
+                        ? const Color(0xFF0062FF)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    option,
+                    style: TextStyle(
+                      color:
+                          selectedValue == option ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
 }
+
