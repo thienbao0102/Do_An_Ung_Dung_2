@@ -21,10 +21,10 @@ class GlobalData {
   String location = 'Urban';
   String school = 'Van Lang University';
   String age = '';
-  String schoolSupport = '';
-  String familySupport = '';
-  String paidClasses = '';
-  String extracurricularActivities = '';
+  String schoolSupport = 'No';
+  String familySupport = 'No';
+  String paidClasses = 'No';
+  String extracurricularActivities = 'No';
   int freeTimeIndex = 0;
   int travelTimeIndex = 0;
   int goOutIndex = 0;

@@ -107,7 +107,7 @@ class UiDesign {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Wrap(
-            spacing: 10,
+            //spacing: 10,
             children: options.map((option) {
               return GestureDetector(
                 onTap: () {
@@ -115,13 +115,12 @@ class UiDesign {
                 },
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      option.length < 4? const EdgeInsets.symmetric(horizontal: 36, vertical: 8):const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   decoration: BoxDecoration(
                     color: selectedValue == option
                         ? const Color(0xFF0062FF)
                         : Colors.transparent,
-                    // border: Border.all(color: const Color(0xFF0062FF)),
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
                     option,
