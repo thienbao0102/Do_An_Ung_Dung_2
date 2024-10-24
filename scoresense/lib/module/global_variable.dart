@@ -25,6 +25,10 @@ class GlobalData {
   String familySupport = 'No';
   String paidClasses = 'No';
   String extracurricularActivities = 'No';
+   String nurserySchool = 'No';
+  String higherEducation = 'No';
+  String internetAtHome = 'No';
+  String relationship = 'No';
   int freeTimeIndex = 0;
   int travelTimeIndex = 0;
   int goOutIndex = 0;

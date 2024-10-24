@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
 
-class FormData5 extends StatefulWidget {
+class FormData6 extends StatefulWidget {
   @override
-  _FormData5State createState() => _FormData5State();
+  _FormData6State createState() => _FormData6State();
 }
 
-class _FormData5State extends State<FormData5> {
+class _FormData6State extends State<FormData6> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -22,45 +22,45 @@ class _FormData5State extends State<FormData5> {
       ),
       const SizedBox(height: 50),
       UiDesign.buildRadioButtonSupport(
-        "School support",
+        "Attended nursery school",
         ['Yes', 'No'],
-        GlobalData().schoolSupport,
+        GlobalData().nurserySchool,
         (value) {
           setState(() {
-            GlobalData().schoolSupport = value;
+            GlobalData().nurserySchool = value;
           });
         },
       ),
       const SizedBox(height: 30),
       UiDesign.buildRadioButtonSupport(
-        "Family support",
+        "Aspiration for higher education",
         ['Yes', 'No'],
-        GlobalData().familySupport,
+        GlobalData().higherEducation,
         (value) {
           setState(() {
-            GlobalData().familySupport = value;
+            GlobalData().higherEducation = value;
           });
         },
       ),
       const SizedBox(height: 30),
       UiDesign.buildRadioButtonSupport(
-        "Extra paid classes",
+        "Access to internet at home",
         ['Yes', 'No'],
-        GlobalData().paidClasses,
+        GlobalData().internetAtHome,
         (value) {
           setState(() {
-            GlobalData().paidClasses = value;
+            GlobalData().internetAtHome = value;
           });
         },
       ),
       const SizedBox(height: 30),
       UiDesign.buildRadioButtonSupport(
-        "Extracurricular activities",
+        "In a romantic relationship",
         ['Yes', 'No'],
-        GlobalData().extracurricularActivities,
+        GlobalData().relationship,
         (value) {
           setState(() {
-            GlobalData().extracurricularActivities = value;
+            GlobalData().relationship = value;
           });
         },
       ),
