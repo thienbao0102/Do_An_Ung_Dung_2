@@ -25,7 +25,7 @@ class GlobalData {
   String familySupport = 'No';
   String paidClasses = 'No';
   String extracurricularActivities = 'No';
-   String nurserySchool = 'No';
+  String nurserySchool = 'No';
   String higherEducation = 'No';
   String internetAtHome = 'No';
   String relationship = 'No';

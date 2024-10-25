@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/activity.dart';
 import 'package:scoresense/module/content_try_predict.dart';
 import 'package:scoresense/module/footer.dart';
+import 'package:scoresense/module/joinus.dart';
+import 'package:scoresense/module/review.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +21,9 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ContentAndTry(),   
-              Activity(),          
+              Activity(),
+              Review(), 
+              Joinus(),         
               Footer()
             ],
           ),
