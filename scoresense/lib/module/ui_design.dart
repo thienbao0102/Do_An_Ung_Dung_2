@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UiDesign {
   //cách gọi hàm
@@ -261,6 +262,17 @@ class UiDesign {
       ],
     );
   }
+
+  //toast thông báo ra màn hình
+  static void showToast(String message) {
+    Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.TOP,
+    timeInSecForIosWeb: 5,
+    fontSize: 16.0,
+  );
+}
 
 }
 

@@ -36,7 +36,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                 Center(
                   child: Container(
                       width: MediaQuery.of(context).size.width * 0.65,
-                      height: MediaQuery.of(context).size.height * 0.77,
+                      height: MediaQuery.of(context).size.height * 0.79,
                       margin: const EdgeInsets.only(top: 70),
                       padding: const EdgeInsets.only(left: 80, right: 80),
                       decoration: BoxDecoration(
@@ -54,11 +54,11 @@ class _EnterFormDataState extends State<EnterFormData> {
                         children: [
                           ValueListenableBuilder<int>(
                             valueListenable: GlobalData()
-                                .indexedStackNotifier, // Lắng nghe thay đổi
+                                .indexedStackNotifier,
                             builder: (context, indexedStack, child) {
                               return IndexedStack(
                                 index:
-                                    indexedStack, // Sử dụng giá trị từ ValueNotifier
+                                    indexedStack,
                                 children: [
                                   FormData1(),
                                   FormData2(),
