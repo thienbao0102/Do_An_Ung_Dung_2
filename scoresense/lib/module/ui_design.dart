@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:scoresense/module/pie_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UiDesign {
   //cách gọi hàm
@@ -321,6 +322,17 @@ Widget buildPieChart() {
     );
 }
 
+
+  //toast thông báo ra màn hình
+  static void showToast(String message) {
+    Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.TOP,
+    timeInSecForIosWeb: 5,
+    fontSize: 16.0,
+  );
+}
 
 }
 
