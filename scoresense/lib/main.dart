@@ -3,6 +3,7 @@ import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/pages/homepage.dart';
 import 'package:scoresense/pages/predictformdata.dart';
 import 'package:scoresense/pages/predictimportfile.dart';
+import 'package:scoresense/pages/personalResultPage.dart';
 
 void main() {
   runApp(const MyApp());

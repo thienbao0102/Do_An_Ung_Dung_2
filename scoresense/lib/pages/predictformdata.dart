@@ -6,6 +6,7 @@ import 'package:scoresense/module/formenterdata4.dart';
 import 'package:scoresense/module/formenterdata5.dart';
 import 'package:scoresense/module/formenterdata6.dart';
 import 'package:scoresense/module/global_variable.dart';
+import 'package:scoresense/pages/personalResultPage.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/homepage.dart';
 
@@ -35,10 +36,12 @@ class _EnterFormDataState extends State<EnterFormData> {
                 ),
                 Center(
                   child: Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      height: MediaQuery.of(context).size.height * 0.77,
+                      constraints: BoxConstraints(
+                        maxWidth: 1000.0, // Chiều rộng tối đa là 1000
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.6, // 70% chiều rộng màn hình
                       margin: const EdgeInsets.only(top: 70),
-                      padding: const EdgeInsets.only(left: 80, right: 80),
+                      padding: const EdgeInsets.only(left: 80, right: 80, bottom: 40, top: 40),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -50,94 +53,99 @@ class _EnterFormDataState extends State<EnterFormData> {
                           ),
                         ],
                       ),
-                      child: Stack(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min, // Chiều cao tự điều chỉnh theo kích thước của widget con
                         children: [
-                          ValueListenableBuilder<int>(
-                            valueListenable: GlobalData()
-                                .indexedStackNotifier, // Lắng nghe thay đổi
-                            builder: (context, indexedStack, child) {
-                              return IndexedStack(
-                                index:
-                                    indexedStack, // Sử dụng giá trị từ ValueNotifier
-                                children: [
-                                  FormData1(),
-                                  FormData2(),
-                                  FormData3(),
-                                  FormData4(),
-                                  FormData5(),
-                                  FormData6()
-                                ],
-                              );
-                            },
-                          ),
-                          Positioned(
-                            bottom: 30,
-                            left: 0,
-                            right: 0,
-                            child:
-                                // Navigation Buttons
-                                Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    if (GlobalData()
-                                            .indexedStackNotifier
-                                            .value >
-                                        0) {
-                                      GlobalData().indexedStackNotifier.value--;
-                                    }
-                                  },
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30, vertical: 15),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      side: const BorderSide(
-                                          color: Color(0xFF0062FF)),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'Previous',
-                                    style: TextStyle(
-                                        color: Color(0xFF0062FF),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                          Stack(
+                            children: [
+                              ValueListenableBuilder<int>(
+                                valueListenable: GlobalData()
+                                    .indexedStackNotifier, // Lắng nghe thay đổi
+                                builder: (context, indexedStack, child) {
+                                  return IndexedStack(
+                                    index:
+                                        indexedStack, // Sử dụng giá trị từ ValueNotifier
+                                    children: [
+                                      FormData1(),
+                                      FormData2(),
+                                      FormData3(),
+                                      FormData4(),
+                                      FormData5(),
+                                      FormData6(),
+                                    ],
+                                  );
+                                },
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child:
+                                    // Navigation Buttons
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          if (GlobalData()
+                                                  .indexedStackNotifier
+                                                  .value > 0
+                                          ) {
+                                            GlobalData().indexedStackNotifier.value--;
+                                          }
+                                        },
+                                        style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8),
+                                            side: const BorderSide(
+                                                color: Color(0xFF0062FF)),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          'Previous',
+                                          style: TextStyle(
+                                              color: Color(0xFF0062FF),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (GlobalData()
+                                                  .indexedStackNotifier
+                                                  .value <
+                                              7) {
+                                            GlobalData().indexedStackNotifier.value++;
+                                          }
+                                          print("value" + (MediaQuery.of(context).size.height).toString() + "x" + (MediaQuery.of(context).size.width).toString());
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 45, vertical: 15),
+                                          backgroundColor: const Color(0xFF0062FF),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          'Next',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (GlobalData()
-                                            .indexedStackNotifier
-                                            .value <
-                                        7) {
-                                      GlobalData().indexedStackNotifier.value++;
-                                    }
-                                    print("value" + (MediaQuery.of(context).size.height).toString() + "x" + (MediaQuery.of(context).size.width).toString());
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 45, vertical: 15),
-                                    backgroundColor: const Color(0xFF0062FF),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'Next',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      )),
-                ),
+                              )
+                            ],
+                      )]
+                      ),
+                )),
               ],
             )));
   }
+  
 }

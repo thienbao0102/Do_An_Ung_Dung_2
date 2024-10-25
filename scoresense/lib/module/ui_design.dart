@@ -1,6 +1,7 @@
 import 'dart:math';
-
+import 'package:scoresense/module/pie_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UiDesign {
   //cách gọi hàm
@@ -21,6 +22,9 @@ class UiDesign {
               focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF0062FF), width: 2.0),
               ),
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Color.fromARGB(255, 155, 155, 155), width: 2.0), // Độ dày border khi không focus
+              ),
             ),
             onChanged: (val) => onChanged(val),
           )
@@ -29,9 +33,42 @@ class UiDesign {
     );
   }
 
+  // text field with border and top label
+  static Widget buildTextField2(String label, bool numOnly) {
+    return SizedBox(
+      width: 220,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF0062FF),
+            ),
+          ),
+          TextFormField(
+            keyboardType: numOnly ? TextInputType.number : TextInputType.text,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0), // Đặt bán kính bo góc
+                borderSide: BorderSide(color: Color(0xFF0062FF), width: 1.0), // Viền xung quanh
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0), // Đặt bán kính bo góc
+                borderSide: BorderSide(color: Color(0xFF0062FF), width: 1.0), // Viền xung quanh
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+
   // Helper method to build radio button groups
   //kích thước ô bằng nhau của radio (này là ở form 1 có gì tham khảo form 1 nha)
-  static Widget buildRadioButtonGroup(String label, List<String> options,
+   static Widget buildRadioButtonGroup(String label, List<String> options,
       String selectedValue, Function(String) onChanged) {
     return SizedBox(
       width: 220,
@@ -261,6 +298,41 @@ class UiDesign {
       ],
     );
   }
+
+
+Widget buildPieChart() {
+    // Dữ liệu cho biểu đồ
+    final List<PieChartData> data = [
+      PieChartData(Color.fromARGB(255, 4, 203, 110), 75), // Phần màu xanh
+      PieChartData(Color(0xFFA0E9FF), 25), // Phần màu đỏ
+    ];
+
+    return PieChart(
+      data: data,
+      radius: 100, // Bán kính của biểu đồ (tùy chỉnh theo nhu cầu)
+      strokeWidth: 20, // Độ dày đường viền
+      child: Text(
+        '75%', // Nhãn hiển thị ở giữa
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.black, // Màu chữ
+        ),
+      ),
+    );
+}
+
+
+  //toast thông báo ra màn hình
+  static void showToast(String message) {
+    Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.TOP,
+    timeInSecForIosWeb: 5,
+    fontSize: 16.0,
+  );
+}
 
 }
 

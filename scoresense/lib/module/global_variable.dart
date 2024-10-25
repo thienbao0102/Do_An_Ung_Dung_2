@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 class GlobalData {
   static final GlobalData _instance = GlobalData._internal();
   String fileName = '';
-  double progress = 0.0;
+
+  //nội dung file csv import
+  List<List<dynamic>> inputDataImport = List<List<dynamic>>.empty();
 
 //index chuyen giua cac form
   ValueNotifier<int> indexedStackNotifier = ValueNotifier<int>(0);
-
 
   //bien data enter
   String fatherEducation = 'None';
