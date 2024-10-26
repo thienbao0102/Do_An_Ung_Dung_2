@@ -38,6 +38,9 @@ class GlobalData {
   int currentHealth = 0;
   String familySize = "Greater than 3";
   int familyQuality = 0;
+  int weeklyStudyTime = 0;
+  int numOfFailClass = 0;
+
 
   // Private constructor
   GlobalData._internal();

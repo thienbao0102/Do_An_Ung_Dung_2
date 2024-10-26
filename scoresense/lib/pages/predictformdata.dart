@@ -5,6 +5,7 @@ import 'package:scoresense/module/formenterdata3.dart';
 import 'package:scoresense/module/formenterdata4.dart';
 import 'package:scoresense/module/formenterdata5.dart';
 import 'package:scoresense/module/formenterdata6.dart';
+import 'package:scoresense/module/formenterdata7.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 
@@ -32,10 +33,12 @@ class _EnterFormDataState extends State<EnterFormData> {
               children: [       
                 Center(
                   child: Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      //height: MediaQuery.of(context).size.height * 0.79,
-                      margin: const EdgeInsets.only(top: 140, bottom: 50),
-                      padding: const EdgeInsets.only(left: 80, right: 80, ),
+                      constraints: const BoxConstraints(
+                        maxWidth: 1000.0, // Chiều rộng tối đa là 1000
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.6, // 70% chiều rộng màn hình
+                      margin: const EdgeInsets.only(top: 70),
+                      padding: const EdgeInsets.only(left: 80, right: 80, bottom: 40, top: 40),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -149,4 +152,5 @@ class _EnterFormDataState extends State<EnterFormData> {
             ),
             )));
   }
+  
 }
