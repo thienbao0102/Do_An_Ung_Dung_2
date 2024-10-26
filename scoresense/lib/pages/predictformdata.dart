@@ -8,6 +8,7 @@ import 'package:scoresense/module/formenterdata6.dart';
 import 'package:scoresense/module/formenterdata7.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
+import 'package:scoresense/pages/personalResultPage.dart';
 
 class EnterFormData extends StatefulWidget {
   const EnterFormData({super.key});
@@ -64,7 +65,8 @@ class _EnterFormDataState extends State<EnterFormData> {
                                   FormData3(),
                                   const FormData4(),
                                   FormData5(),
-                                  FormData6()
+                                  FormData6(),
+                                  FormData7()
                                 ],
                               );
                             },
@@ -124,6 +126,13 @@ class _EnterFormDataState extends State<EnterFormData> {
                                             .indexedStackNotifier
                                             .value++;
                                       });
+                                      if(GlobalData().indexedStackNotifier.value == 7){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => const PersonalResultPage()),
+                                        );
+                                      }
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
