@@ -21,7 +21,7 @@ class GlobalData {
   String gender = 'Male';
   String location = 'Urban';
   String school = '';
-  String age = '';
+  int age = 0;
   String schoolSupport = 'No';
   String familySupport = 'No';
   String paidClasses = 'No';

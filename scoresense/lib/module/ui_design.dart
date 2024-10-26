@@ -91,8 +91,8 @@ class UiDesign {
   //hàm ui radio chọn nhưng không có kích thước đồng đều (tham khảo form 2 cho dễ hình dung nha)
   static Widget buildRadioButtonGroupRow(String label, List<String> options,
       String selectedValue, Function(String) onChanged) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Wrap(
+      runAlignment: WrapAlignment.start,
       children: [
         SizedBox(
           width: 250,
@@ -145,10 +145,10 @@ class UiDesign {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
           children: [
             const SizedBox(
-              width: 250,
+              width: 200,
             ),
             Container(
               width: options.length * 100,
@@ -168,10 +168,10 @@ class UiDesign {
             )
           ],
         ),
-        Row(
+        Wrap(
           children: [
             SizedBox(
-              width: 250,
+              width: 200,
               child: Text(
                 question,
                 style: const TextStyle(fontSize: 16),

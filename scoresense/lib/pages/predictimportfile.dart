@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/initial.dart';
 import 'package:scoresense/module/uploadfile.dart';
+import 'package:scoresense/pages/resultpredictfileimport.dart';
 
 class ImportFilePredict extends StatelessWidget {
   const ImportFilePredict({super.key});
@@ -91,7 +92,13 @@ class _FormImportFileState extends State<FormImportFile> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Xử lý khi click Predict
+                if (fileUpload) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Resultpredictfileimport()),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 padding:
@@ -123,5 +130,3 @@ class _FormImportFileState extends State<FormImportFile> {
     });
   }
 }
-
-

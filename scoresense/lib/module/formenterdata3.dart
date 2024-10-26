@@ -12,6 +12,7 @@ class _FormData3State extends State<FormData3> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
         const Text(
@@ -55,6 +56,7 @@ class _FormData3State extends State<FormData3> {
             });
           },
         ),
+
      ],
     );
   }

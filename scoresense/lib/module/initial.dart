@@ -13,8 +13,8 @@ class InitialWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalData().inputDataImport.clear();
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Icon(Icons.upload, size: 50, color: Colors.black),
         const SizedBox(height: 10),

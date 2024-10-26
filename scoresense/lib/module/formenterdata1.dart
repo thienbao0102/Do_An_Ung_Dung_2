@@ -84,7 +84,7 @@ class _FormData1State extends State<FormData1> {
               "Your age?",
               (value) {
                 setState(() {
-                  GlobalData().age = value;
+                  GlobalData().age = int.parse(value) ;
                 });
               },
             ),
@@ -95,7 +95,7 @@ class _FormData1State extends State<FormData1> {
 
         // School Name
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             UiDesign.buildTextField(
               "What school are you in?",
@@ -107,6 +107,7 @@ class _FormData1State extends State<FormData1> {
             ),
           ],
         ),
+        const SizedBox(height: 110),
       ],
     );
   }

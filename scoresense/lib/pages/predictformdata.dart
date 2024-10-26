@@ -7,7 +7,6 @@ import 'package:scoresense/module/formenterdata5.dart';
 import 'package:scoresense/module/formenterdata6.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
-import 'package:scoresense/pages/homepage.dart';
 
 class EnterFormData extends StatefulWidget {
   const EnterFormData({super.key});
@@ -22,23 +21,21 @@ class _EnterFormDataState extends State<EnterFormData> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
+            width: MediaQuery.of(context).size.width ,
+            height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('Background_OtherPage.png'),
                     fit: BoxFit.cover)),
-            child: Stack(
-              children: [
-                const Positioned(
-                  top: 40,
-                  left: 120,
-                  child: Header(),
-                ),
+            child: SingleChildScrollView(
+              child: Stack(
+              children: [       
                 Center(
                   child: Container(
                       width: MediaQuery.of(context).size.width * 0.65,
-                      height: MediaQuery.of(context).size.height * 0.79,
-                      margin: const EdgeInsets.only(top: 70),
-                      padding: const EdgeInsets.only(left: 80, right: 80),
+                      //height: MediaQuery.of(context).size.height * 0.79,
+                      margin: const EdgeInsets.only(top: 140, bottom: 50),
+                      padding: const EdgeInsets.only(left: 80, right: 80, ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -53,17 +50,15 @@ class _EnterFormDataState extends State<EnterFormData> {
                       child: Stack(
                         children: [
                           ValueListenableBuilder<int>(
-                            valueListenable: GlobalData()
-                                .indexedStackNotifier,
+                            valueListenable: GlobalData().indexedStackNotifier,
                             builder: (context, indexedStack, child) {
                               return IndexedStack(
-                                index:
-                                    indexedStack,
+                                index: indexedStack,
                                 children: [
                                   FormData1(),
                                   FormData2(),
                                   FormData3(),
-                                  FormData4(),
+                                  const FormData4(),
                                   FormData5(),
                                   FormData6()
                                 ],
@@ -79,13 +74,18 @@ class _EnterFormDataState extends State<EnterFormData> {
                                 Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                if(GlobalData().indexedStackNotifier.value == 0)
+                                const SizedBox(),
+                                if(GlobalData().indexedStackNotifier.value != 0)
                                 TextButton(
                                   onPressed: () {
                                     if (GlobalData()
                                             .indexedStackNotifier
                                             .value >
                                         0) {
-                                      GlobalData().indexedStackNotifier.value--;
+                                      setState(() {
+                                        GlobalData().indexedStackNotifier.value--;
+                                      });
                                     }
                                   },
                                   style: TextButton.styleFrom(
@@ -111,9 +111,10 @@ class _EnterFormDataState extends State<EnterFormData> {
                                             .indexedStackNotifier
                                             .value <
                                         7) {
-                                      GlobalData().indexedStackNotifier.value++;
+                                      setState(() {
+                                        GlobalData().indexedStackNotifier.value++;
+                                      });
                                     }
-                                    print("value" + (MediaQuery.of(context).size.height).toString() + "x" + (MediaQuery.of(context).size.width).toString());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
@@ -123,9 +124,9 @@ class _EnterFormDataState extends State<EnterFormData> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  child: const Text(
-                                    'Next',
-                                    style: TextStyle(
+                                  child: Text(
+                                    GlobalData().indexedStackNotifier.value == 6? 'Submit':'Next',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -135,9 +136,17 @@ class _EnterFormDataState extends State<EnterFormData> {
                             ),
                           )
                         ],
-                      )),
+                      ),
+
+                      ),
+                ),
+                const Positioned(
+                  top: 40,
+                  left: 120,
+                  child: Header(),
                 ),
               ],
+            ),
             )));
   }
 }

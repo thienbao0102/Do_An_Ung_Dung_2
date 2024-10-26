@@ -14,7 +14,7 @@ class _FormData2State extends State<FormData2> {
   Widget build(BuildContext context) {
     return Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 60),
           const Text(
@@ -101,7 +101,7 @@ class _FormData2State extends State<FormData2> {
               });
             },
           ),
-
+          const SizedBox(height: 110),
         ]);
   }
 
