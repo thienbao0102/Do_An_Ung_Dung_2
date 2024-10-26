@@ -94,8 +94,7 @@ class Review extends StatelessWidget {
           ),
           const SizedBox(height: 25),
           const Text(
-            'Slate helps you see how many more days you need to work\n'
-            'to reach your financial goal for the month and year.',
+            'Slate helps you see how many more days you need to work to reach your financial goal for the month and year.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -103,7 +102,7 @@ class Review extends StatelessWidget {
               color: Color(0xFF737373),
             ),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
