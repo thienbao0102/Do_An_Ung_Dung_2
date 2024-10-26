@@ -5,6 +5,7 @@ import 'package:scoresense/module/formenterdata3.dart';
 import 'package:scoresense/module/formenterdata4.dart';
 import 'package:scoresense/module/formenterdata5.dart';
 import 'package:scoresense/module/formenterdata6.dart';
+import 'package:scoresense/module/formenterdata7.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 import 'package:scoresense/module/header.dart';
@@ -72,6 +73,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                                       FormData4(),
                                       FormData5(),
                                       FormData6(),
+                                      FormData7()
                                     ],
                                   );
                                 },
