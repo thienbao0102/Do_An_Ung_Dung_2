@@ -9,6 +9,7 @@ class FormData7 extends StatefulWidget {
 
 class _FormData7State extends State<FormData7> {
   @override
+  
   Widget build(BuildContext context) {
     return SingleChildScrollView( // Thêm SingleChildScrollView
       child: Padding(
