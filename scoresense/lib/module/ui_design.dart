@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:scoresense/module/pie_chart.dart';
+import 'package:scoresense/module/animatedPieChart.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -299,25 +300,154 @@ class UiDesign {
     );
   }
 
+Widget buildAnimatedPieChart(String title, double percentage) {
+  String percentageString = "";
+  Color conersColor = Color.fromARGB(255, 0, 0, 0);
+  if (percentage < 0 || percentage > 100) {
+      throw Exception('Percentage must be between 0 and 100');
+  }else{
+    percentageString = percentage.toStringAsFixed(0);
+  }
 
-Widget buildPieChart() {
+  if (percentage >= 0 && percentage < 30) {
+       conersColor = Color.fromARGB(255, 211, 0, 4);
+      }
+    else if (percentage >= 30 && percentage < 50) {
+      conersColor = Color.fromARGB(255, 214, 97, 99);
+    }
+    else if (percentage >= 50 && percentage < 70) {
+      conersColor = Color.fromARGB(255, 76, 75, 22);
+    }
+    else if (percentage >= 70 && percentage < 100) {
+      conersColor = Color.fromARGB(255, 4, 203, 110);
+    }
+    else {
+      conersColor = Color.fromARGB(255, 243, 198, 35);
+    }
+
+  // Dữ liệu cho biểu đồ  
+  ChartSampleData data = ChartSampleData(
+    x: "",  // Bạn có thể để tên hoặc nhãn ở đây nếu cần
+    y: percentage,  // percentage cần là một giá trị double từ 0 đến 100
+    text: '',
+    pointColor: conersColor,
+  );
+
+  return RadialBarChart(
+    title: title,
+    maximumValue: 100,
+    data: data,
+  );
+}
+
+Widget addTextToAnimatedPieChart(percentage) {
+  String percentageString = "";
+  Color conersColor = Color.fromARGB(255, 0, 0, 0);
+  if (percentage < 0 || percentage > 100) {
+      throw Exception('Percentage must be between 0 and 100');
+  }else{
+    percentageString = percentage.toStringAsFixed(0);
+  }
+
+  if (percentage >= 0 && percentage < 30) {
+       conersColor = Color.fromARGB(255, 211, 0, 4);
+      }
+    else if (percentage >= 30 && percentage < 50) {
+      conersColor = Color.fromARGB(255, 214, 97, 99);
+    }
+    else if (percentage >= 50 && percentage < 70) {
+      conersColor = Color.fromARGB(255, 76, 75, 22);
+    }
+    else if (percentage >= 70 && percentage < 100) {
+      conersColor = Color.fromARGB(255, 4, 203, 110);
+    }
+    else {
+      conersColor = Color.fromARGB(255, 243, 198, 35);
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+            '${percentageString}%', // Phần trăm
+            style: TextStyle(
+              fontSize: 50,
+              fontWeight: FontWeight.bold,
+              color: conersColor, // Màu chữ
+              height: 1.0
+            ),
+          ),
+          Text(
+            'Pass', // Chữ "Pass" nằm dưới phần trăm
+            style: TextStyle(
+              fontSize: 30, // Kích thước chữ có thể thay đổi
+              fontWeight: FontWeight.bold,
+              color: conersColor, // Màu chữ
+              height: 1.0
+            ),
+          ),
+      ],
+    );
+  }
+
+
+Widget buildPieChart(double percentage) {
+  String percentageString = "";
+  Color conersColor = Color.fromARGB(255, 0, 0, 0);
+  if (percentage < 0 || percentage > 100) {
+      throw Exception('Percentage must be between 0 and 100');
+  }else{
+    percentageString = percentage.toStringAsFixed(0);
+  }
+
+  if (percentage >= 0 && percentage < 30) {
+       conersColor = Color.fromARGB(255, 211, 0, 4);
+      }
+    else if (percentage >= 30 && percentage < 50) {
+      conersColor = Color.fromARGB(255, 214, 97, 99);
+    }
+    else if (percentage >= 50 && percentage < 70) {
+      conersColor = Color.fromARGB(255, 76, 75, 22);
+    }
+    else if (percentage >= 70 && percentage < 100) {
+      conersColor = Color.fromARGB(255, 4, 203, 110);
+    }
+    else {
+      conersColor = Color.fromARGB(255, 243, 198, 35);
+    }
     // Dữ liệu cho biểu đồ
     final List<PieChartData> data = [
-      PieChartData(Color.fromARGB(255, 4, 203, 110), 75), // Phần màu xanh
-      PieChartData(Color(0xFFA0E9FF), 25), // Phần màu đỏ
+      PieChartData(conersColor, percentage), //data chính
+      PieChartData(Color(0xFFA0E9FF), 100 - percentage), // nền
     ];
 
     return PieChart(
       data: data,
-      radius: 100, // Bán kính của biểu đồ (tùy chỉnh theo nhu cầu)
+      radius: 120, // Bán kính của biểu đồ (tùy chỉnh theo nhu cầu)
       strokeWidth: 20, // Độ dày đường viền
-      child: Text(
-        '75%', // Nhãn hiển thị ở giữa
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.black, // Màu chữ
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center, // Căn giữa cột
+        crossAxisAlignment: CrossAxisAlignment.center, // Căn giữa theo chiều ngang
+        children: [
+          Text(
+            '${percentageString}%', // Phần trăm
+            style: TextStyle(
+              fontSize: 50,
+              fontWeight: FontWeight.bold,
+              color: conersColor, // Màu chữ
+              height: 1.0
+            ),
+          ),
+          Text(
+            'Pass', // Chữ "Pass" nằm dưới phần trăm
+            style: TextStyle(
+              fontSize: 30, // Kích thước chữ có thể thay đổi
+              fontWeight: FontWeight.bold,
+              color: conersColor, // Màu chữ
+              height: 1.0
+            ),
+          ),
+        ],
       ),
     );
 }

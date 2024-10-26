@@ -4,6 +4,7 @@ import 'package:scoresense/pages/homepage.dart';
 import 'package:scoresense/pages/predictformdata.dart';
 import 'package:scoresense/pages/predictimportfile.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
+import 'package:scoresense/module/animatedPieChart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        fontFamily: 'Montserrat',
         useMaterial3: true,
       ),
-      home: const HomePage()
+      home: HomePage()
     );
   }
 }
