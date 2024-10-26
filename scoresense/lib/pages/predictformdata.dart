@@ -22,7 +22,7 @@ class _EnterFormDataState extends State<EnterFormData> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            width: MediaQuery.of(context).size.width ,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -30,15 +30,16 @@ class _EnterFormDataState extends State<EnterFormData> {
                     fit: BoxFit.cover)),
             child: SingleChildScrollView(
               child: Stack(
-              children: [       
-                Center(
-                  child: Container(
-                      constraints: const BoxConstraints(
-                        maxWidth: 1000.0, // Chiều rộng tối đa là 1000
+                children: [
+                  Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.65,
+                      //height: MediaQuery.of(context).size.height * 0.79,
+                      margin: const EdgeInsets.only(top: 140, bottom: 50),
+                      padding: const EdgeInsets.only(
+                        left: 80,
+                        right: 80,
                       ),
-                      width: MediaQuery.of(context).size.width * 0.6, // 70% chiều rộng màn hình
-                      margin: const EdgeInsets.only(top: 70),
-                      padding: const EdgeInsets.only(left: 80, right: 80, bottom: 40, top: 40),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -77,37 +78,41 @@ class _EnterFormDataState extends State<EnterFormData> {
                                 Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                if(GlobalData().indexedStackNotifier.value == 0)
-                                const SizedBox(),
-                                if(GlobalData().indexedStackNotifier.value != 0)
-                                TextButton(
-                                  onPressed: () {
-                                    if (GlobalData()
-                                            .indexedStackNotifier
-                                            .value >
-                                        0) {
-                                      setState(() {
-                                        GlobalData().indexedStackNotifier.value--;
-                                      });
-                                    }
-                                  },
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30, vertical: 15),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      side: const BorderSide(
-                                          color: Color(0xFF0062FF)),
+                                if (GlobalData().indexedStackNotifier.value ==
+                                    0)
+                                  const SizedBox(),
+                                if (GlobalData().indexedStackNotifier.value !=
+                                    0)
+                                  TextButton(
+                                    onPressed: () {
+                                      if (GlobalData()
+                                              .indexedStackNotifier
+                                              .value >
+                                          0) {
+                                        setState(() {
+                                          GlobalData()
+                                              .indexedStackNotifier
+                                              .value--;
+                                        });
+                                      }
+                                    },
+                                    style: TextButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30, vertical: 15),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        side: const BorderSide(
+                                            color: Color(0xFF0062FF)),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Previous',
+                                      style: TextStyle(
+                                          color: Color(0xFF0062FF),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  child: const Text(
-                                    'Previous',
-                                    style: TextStyle(
-                                        color: Color(0xFF0062FF),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
                                 ElevatedButton(
                                   onPressed: () {
                                     if (GlobalData()
@@ -115,7 +120,9 @@ class _EnterFormDataState extends State<EnterFormData> {
                                             .value <
                                         7) {
                                       setState(() {
-                                        GlobalData().indexedStackNotifier.value++;
+                                        GlobalData()
+                                            .indexedStackNotifier
+                                            .value++;
                                       });
                                     }
                                   },
@@ -128,7 +135,9 @@ class _EnterFormDataState extends State<EnterFormData> {
                                     ),
                                   ),
                                   child: Text(
-                                    GlobalData().indexedStackNotifier.value == 6? 'Submit':'Next',
+                                    GlobalData().indexedStackNotifier.value == 6
+                                        ? 'Submit'
+                                        : 'Next',
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
@@ -140,17 +149,15 @@ class _EnterFormDataState extends State<EnterFormData> {
                           )
                         ],
                       ),
-
-                      ),
-                ),
-                const Positioned(
-                  top: 40,
-                  left: 120,
-                  child: Header(),
-                ),
-              ],
-            ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 40,
+                    left: 120,
+                    child: Header(),
+                  ),
+                ],
+              ),
             )));
   }
-  
 }
