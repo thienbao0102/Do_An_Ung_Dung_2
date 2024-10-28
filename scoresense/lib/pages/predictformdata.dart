@@ -105,6 +105,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                                       'Previous',
                                       style: TextStyle(
                                           color: Color(0xFF0062FF),
+                                          letterSpacing: 1.3,
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -138,6 +139,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
+                                        letterSpacing: 1.3,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

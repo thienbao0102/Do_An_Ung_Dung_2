@@ -4,6 +4,8 @@ import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/module/ui_design.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import '../module/global_variable.dart';
+
 class PersonalResultPage extends StatefulWidget {
   const PersonalResultPage({super.key});
 
@@ -14,7 +16,7 @@ class PersonalResultPage extends StatefulWidget {
 
 class _PersonalResultPageState extends State<PersonalResultPage> {
   @override
-  double _percentInRadians = 100.0;
+  double _percentInRadians = 80.0;
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -221,11 +223,11 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                       ),
                                     ),
                                     Text(
-                                      "100%",
+                                      "80 %",
                                       style: TextStyle(
                                         fontSize: 20,
-                                        fontWeight: FontWeight.normal,
-                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 4, 203, 110),
                                       ),
                                     ),
                                   ],
@@ -239,7 +241,33 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                       ),
                     ],
                   ),
-                )
+                ),const SizedBox(height: 30),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Choosepredictmethod()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
+                      (Route<dynamic> route) => false, // Loại bỏ tất cả các trang trước đó
+                    );
+                    GlobalData().resetValues();
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xFF0062FF), // Màu nền
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Bo góc
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18), // Padding tùy chọn
+                  ),
+                  child: const Text(
+                    'Retake the test',
+                    style: TextStyle(
+                      color: Color(0xFBFBFBFB), // Màu chữ
+                      fontSize: 16,
+                      letterSpacing: 1.3,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           )
