@@ -50,96 +50,103 @@ class _EnterFormDataState extends State<EnterFormData> {
                           ),
                         ],
                       ),
-                      child: Stack(
-                        children: [
-                          ValueListenableBuilder<int>(
-                            valueListenable: GlobalData().indexedStackNotifier,
-                            builder: (context, indexedStack, child) {
-                              return IndexedStack(
-                                index: indexedStack,
-                                children: [
-                                  FormData1(),
-                                  FormData2(),
-                                  FormData3(),
-                                  const FormData4(),
-                                  FormData5(),
-                                  FormData6()
-                                ],
-                              );
-                            },
-                          ),
-                          Positioned(
-                            bottom: 30,
-                            left: 0,
-                            right: 0,
-                            child:
-                                // Navigation Buttons
-                                Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: 
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Stack(
                               children: [
-                                if(GlobalData().indexedStackNotifier.value == 0)
-                                const SizedBox(),
-                                if(GlobalData().indexedStackNotifier.value != 0)
-                                TextButton(
-                                  onPressed: () {
-                                    if (GlobalData()
-                                            .indexedStackNotifier
-                                            .value >
-                                        0) {
-                                      setState(() {
-                                        GlobalData().indexedStackNotifier.value--;
-                                      });
-                                    }
+                                ValueListenableBuilder<int>(
+                                  valueListenable: GlobalData().indexedStackNotifier,
+                                  builder: (context, indexedStack, child) {
+                                    return IndexedStack(
+                                      index: indexedStack,
+                                      children: [
+                                        FormData1(),
+                                        FormData2(),
+                                        FormData3(),
+                                        const FormData4(),
+                                        FormData5(),
+                                        FormData6()
+                                      ],
+                                    );
                                   },
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30, vertical: 15),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      side: const BorderSide(
-                                          color: Color(0xFF0062FF)),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'Previous',
-                                    style: TextStyle(
-                                        color: Color(0xFF0062FF),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (GlobalData()
-                                            .indexedStackNotifier
-                                            .value <
-                                        7) {
-                                      setState(() {
-                                        GlobalData().indexedStackNotifier.value++;
-                                      });
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 45, vertical: 15),
-                                    backgroundColor: const Color(0xFF0062FF),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child:
+                                      // Navigation Buttons
+                                      Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      if(GlobalData().indexedStackNotifier.value == 0)
+                                      const SizedBox(),
+                                      if(GlobalData().indexedStackNotifier.value != 0)
+                                      TextButton(
+                                        onPressed: () {
+                                          if (GlobalData()
+                                                  .indexedStackNotifier
+                                                  .value >
+                                              0) {
+                                            setState(() {
+                                              GlobalData().indexedStackNotifier.value--;
+                                            });
+                                          }
+                                        },
+                                        style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8),
+                                            side: const BorderSide(
+                                                color: Color(0xFF0062FF)),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          'Previous',
+                                          style: TextStyle(
+                                              color: Color(0xFF0062FF),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (GlobalData()
+                                                  .indexedStackNotifier
+                                                  .value <
+                                              7) {
+                                            setState(() {
+                                              GlobalData().indexedStackNotifier.value++;
+                                            });
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 45, vertical: 15),
+                                          backgroundColor: const Color(0xFF0062FF),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          GlobalData().indexedStackNotifier.value == 6? 'Submit':'Next',
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  child: Text(
-                                    GlobalData().indexedStackNotifier.value == 6? 'Submit':'Next',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
+                                )
                               ],
                             ),
-                          )
-                        ],
-                      ),
+                          ],
+                        )
+                      
 
                       ),
                 ),
