@@ -177,6 +177,9 @@ class UiDesign {
   }
 
   //hàm ui này là ui hàng radio tròn cổ điển (tham khảo form 3 nha)
+
+  /*Chieu dai giua 4option va 5option khong tuong dong khong dong deu tren giao dien */
+
   static Widget buildRadioLevels(String question, List<String> options, int selectedIndex,
       ValueChanged<int> onChanged) {
     return Column(
@@ -256,7 +259,7 @@ class UiDesign {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          width: 300,
+          width: 350,
           child: Text(
             label,
             style: const TextStyle(fontSize: 20),

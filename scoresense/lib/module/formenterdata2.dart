@@ -12,20 +12,22 @@ class FormData2 extends StatefulWidget {
 class _FormData2State extends State<FormData2> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+      child: 
+        Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 60),
-          const Text(
+          Center(
+            child: const Text(
             "Your parents information",
             style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF0062FF)),
           ),
+          ),
           const SizedBox(height: 30),
-
           // Father's Education
           UiDesign.buildRadioButtonGroupRow(
             "Father's education",
@@ -101,8 +103,9 @@ class _FormData2State extends State<FormData2> {
               });
             },
           ),
-          const SizedBox(height: 110),
-        ]);
+          // const SizedBox(height: 110),
+        ]),
+    ); 
   }
 
 
