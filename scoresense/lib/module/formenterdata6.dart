@@ -11,7 +11,6 @@ class _FormData6State extends State<FormData6> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const SizedBox(height: 60),
       const Text(
         "Do you participate in or receive support for the following activities?",
         style: TextStyle(

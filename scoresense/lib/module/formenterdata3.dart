@@ -10,18 +10,21 @@ class FormData3 extends StatefulWidget {
 class _FormData3State extends State<FormData3> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
+    return SingleChildScrollView(
+      child: Column(
+      // mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(height: 60),
-        const Text(
-          "Your daily",
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF0062FF),
-          ),
+        // const SizedBox(height: 60),
+        const Center(
+          child:
+            Text(
+              "Your daily",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0062FF),
+              ),
+            ),
         ),
         const SizedBox(height: 40),
         UiDesign.buildRadioLevels(
@@ -58,6 +61,7 @@ class _FormData3State extends State<FormData3> {
         ),
 
      ],
+    ),
     );
   }
 }

@@ -4,13 +4,13 @@ class GlobalData {
   static final GlobalData _instance = GlobalData._internal();
   String fileName = '';
 
-  //nội dung file csv import
+  // Nội dung file csv import
   List<List<dynamic>> inputDataImport = List<List<dynamic>>.empty();
 
-//index chuyen giua cac form
+  // Index chuyển giữa các form
   ValueNotifier<int> indexedStackNotifier = ValueNotifier<int>(0);
 
-  //bien data enter
+  // Biến data enter
   String fatherEducation = 'None';
   String motherEducation = 'None';
   String motherJob = 'At home';
@@ -41,11 +41,44 @@ class GlobalData {
   int weeklyStudyTime = 0;
   int numOfFailClass = 0;
 
-
   // Private constructor
   GlobalData._internal();
 
   factory GlobalData() {
     return _instance;
+  }
+
+  // Hàm đặt lại tất cả về giá trị mặc định
+  void resetValues() {
+    fatherEducation = 'None';
+    motherEducation = 'None';
+    motherJob = 'At home';
+    fatherJob = 'At home';
+    parentStatus = 'Apart';
+    firstName = '';
+    lastName = '';
+    gender = 'Male';
+    location = 'Urban';
+    school = '';
+    age = 0;
+    schoolSupport = 'No';
+    familySupport = 'No';
+    paidClasses = 'No';
+    extracurricularActivities = 'No';
+    nurserySchool = 'No';
+    higherEducation = 'No';
+    internetAtHome = 'No';
+    relationship = 'No';
+    freeTimeIndex = 0;
+    travelTimeIndex = 0;
+    goOutIndex = 0;
+    workdayAlcohol = 0;
+    weekendAlcohol = 0;
+    currentHealth = 0;
+    familySize = "Greater than 3";
+    familyQuality = 0;
+    weeklyStudyTime = 0;
+    numOfFailClass = 0;
+    indexedStackNotifier.value = 0; // Đặt lại chỉ số stack về 0
   }
 }

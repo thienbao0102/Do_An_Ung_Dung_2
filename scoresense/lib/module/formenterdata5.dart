@@ -11,14 +11,17 @@ class _FormData5State extends State<FormData5> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const SizedBox(height: 60),
-      const Text(
-        "Do you participate in or receive support for the following activities?",
-        style: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF0062FF),
-        ),
+      // const SizedBox(height: 60),
+      Center(
+        child:
+          const Text(
+            "Do you participate in or receive support for the following activities?",
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF0062FF),
+            ),
+          ),
       ),
       const SizedBox(height: 50),
       UiDesign.buildRadioButtonSupport(
