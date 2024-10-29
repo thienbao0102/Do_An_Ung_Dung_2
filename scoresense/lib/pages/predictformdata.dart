@@ -9,6 +9,7 @@ import 'package:scoresense/module/formenterdata7.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
+import 'package:scoresense/module/decisiontreemodel.dart';
 
 class EnterFormData extends StatefulWidget {
   const EnterFormData({super.key});
@@ -117,6 +118,9 @@ class _EnterFormDataState extends State<EnterFormData> {
                                   ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    loadModel().then((_) {
+                                      print("Model loaded successfully");
+                                    });
                                     if (GlobalData()
                                             .indexedStackNotifier
                                             .value <
@@ -126,11 +130,15 @@ class _EnterFormDataState extends State<EnterFormData> {
                                             .indexedStackNotifier
                                             .value++;
                                       });
-                                      if(GlobalData().indexedStackNotifier.value == 7){
+                                      if (GlobalData()
+                                              .indexedStackNotifier
+                                              .value ==
+                                          7) {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => const PersonalResultPage()),
+                                              builder: (context) =>
+                                                  const PersonalResultPage()),
                                         );
                                       }
                                     }
