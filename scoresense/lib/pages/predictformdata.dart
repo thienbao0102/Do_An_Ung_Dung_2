@@ -9,7 +9,6 @@ import 'package:scoresense/module/formenterdata7.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
-import 'package:scoresense/module/decisiontreemodel.dart';
 
 class EnterFormData extends StatefulWidget {
   const EnterFormData({super.key});
@@ -20,7 +19,7 @@ class EnterFormData extends StatefulWidget {
 
 class _EnterFormDataState extends State<EnterFormData> {
   int indexedStack = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,131 +35,137 @@ class _EnterFormDataState extends State<EnterFormData> {
         child: Stack(
           children: [
             Center(
-              child: SingleChildScrollView(
-                child: Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: 1000.0,
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  margin: const EdgeInsets.only(top: 70, bottom: 20),
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          ValueListenableBuilder<int>(
-                            valueListenable: GlobalData().indexedStackNotifier,
-                            builder: (context, indexedStack, child) {
-                              return IndexedStack(
-                                index: indexedStack,
-                                children: [
-                                  FormData1(),
-                                  FormData2(),
-                                  FormData3(),
-                                  const FormData4(),
-                                  FormData5(),
-                                  FormData6(),
-                                  FormData7(),
-                                ],
-                              );
-                            },
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: 1000.0,
+                ),
+                width: MediaQuery.of(context).size.width * 0.6,
+                margin: const EdgeInsets.only(top: 70, bottom: 20),
+                padding: const EdgeInsets.only(
+                    top: 50, left: 50, right: 50, bottom: 30),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Stack(
+                      children: [
+                        ValueListenableBuilder<int>(
+                          valueListenable: GlobalData().indexedStackNotifier,
+                          builder: (context, indexedStack, child) {
+                            return IndexedStack(
+                              index: indexedStack,
                               children: [
-                                if (GlobalData().indexedStackNotifier.value ==
-                                        0)
-                                      const SizedBox(),
-                                if (GlobalData().indexedStackNotifier.value != 0)
-                                  TextButton(
-                                    onPressed: () {
-                                      if (GlobalData().indexedStackNotifier.value > 0) {
-                                        setState(() {
-                                          GlobalData().indexedStackNotifier.value--;
-                                        });
-                                      }
-                                    },
-                                    style: TextButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        side: const BorderSide(color: Color(0xFF0062FF)),
-                                      ),
-                                    ),
-                                    child: const Text(
-                                      'Previous',
-                                      style: TextStyle(
-                                          color: Color(0xFF0062FF),
-                                          letterSpacing: 1.3,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ElevatedButton(
+                                FormData1(),
+                                Container(
+                                  width: 600, // Chiều rộng cụ thể cho FormData2
+                                  height: 400, // Chiều cao cụ thể cho FormData2
+                                  child: FormData2(),
+                                ),
+                                FormData3(),
+                                FormData4(),
+                                FormData5(),
+                                FormData6(),
+                                FormData7(),
+                              ],
+                            );
+                          },
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (GlobalData().indexedStackNotifier.value == 0)
+                                const SizedBox(),
+                              if (GlobalData().indexedStackNotifier.value != 0)
+                                TextButton(
                                   onPressed: () {
-                                    loadModel().then((_) {
-                                      print("Model loaded successfully");
-                                    });
                                     if (GlobalData()
                                             .indexedStackNotifier
-                                            .value <
-                                        7) {
+                                            .value >
+                                        0) {
                                       setState(() {
-                                        GlobalData().indexedStackNotifier.value++;
+                                        GlobalData()
+                                            .indexedStackNotifier
+                                            .value--;
                                       });
-                                      if (GlobalData()
-                                              .indexedStackNotifier
-                                              .value ==
-                                          7) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const PersonalResultPage()),
-                                        );
-                                      }
                                     }
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                                    backgroundColor: const Color(0xFF0062FF),
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 15),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
+                                      side: const BorderSide(
+                                          color: Color(0xFF0062FF)),
                                     ),
                                   ),
-                                  child: Text(
-                                    GlobalData().indexedStackNotifier.value == 6
-                                        ? 'Submit'
-                                        : 'Next',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
+                                  child: const Text(
+                                    'Previous',
+                                    style: TextStyle(
+                                        color: Color(0xFF0062FF),
                                         letterSpacing: 1.3,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (GlobalData().indexedStackNotifier.value <
+                                      7) {
+                                    setState(() {
+                                      GlobalData().indexedStackNotifier.value++;
+                                    });
+                                    if (GlobalData()
+                                            .indexedStackNotifier
+                                            .value ==
+                                        7) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const PersonalResultPage()),
+                                      );
+                                    }
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 45, vertical: 15),
+                                  backgroundColor: const Color(0xFF0062FF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                child: Text(
+                                  GlobalData().indexedStackNotifier.value == 6
+                                      ? 'Submit'
+                                      : 'Next',
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      letterSpacing: 1.3,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -175,4 +180,3 @@ class _EnterFormDataState extends State<EnterFormData> {
     );
   }
 }
-

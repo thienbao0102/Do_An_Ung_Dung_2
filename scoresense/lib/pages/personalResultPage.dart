@@ -70,25 +70,27 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
             ),
           ),
           const Positioned(
-                  top: 40,
-                  left: 120,
-                  child: Header(),
-                ),
+            top: 40,
+            left: 120,
+            child: Header(),
+          ),
           // Nội dung chính ở giữa
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: screenSize.width * 0.4,
+                  width: screenSize.width * 0.5,
                   padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Column(
-                    mainAxisSize: MainAxisSize.min, // Cho phép Column tự điều chỉnh chiều cao
-                    crossAxisAlignment: CrossAxisAlignment.start, // Đặt nội dung căn lề trái
+                    mainAxisSize: MainAxisSize
+                        .min, // Cho phép Column tự điều chỉnh chiều cao
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // Đặt nội dung căn lề trái
                     children: [
                       AutoSizeText(
                         "Excellent! This is the highest I've ever seen",
@@ -98,8 +100,8 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                           color: Color(0xFF0062FF), // Màu chữ
                         ),
                         maxLines: 1,
-                        minFontSize: 16,  // Kích thước nhỏ nhất có thể thu nhỏ
-                        maxFontSize: 36,  // Kích thước tối đa có thể phóng to
+                        minFontSize: 16, // Kích thước nhỏ nhất có thể thu nhỏ
+                        maxFontSize: 36, // Kích thước tối đa có thể phóng to
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
@@ -112,9 +114,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                       ),
                     ],
                   ),
-                ),const SizedBox(height: 15),
+                ),
+                const SizedBox(height: 15),
                 Container(
-                  width: screenSize.width * 0.4,
+                  width: screenSize.width * 0.5,
                   padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -128,25 +131,28 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(right: 50),
-                            // padding: const EdgeInsets.all(10.0), // Padding bên trong
-                            alignment: Alignment.center, // Căn giữa nội dung
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                UiDesign().buildAnimatedPieChart("", _percentInRadians),
-                                UiDesign().addTextToAnimatedPieChart(_percentInRadians),
-                              ],
-                            )
-                            // UiDesign().buildPieChart(100), // Widget Pie Chart
-                          ),
+                              margin: const EdgeInsets.only(right: 50),
+                              // padding: const EdgeInsets.all(10.0), // Padding bên trong
+                              alignment: Alignment.center, // Căn giữa nội dung
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  UiDesign().buildAnimatedPieChart(
+                                      "", _percentInRadians),
+                                  UiDesign().addTextToAnimatedPieChart(
+                                      _percentInRadians),
+                                ],
+                              )
+                              // UiDesign().buildPieChart(100), // Widget Pie Chart
+                              ),
                           const Expanded(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.center, // Căn giữa tiêu đề
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Căn giữa tiêu đề
                                   children: [
                                     Text(
                                       "Outcome",
@@ -236,18 +242,21 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                               ],
                             ),
                           ),
-
                         ],
                       ),
                     ],
                   ),
-                ),const SizedBox(height: 30),
+                ),
+                const SizedBox(height: 30),
                 TextButton(
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const Choosepredictmethod()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
-                      (Route<dynamic> route) => false, // Loại bỏ tất cả các trang trước đó
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const Choosepredictmethod()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
+                      (Route<dynamic> route) =>
+                          false, // Loại bỏ tất cả các trang trước đó
                     );
                     GlobalData().resetValues();
                   },
@@ -256,7 +265,8 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10), // Bo góc
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18), // Padding tùy chọn
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 18), // Padding tùy chọn
                   ),
                   child: const Text(
                     'Retake the test',
@@ -271,7 +281,6 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
               ],
             ),
           )
-
         ],
       ),
     );

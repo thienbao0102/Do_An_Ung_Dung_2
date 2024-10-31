@@ -3,7 +3,7 @@ import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
 
 class FormData4 extends StatefulWidget {
-  const FormData4({super.key});
+  // const FormData4({super.key});
 
   @override
   State<FormData4> createState() => _FormData4State();
@@ -13,7 +13,8 @@ class _FormData4State extends State<FormData4> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: IntrinsicHeight( // Bọc Column trong IntrinsicHeight
+      child: IntrinsicHeight(
+        // Bọc Column trong IntrinsicHeight
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,15 +30,21 @@ class _FormData4State extends State<FormData4> {
               ),
             ),
             const SizedBox(height: 20),
-            UiDesign.buildRadioLevels(
-              'Workday alcohol consumption',
-              ['Very low', 'Low', 'Normal', 'High', 'Very high'],
-              GlobalData().workdayAlcohol,
-              (val) {
-                setState(() {
-                  GlobalData().workdayAlcohol = val;
-                });
-              },
+            Column(
+              children: [
+                UiDesign.buildRadioLevelsLabel('Workday alcohol consumption',
+                    ['Very low', 'Low', 'Normal', 'High', 'Very high']),
+                UiDesign.buildRadioLevels(
+                  'Workday alcohol consumption',
+                  ['Very low', 'Low', 'Normal', 'High', 'Very high'],
+                  GlobalData().workdayAlcohol,
+                  (val) {
+                    setState(() {
+                      GlobalData().workdayAlcohol = val;
+                    });
+                  },
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             UiDesign.buildRadioLevels(
@@ -51,15 +58,21 @@ class _FormData4State extends State<FormData4> {
               },
             ),
             const SizedBox(height: 10),
-            UiDesign.buildRadioLevels(
-              'Current health status',
-              ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
-              GlobalData().currentHealth,
-              (val) {
-                setState(() {
-                  GlobalData().currentHealth = val;
-                });
-              },
+            Column(
+              children: [
+                UiDesign.buildRadioLevelsLabel('Current health status',
+                    ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent']),
+                UiDesign.buildRadioLevels(
+                  'Current health status',
+                  ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
+                  GlobalData().currentHealth,
+                  (val) {
+                    setState(() {
+                      GlobalData().currentHealth = val;
+                    });
+                  },
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             const Center(
@@ -84,16 +97,24 @@ class _FormData4State extends State<FormData4> {
               },
             ),
             const SizedBox(height: 10),
-            UiDesign.buildRadioLevels(
-              'Quality of family relationships',
-              ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
-              GlobalData().familyQuality,
-              (val) {
-                setState(() {
-                  GlobalData().familyQuality = val;
-                });
-              },
+            Column(
+              children: [
+                UiDesign.buildRadioLevelsLabel(
+                    'Quality of family relationships',
+                    ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent']),
+                UiDesign.buildRadioLevels(
+                  'Quality of family relationships',
+                  ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
+                  GlobalData().familyQuality,
+                  (val) {
+                    setState(() {
+                      GlobalData().familyQuality = val;
+                    });
+                  },
+                ),
+              ],
             ),
+            SizedBox(height: 60,)
           ],
         ),
       ),

@@ -71,8 +71,6 @@ class InitialWidget extends StatelessWidget {
     // Chuyển từ Uint8List sang chuỗi văn bản để đọc CSV
     String csvContent = utf8.decode(fileBytes);
     GlobalData().inputDataImport = CsvToListConverter().convert(csvContent);
-    print("GlobalData().inputDataImport:");
-    print(GlobalData().inputDataImport.toString());
     checkFileImport(GlobalData().inputDataImport);
 
     // Gọi mô hình dự đoán
@@ -118,15 +116,18 @@ class InitialWidget extends StatelessWidget {
 
       // Lấy hàng đầu tiên làm header
       List<dynamic> header = fields.first;
+      print("header");
+      print(header);
       List<String> fileColumns = header.map((col) => col.toString()).toList();
 
       // Kiểm tra các cột có đầy đủ hay không
-      bool hasAllRequiredColumns =
-          requiredColumns.every((col) => fileColumns.contains(col));
+      bool hasAllRequiredColumns = 
+      requiredColumns.every((col) => fileColumns.contains(col));
 
       if (hasAllRequiredColumns) {
         onFileUploaded(true);
-      } else {
+      }
+      else {
         UiDesign.showToast(
             "This file does not have all the necessary columns.");
       }

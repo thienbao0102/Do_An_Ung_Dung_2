@@ -38,8 +38,12 @@ class Activity extends StatelessWidget {
                 const SizedBox(
                   height: 80,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Wrap(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  spacing: 20,
+                  alignment: WrapAlignment.spaceBetween,
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     MouseRegion(
                       cursor: SystemMouseCursors.click,

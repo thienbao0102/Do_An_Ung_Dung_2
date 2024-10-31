@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
 
   flutter_rating_bar: ^4.0.0
   
@@ -40,6 +41,8 @@ dependencies:
   auto_size_text: ^3.0.0
 
   fl_chart: ^0.69.0
+
+  http: ^1.2.2
 
 
 

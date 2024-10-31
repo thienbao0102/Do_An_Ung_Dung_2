@@ -9,9 +9,9 @@ class FormData7 extends StatefulWidget {
 
 class _FormData7State extends State<FormData7> {
   @override
-  
   Widget build(BuildContext context) {
-    return SingleChildScrollView( // Thêm SingleChildScrollView
+    return SingleChildScrollView(
+      // Thêm SingleChildScrollView
       child: Padding(
         padding: const EdgeInsets.all(0), // Thêm padding để cách biên
         child: Column(
@@ -19,20 +19,23 @@ class _FormData7State extends State<FormData7> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Center(
-              child: (
-                Text(
-                  "Your learning process",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF0062FF),
-                  ),
-                )
-              )
-            ),
+                child: (Text(
+              "Your learning process",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0062FF),
+              ),
+            ))),
             SizedBox(height: 30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-            Row(
+            Column(
               children: [
+                UiDesign.buildRadioLevelsLabel('Weekly study time', [
+                  '< 2 hours',
+                  '2 to 5 hours',
+                  '5 to 10 hours',
+                  '> 10 hours'
+                ]),
                 UiDesign.buildRadioLevels(
                   'Weekly study time',
                   ['< 2 hours', '2 to 5 hours', '5 to 10 hours', '> 10 hours'],
@@ -46,8 +49,10 @@ class _FormData7State extends State<FormData7> {
               ],
             ),
             SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-            Row(
+            Column(
               children: [
+                UiDesign.buildRadioLevelsLabel(
+                    'Number of past class failures', ['0', '1', '2', '3', '4']),
                 UiDesign.buildRadioLevels(
                   'Number of past class failures',
                   ['0', '1', '2', '3', '4'],

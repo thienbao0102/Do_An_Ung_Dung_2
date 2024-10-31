@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:scoresense/module/callbackend.dart';
+import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 
 class Resultpredictfileimport extends StatelessWidget {
@@ -27,9 +29,31 @@ class ShowResult extends StatefulWidget {
 }
 
 class _ShowResultState extends State<ShowResult> {
+  bool _isLoading = true;
+  List results = List.empty();
+
+  Future<void> _loadData() async {
+    results = await sendData(GlobalData().inputDataImport);
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   int touchedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return SingleChildScrollView(
         child: Stack(
       children: [
@@ -58,25 +82,25 @@ class _ShowResultState extends State<ShowResult> {
                   alignment: WrapAlignment.start,
                   spacing: 70,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 0,
                       width: 0,
                     ),
                     Text(
-                      "Count: 400",
-                      style: TextStyle(fontSize: 16),
+                      "Count: ${results.length}",
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Text(
-                      "Pass: 350",
-                      style: TextStyle(fontSize: 16),
+                      "Pass: ${results.where((number) => number > 10).toList().length}",
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Text(
-                      "Fail: 50",
-                      style: TextStyle(fontSize: 16),
+                      "Fail: ${results.length - results.where((number) => number > 10).toList().length}",
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Wrap(
@@ -111,7 +135,12 @@ class _ShowResultState extends State<ShowResult> {
                             ),
                             sectionsSpace: 4,
                             centerSpaceRadius: 90,
-                            sections: showingSections(),
+                            sections: showingSections(
+                                results
+                                    .where((number) => number > 10)
+                                    .toList()
+                                    .length,
+                                results.length),
                           ),
                         ),
                       ),
@@ -121,7 +150,7 @@ class _ShowResultState extends State<ShowResult> {
                           ? MediaQuery.of(context).size.width * 0.8
                           : MediaQuery.of(context).size.width * 0.55,
                       margin: const EdgeInsets.only(
-                          left: 20, right: 20, top: 30, bottom: 40),
+                          left: 20, top: 30, bottom: 40),
                       child: Table(
                         border: TableBorder.all(),
                         columnWidths: const <int, TableColumnWidth>{
@@ -131,39 +160,45 @@ class _ShowResultState extends State<ShowResult> {
                         },
                         defaultVerticalAlignment:
                             TableCellVerticalAlignment.middle,
-                        children: const [
-                          TableRow(children: [
-                            TableCell(
-                                child: Padding(
-                              padding: EdgeInsets.all(4),
-                              child: Text(
-                                "No",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                            )),
-                            TableCell(
-                                child: Padding(
-                              padding: EdgeInsets.all(4),
-                              child: Text(
-                                "Percent-Pass",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                            )),
-                            TableCell(
-                                child: Padding(
-                              padding: EdgeInsets.all(4),
-                              child: Text(
-                                "Predicted",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                            )),
-                          ]),
+                        children: [
+                          const TableRow(
+                            children: [
+                              TableCell(
+                                  child: Padding(
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  "No",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )),
+                              TableCell(
+                                  child: Padding(
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  "Score-Predictions",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )),
+                              TableCell(
+                                  child: Padding(
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  "Predictions",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )),
+                            ],
+                          ),
+                          ...renderContentRow()
                         ],
                       ),
                     ),
@@ -182,7 +217,14 @@ class _ShowResultState extends State<ShowResult> {
     ));
   }
 
-  List<PieChartSectionData> showingSections() {
+  List<PieChartSectionData> showingSections(int coutPass, int countFull) {
+    if (countFull == 0) {
+      return [];
+    }
+    double perPass = ((coutPass / countFull * 100.0) * 100).round() / 100;
+    double perFail =
+        (((countFull - coutPass) / countFull * 100.0) * 100).round() / 100;
+
     return List.generate(2, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
@@ -190,9 +232,9 @@ class _ShowResultState extends State<ShowResult> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Color(0xFF77CDFF),
-            value: 87.5,
-            title: isTouched ? 'Pass' : '87.5%',
+            color: const Color(0xFF77CDFF),
+            value: coutPass / countFull * 100.0,
+            title: isTouched ? 'Pass' : '${perPass}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -202,9 +244,9 @@ class _ShowResultState extends State<ShowResult> {
           );
         case 1:
           return PieChartSectionData(
-            color: Color(0xFFF95454),
-            value: 12.5,
-            title: isTouched ? 'Fail' : '12.5%',
+            color: const Color(0xFFF95454),
+            value: (countFull - coutPass) / countFull * 100.0,
+            title: isTouched ? 'Fail' : '${perFail}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -215,6 +257,40 @@ class _ShowResultState extends State<ShowResult> {
         default:
           throw Error();
       }
+    });
+  }
+
+  List<TableRow> renderContentRow() {
+    return List<TableRow>.generate(results.length, (int i) {
+      return TableRow(children: [
+        TableCell(
+            child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Text(
+            "${i}",
+            style: const TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        )),
+        TableCell(
+            child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Text(
+            "${results[i]}",
+            style: const TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        )),
+        TableCell(
+            child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Text(
+            results[i] > 10 ? "Pass" : "Fail",
+            style: const TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        )),
+      ]);
     });
   }
 }
