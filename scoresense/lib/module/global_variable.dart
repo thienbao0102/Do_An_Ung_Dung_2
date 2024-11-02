@@ -51,6 +51,9 @@ class GlobalData {
     return _instance;
   }
 
+  Color colorPrimary = const Color.fromARGB(255, 0, 98, 255);
+  Color colorText = const Color.fromARGB(255, 51, 51, 51);
+
   // Hàm đặt lại tất cả về giá trị mặc định
   void resetValues() {
     fatherEducation = 'None';

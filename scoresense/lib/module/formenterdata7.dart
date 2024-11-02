@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ratingSlider.dart';
+import 'package:scoresense/module/starRating.dart';
 
 class FormData7 extends StatefulWidget {
   @override
@@ -28,24 +30,27 @@ class _FormData7State extends State<FormData7> {
               ),
             ))),
             SizedBox(height: 30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-            Column(
+            const Column(
               children: [
-                UiDesign.buildRadioLevelsLabel('Weekly study time', [
-                  '< 2 hours',
-                  '2 to 5 hours',
-                  '5 to 10 hours',
-                  '> 10 hours'
-                ]),
-                UiDesign.buildRadioLevels(
-                  'Weekly study time',
-                  ['< 2 hours', '2 to 5 hours', '5 to 10 hours', '> 10 hours'],
-                  GlobalData().weeklyStudyTime,
-                  (index) {
-                    setState(() {
-                      GlobalData().weeklyStudyTime = index;
-                    });
-                  },
+                RatingSlider(
+                  question: "Weekly study time",
+                  labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
                 ),
+                StarRating(question: "Number of past class failures"),
+                // RatingSlider(
+                //   question: "Number of past class failures",
+                //   labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
+                // ),
+                // UiDesign.buildRadioLevels(
+                //   'Weekly study time',
+                //   ['< 2 hours', '2 to 5 hours', '5 to 10 hours', '> 10 hours'],
+                //   GlobalData().weeklyStudyTime,
+                //   (index) {
+                //     setState(() {
+                //       GlobalData().weeklyStudyTime = index;
+                //     });
+                //   },
+                // ),
               ],
             ),
             SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
