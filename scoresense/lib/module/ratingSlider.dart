@@ -32,10 +32,10 @@ class _RatingSliderState extends State<RatingSlider> {
 
   Widget buildRatingSlider() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [

@@ -1,108 +1,162 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/pages/personalResultPage.dart';
 
-class FormData1 extends StatefulWidget {
-  @override
-  _FormData1State createState() => _FormData1State();
-}
+class FormData1 extends StatelessWidget {
+  final VoidCallback onNext;
+  final VoidCallback? onPrevious;
+  final bool isLastPage;
 
-class _FormData1State extends State<FormData1> {
+  const FormData1({
+    Key? key,
+    required this.onNext,
+    this.onPrevious,
+    this.isLastPage = false,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        // Thêm SingleChildScrollView
-        child: Padding(
-      padding: const EdgeInsets.all(0), // Thêm padding để cách biên
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Center(
-              child: (Text(
-            "Give me your information",
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF0062FF),
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 1000.0),
+        width: MediaQuery.of(context).size.width * 0.6,
+        margin: const EdgeInsets.only(top: 70, bottom: 20),
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              offset: Offset(0, 4),
             ),
-          ))),
-
-          const SizedBox(
-              height: 50), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-          // First and Last Name Row
-          Row(
-            children: [
-              Expanded(
-                child: UiDesign.buildTextField(
-                  "Your First name",
-                  (value) {
-                    setState(() {
-                      GlobalData().firstName = value;
-                    });
-                  },
+          ],
+        ),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Center(
+                  child: Text(
+                    "Give me your information",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0062FF),
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 100), // Khoảng cách giữa hai text field
-              Expanded(
-                child: UiDesign.buildTextField(
-                  "Your Last name",
-                  (value) {
-                    setState(() {
-                      GlobalData().lastName = value;
-                    });
-                  },
+                const SizedBox(height: 50),
+                Row(
+                  children: [
+                    Expanded(
+                      child: UiDesign.buildTextField(
+                        "Your First name",
+                        (value) => GlobalData().firstName = value,
+                      ),
+                    ),
+                    const SizedBox(width: 100),
+                    Expanded(
+                      child: UiDesign.buildTextField(
+                        "Your Last name",
+                        (value) => GlobalData().lastName = value,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 50), // Khoảng cách giữa các hàng
-          // Gender and Location Row
-          Row(
-            children: [
-              Expanded(
-                child: UiDesign.buildRadioButtonGroup(
-                  "Gender?",
-                  ['Male', 'Female'],
-                  GlobalData().gender,
-                  (value) {
-                    setState(() {
-                      GlobalData().gender = value;
-                    });
-                  },
+                const SizedBox(height: 50),
+                Row(
+                  children: [
+                    Expanded(
+                      child: UiDesign.buildRadioButtonGroup(
+                        "Gender?",
+                        ['Male', 'Female'],
+                        GlobalData().gender,
+                        (value) => GlobalData().gender = value,
+                      ),
+                    ),
+                    Expanded(
+                      child: UiDesign.buildRadioButtonGroup(
+                        "Home location?",
+                        ['Urban', 'Rural'],
+                        GlobalData().location,
+                        (value) => GlobalData().location = value,
+                      ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 40),
+                UiDesign.buildTextField2("Your age?", true),
+                const SizedBox(height: 40),
+                UiDesign.buildTextField(
+                  "What school are you in?",
+                  (value) => GlobalData().school = value,
+                ),const SizedBox(height: 60),
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (onPrevious != null)
+                    TextButton(
+                      onPressed: onPrevious,
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: const BorderSide(color: Color(0xFF0062FF)),
+                        ),
+                      ),
+                      child: const Text(
+                        'Previous',
+                        style: TextStyle(
+                          color: Color(0xFF0062FF),
+                          letterSpacing: 1.3,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ElevatedButton(
+                    onPressed: isLastPage
+                        ? () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PersonalResultPage(),
+                              ),
+                            )
+                        : onNext,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                      backgroundColor: const Color(0xFF0062FF),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      isLastPage ? 'Submit' : 'Next',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        letterSpacing: 1.3,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: UiDesign.buildRadioButtonGroup(
-                  "Home location?",
-                  ['Urban', 'Rural'],
-                  GlobalData().location,
-                  (value) {
-                    setState(() {
-                      GlobalData().location = value;
-                    });
-                  },
-                ),
-              ),
-              const SizedBox(height: 40), // Khoảng cách giữa các hàng
-              // Age input
-              UiDesign.buildTextField2("Your age?", true)
-            ],
-          ),
-
-          const SizedBox(height: 40), // Khoảng cách giữa các hàng
-          // School Name
-          UiDesign.buildTextField(
-            "What school are you in?",
-            (value) {
-              setState(() {
-                GlobalData().school = value;
-              });
-            },
-          ),
-          const SizedBox(height: 40), // Khoảng cách cuối cùng
-        ],
+            ),
+          ],
+        ),
       ),
-      //const SizedBox(height: 110),
-    ));
+    );
   }
 }
