@@ -6,15 +6,17 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320,
+      
       color: Colors.white,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 250,
             padding: const EdgeInsets.only(top: 60, right: 80, bottom: 60, left: 80),
-            child:  const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child:  const Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              spacing: 80,
+              runSpacing: 40,
               children: [
                 //column dau tien
                 Column(
@@ -146,16 +148,12 @@ class Footer extends StatelessWidget {
             )
           ),
           Container(
-            height: 70,
-            padding: const EdgeInsets.only(left: 185, top: 15, bottom: 15),
+            height: 50,
+            width: double.infinity,
+            padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width*0.13, top: 15, bottom: 15),
             color: const Color(0xFFE9E9E9),
-            child: const Row(
-              children: [
-                Text("Made By ScoreSense All Right Reserved",
+            child: const Text("Made By ScoreSense All Right Reserved",
                 style: TextStyle(fontSize: 14, color: Color(0xFF737373)),),
-                
-              ],
-            ),
           )
         ],
       ),
