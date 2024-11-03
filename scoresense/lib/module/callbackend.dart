@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:scoresense/module/global_variable.dart';
 
 Future<dynamic> sendData(List<List<dynamic>> inputDataImport) async {
   //print(inputDataImport);

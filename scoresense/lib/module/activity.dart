@@ -12,8 +12,12 @@ class Activity extends StatelessWidget {
         color: Colors.white,
         child: Center(
           child: Container(
-            padding: const EdgeInsets.only(top: 200, bottom: 200),
-            width: MediaQuery.of(context).size.width * 0.68,
+            padding: EdgeInsets.only(
+                top: 200,
+                bottom: 200,
+                left: MediaQuery.of(context).size.width * 0.15,
+                right: MediaQuery.of(context).size.width * 0.15),
+            //width: MediaQuery.of(context).size.width * 0.68,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,8 +43,7 @@ class Activity extends StatelessWidget {
                   height: 80,
                 ),
                 Wrap(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  spacing: 20,
+                  spacing: 10,
                   alignment: WrapAlignment.spaceBetween,
                   runAlignment: WrapAlignment.center,
                   crossAxisAlignment: WrapCrossAlignment.center,
@@ -55,43 +58,52 @@ class Activity extends StatelessWidget {
                                 builder: (context) => const EnterFormData()),
                           );
                         },
-                        child: Container(
-                          width: 510,
-                          height: 270,
-                          color: const Color(0xFFCDF5FD),
-                          padding: const EdgeInsets.all(30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Image(image: AssetImage('Individual.png')),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Text(
-                                'Individual',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Container(
-                                height: 2,
-                                width: 50,
-                                color: const Color(0xFF0062FF),
-                                margin:
-                                    const EdgeInsets.only(top: 20, bottom: 20),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                                width: 250,
-                                child: Text(
-                                  'Analyze personal data to predict pass/fail outcomes.',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Color(0xFF737373)),
+                        child: FractionallySizedBox(
+                          widthFactor: MediaQuery.of(context).size.width >800? 0.45: 1,
+                          child: Container(
+                            constraints: const BoxConstraints(minWidth: 250),
+                            height: 270,
+                            color: const Color(0xFFCDF5FD),
+                            padding: const EdgeInsets.all(30),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Image(
+                                    image: AssetImage('Individual.png')),
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                              ),
-                            ],
+                                const Text(
+                                  'Individual',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Container(
+                                  height: 2,
+                                  width: 50,
+                                  color: const Color(0xFF0062FF),
+                                  margin: const EdgeInsets.only(
+                                      top: 20, bottom: 20),
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                  width: 250,
+                                  child: Text(
+                                    'Analyze personal data to predict pass/fail outcomes.',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Color(0xFF737373)),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                      width: 1,
                     ),
                     MouseRegion(
                       cursor: SystemMouseCursors.click,
@@ -104,40 +116,44 @@ class Activity extends StatelessWidget {
                                     const ImportFilePredict()),
                           );
                         },
-                        child: Container(
-                          width: 510,
-                          height: 270,
-                          color: const Color(0xFFCDF5FD),
-                          padding: const EdgeInsets.all(30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Image(image: AssetImage('public.png')),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Text(
-                                'Public',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Container(
-                                height: 2,
-                                width: 50,
-                                margin:
-                                    const EdgeInsets.only(top: 20, bottom: 20),
-                                color: const Color(0xFF0062FF),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                                width: 250,
-                                child: Text(
-                                  'Analyze collective data to predict overall pass/fail outcomes.',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Color(0xFF737373)),
+                        child: FractionallySizedBox(
+                          widthFactor: MediaQuery.of(context).size.width >800? 0.45: 1,
+                          child: Container(
+                            constraints: const BoxConstraints(minWidth: 250),
+                            height: 270,
+                            color: const Color(0xFFCDF5FD),
+                            padding: const EdgeInsets.all(30),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Image(image: AssetImage('public.png')),
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                              ),
-                            ],
+                                const Text(
+                                  'Public',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Container(
+                                  height: 2,
+                                  width: 50,
+                                  margin: const EdgeInsets.only(
+                                      top: 20, bottom: 20),
+                                  color: const Color(0xFF0062FF),
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                  width: 250,
+                                  child: Text(
+                                    'Analyze collective data to predict overall pass/fail outcomes.',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Color(0xFF737373)),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

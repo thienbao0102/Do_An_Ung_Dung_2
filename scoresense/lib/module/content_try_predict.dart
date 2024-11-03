@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
@@ -17,8 +18,8 @@ class _ContentAndTryState extends State<ContentAndTry> {
           image: DecorationImage(
               image: AssetImage('backgound_homepage.png'),
               fit: BoxFit.cover)),
-      height: MediaQuery.of(context).size.height,
-      padding: const EdgeInsets.only(left: 100),
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(left: 100, bottom: 160),
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
@@ -34,7 +35,8 @@ class _ContentAndTryState extends State<ContentAndTry> {
               children: [
                 TitleSection(),
                 SizedBox(height: 40),
-                ActionButtons()
+                ActionButtons(),
+                SizedBox(height: 100,)  
               ],
             ),
           )
@@ -49,24 +51,30 @@ class TitleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.only(top: 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          AutoSizeText(
             'Achieve Your Best Grades\nwith Smart Predictions',
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
+            maxLines: 2,
+            maxFontSize: 40,
+            minFontSize: 20,           
           ),
           SizedBox(height: 10),
-          Text(
+          AutoSizeText(
             'Unlock insights into your academic performance\nand stay ahead with accurate score forecasts.',
             style: TextStyle(
               fontSize: 20,
               color: Colors.black54,
             ),
+            maxLines: 2,
+            maxFontSize: 20,
+            minFontSize: 13,
           ),
         ],
       ),
@@ -81,7 +89,7 @@ class ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
+      child: Wrap(
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(

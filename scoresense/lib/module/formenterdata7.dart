@@ -60,6 +60,7 @@ class FormData7 extends StatelessWidget {
                   ))),
                   SizedBox(height: 30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
                   const Column(
+                    //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       RatingSlider(
                         question: "Weekly study time",

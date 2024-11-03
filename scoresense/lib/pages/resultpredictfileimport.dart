@@ -55,175 +55,200 @@ class _ShowResultState extends State<ShowResult> {
       );
     }
     return SingleChildScrollView(
-        child: Stack(
-      children: [
-        Center(
-          child: Container(
-            margin: const EdgeInsets.only(top: 140, bottom: 50),
-            padding: const EdgeInsets.all(30),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Colors.white),
-            width: MediaQuery.of(context).size.width * 0.95,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Predict Results",
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0062FF)),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Wrap(
-                  alignment: WrapAlignment.start,
-                  spacing: 70,
-                  children: [
-                    const SizedBox(
-                      height: 0,
-                      width: 0,
-                    ),
-                    Text(
-                      "Count: ${results.length}",
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    Text(
-                      "Pass: ${results.where((number) => number > 10).toList().length}",
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    Text(
-                      "Fail: ${results.length - results.where((number) => number > 10).toList().length}",
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Wrap(
-                  alignment: WrapAlignment.start,
-                  direction: Axis.horizontal,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 20),
-                      height: 350,
-                      width: 350,
-                      child: Center(
-                        child: PieChart(
-                          PieChartData(
-                            pieTouchData: PieTouchData(
-                              touchCallback:
-                                  (FlTouchEvent event, pieTouchResponse) {
-                                setState(() {
-                                  if (!event.isInterestedForInteractions ||
-                                      pieTouchResponse == null ||
-                                      pieTouchResponse.touchedSection == null) {
-                                    touchedIndex = -1;
-                                    return;
-                                  }
-                                  touchedIndex = pieTouchResponse
-                                      .touchedSection!.touchedSectionIndex;
-                                });
-                              },
+      child: Stack(
+        children: [
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: 140, bottom: 50),
+              padding: const EdgeInsets.all(30),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), color: Colors.white),
+              width: MediaQuery.of(context).size.width * 0.95,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Center(
+                    child: Text(
+                    "Predict Results",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF0062FF)),
+                  ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [                    
+                      const SizedBox(width: 50,),
+                      Text(
+                        "Count: ${results.length}",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(width: 50,),
+                      Text(
+                        "Pass: ${results.where((number) => number > 10).toList().length}",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(width: 50,),
+                      Text(
+                        "Fail: ${results.length - results.where((number) => number > 10).toList().length}",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Wrap(
+                    alignment: WrapAlignment.start,
+                    direction: Axis.horizontal,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 20),
+                        height: 350,
+                        width: 350,
+                        child: Center(
+                          child: PieChart(
+                            PieChartData(
+                              startDegreeOffset: 79,
+                              pieTouchData: PieTouchData(
+                                touchCallback:
+                                    (FlTouchEvent event, pieTouchResponse) {
+                                  setState(() {
+                                    if (!event.isInterestedForInteractions ||
+                                        pieTouchResponse == null ||
+                                        pieTouchResponse.touchedSection ==
+                                            null) {
+                                      touchedIndex = -1;
+                                      return;
+                                    }
+                                    touchedIndex = pieTouchResponse
+                                        .touchedSection!.touchedSectionIndex;
+                                  });
+                                },
+                              ),
+                              borderData: FlBorderData(
+                                show: false,
+                              ),
+                              sectionsSpace: 4,
+                              centerSpaceRadius: 90,
+                              sections: showingSections(
+                                  results
+                                      .where((number) => number > 10)
+                                      .toList()
+                                      .length,
+                                  results.length),
                             ),
-                            borderData: FlBorderData(
-                              show: false,
-                            ),
-                            sectionsSpace: 4,
-                            centerSpaceRadius: 90,
-                            sections: showingSections(
-                                results
-                                    .where((number) => number > 10)
-                                    .toList()
-                                    .length,
-                                results.length),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width < 1150
-                          ? MediaQuery.of(context).size.width * 0.8
-                          : MediaQuery.of(context).size.width * 0.55,
-                      margin: const EdgeInsets.only(
-                          left: 20, top: 30, bottom: 40),
-                      child: Table(
-                        border: TableBorder.all(),
-                        columnWidths: const <int, TableColumnWidth>{
-                          0: FixedColumnWidth(60),
-                          1: FlexColumnWidth(),
-                          2: FlexColumnWidth()
-                        },
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        children: [
-                          const TableRow(
-                            children: [
-                              TableCell(
-                                  child: Padding(
-                                padding: EdgeInsets.all(4),
-                                child: Text(
-                                  "No",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
+                      Container(
+                        width: MediaQuery.of(context).size.width < 1150
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : MediaQuery.of(context).size.width * 0.55,
+                        margin: const EdgeInsets.only(
+                            left: 20, top: 30, bottom: 40),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Table(
+                              border: TableBorder.all(),
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(60),
+                                1: FlexColumnWidth(),
+                                2: FlexColumnWidth()
+                              },
+                              defaultVerticalAlignment:
+                                  TableCellVerticalAlignment.middle,
+                              children: const [
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                        child: Padding(
+                                      padding: EdgeInsets.all(4),
+                                      child: Text(
+                                        "No",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(4),
+                                        child: Text(
+                                          "Score-Predictions",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(4),
+                                        child: Text(
+                                          "Predictions",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              )),
-                              TableCell(
-                                  child: Padding(
-                                padding: EdgeInsets.all(4),
-                                child: Text(
-                                  "Score-Predictions",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
+                              ],
+                            ),
+                            SizedBox(
+                              height: 500,
+                              child: SingleChildScrollView(
+                                child: Table(
+                                  border: TableBorder.all(),
+                                  columnWidths: const <int, TableColumnWidth>{
+                                    0: FixedColumnWidth(60),
+                                    1: FlexColumnWidth(),
+                                    2: FlexColumnWidth()
+                                  },
+                                  defaultVerticalAlignment:
+                                      TableCellVerticalAlignment.middle,
+                                  children: [...renderContentRow()],
                                 ),
-                              )),
-                              TableCell(
-                                  child: Padding(
-                                padding: EdgeInsets.all(4),
-                                child: Text(
-                                  "Predictions",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
-                                ),
-                              )),
-                            ],
-                          ),
-                          ...renderContentRow()
-                        ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        const Positioned(
-          top: 40,
-          left: 120,
-          child: Header(),
-        ),
-      ],
-    ));
+          const Positioned(
+            top: 40,
+            left: 120,
+            child: Header(),
+          ),
+        ],
+      ),
+    );
   }
 
   List<PieChartSectionData> showingSections(int coutPass, int countFull) {
     if (countFull == 0) {
       return [];
     }
-    double perPass = ((coutPass / countFull * 100.0) * 100).round() / 100;
+    double perPass = ((coutPass / countFull * 100.0) * 10).round() / 10;
     double perFail =
-        (((countFull - coutPass) / countFull * 100.0) * 100).round() / 100;
+        (((countFull - coutPass) / countFull * 100.0) * 10).round() / 10;
 
     return List.generate(2, (i) {
       final isTouched = i == touchedIndex;
