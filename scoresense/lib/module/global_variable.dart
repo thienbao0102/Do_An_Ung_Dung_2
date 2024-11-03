@@ -7,9 +7,6 @@ class GlobalData {
   // Nội dung file csv import
   List<List<dynamic>> inputDataImport = List<List<dynamic>>.empty();
 
-  //kết quả dự đoán
-  //List results = List.empty();
-
   // Index chuyển giữa các form
   ValueNotifier<int> indexedStackNotifier = ValueNotifier<int>(0);
 
