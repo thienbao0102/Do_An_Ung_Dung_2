@@ -42,6 +42,8 @@ dependencies:
 
   fl_chart: ^0.69.0
 
+  flutter_svg: ^2.0.7
+
   http: ^1.2.2
 
 
@@ -77,7 +79,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - assets/chevron-back-outline.svg
+    - assets/chevron-forward-outline.svg
+    - assets/star-filled.svg
+    - assets/star-bordered.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
