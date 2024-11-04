@@ -6,6 +6,7 @@ import 'package:scoresense/module/formenterdata4.dart';
 import 'package:scoresense/module/formenterdata5.dart';
 import 'package:scoresense/module/formenterdata6.dart';
 import 'package:scoresense/module/formenterdata7.dart';
+import 'package:scoresense/module/formenterdata8.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 
@@ -33,7 +34,7 @@ class _EnterFormDataState extends State<EnterFormData> {
   }
 
   void _nextPage() {
-    if (indexedStack < 6) {
+    if (indexedStack < 7) {
       setState(() {
         indexedStack++;
       });
@@ -89,7 +90,8 @@ class _EnterFormDataState extends State<EnterFormData> {
                         FormData4(onNext: _nextPage, onPrevious: _previousPage),
                         FormData5(onNext: _nextPage, onPrevious: _previousPage),
                         FormData6(onNext: _nextPage, onPrevious: _previousPage),
-                        FormData7(onNext: _nextPage, onPrevious: _previousPage, isLastPage: true),
+                        FormData7(onNext: _nextPage, onPrevious: _previousPage, isLastPage: false),
+                        FormData8(onNext: _nextPage, onPrevious: _previousPage, isLastPage: true),
                       ],
                     ),
                   ),
