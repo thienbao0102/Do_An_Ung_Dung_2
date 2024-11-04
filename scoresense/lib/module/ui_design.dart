@@ -35,7 +35,7 @@ class UiDesign {
   }
 
   // text field with border and top label
-  static Widget buildTextField2(String label, bool numOnly) {
+  static Widget buildTextField2(String label, bool numOnly, Function(String) onChanged) {
     return SizedBox(
       width: 220,
       child: Column(
@@ -62,6 +62,7 @@ class UiDesign {
                     color: Color(0xFF0062FF), width: 1.0), // Viền xung quanh
               ),
             ),
+            onChanged: (val) => onChanged(val),
           )
         ],
       ),

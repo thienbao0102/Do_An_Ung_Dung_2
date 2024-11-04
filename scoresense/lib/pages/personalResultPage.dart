@@ -3,6 +3,7 @@ import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/module/ui_design.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:scoresense/module/callbackend.dart';
 
 import '../module/global_variable.dart';
 
@@ -17,8 +18,59 @@ class PersonalResultPage extends StatefulWidget {
 class _PersonalResultPageState extends State<PersonalResultPage> {
   @override
   double _percentInRadians = 80.0;
+  bool _isLoading = true;
+  List results = List.empty();
+
+  Future<void> _loadData() async {
+    List<Map<String, dynamic>> dataPredict = [
+        {
+          "school": GlobalData().school,
+        "sex": GlobalData().gender,
+        "age": GlobalData().age,
+        "address": GlobalData().location,
+        "famsize": GlobalData().familySize,
+        "Pstatus": GlobalData().parentStatus,
+        "Medu": GlobalData().motherEducation,
+        "Fedu": GlobalData().fatherEducation,
+        "Mjob": GlobalData().motherJob,
+        "Fjob": GlobalData().fatherJob,
+        "reason": GlobalData(),
+        "guardian": GlobalData(),
+        "traveltime": GlobalData().travelTimeIndex + 1,
+        "studytime": GlobalData().weeklyStudyTime,
+        "failures": GlobalData().numOfFailClass,
+        "schoolsup": GlobalData().schoolSupport,
+        "famsup": GlobalData().familySupport,
+        "paid": GlobalData().paidClasses,
+        "activities": GlobalData().extracurricularActivities,
+        "nursery": GlobalData().nurserySchool,
+        "higher": GlobalData().higherEducation,
+        "internet": GlobalData().internetAtHome,
+        "romantic": GlobalData().relationship,
+        "famrel": GlobalData().familyQuality + 1,
+        "freetime": GlobalData().freeTimeIndex + 1,
+        "goout": GlobalData().goOutIndex + 1,
+        "Dalc": GlobalData().workdayAlcohol + 1,
+        "Walc": GlobalData().weekendAlcohol + 1,
+        "health": GlobalData().currentHealth + 1,
+        "absences": GlobalData().absences,
+        "G1": GlobalData().G1,
+        "G2": GlobalData().G2
+        }
+      ];
+    results = await sendData(GlobalData().inputDataImport);
+    setState(() {
+      _isLoading = false;
+    });
+  }
+  
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       body: Stack(
         children: [
