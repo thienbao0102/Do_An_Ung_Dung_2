@@ -5,16 +5,16 @@ import 'package:scoresense/module/ratingSlider.dart';
 import 'package:scoresense/module/starRating.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
-class FormData7 extends StatelessWidget {
+class FormData8 extends StatelessWidget {
   final VoidCallback onNext;
   final VoidCallback? onPrevious;
   final bool isLastPage;
 
-  const FormData7({
+  const FormData8({
     Key? key,
     required this.onNext,
     this.onPrevious,
-    this.isLastPage = false,
+    this.isLastPage = true,
   }) : super(key: key);
 
   @override
@@ -44,14 +44,14 @@ class FormData7 extends StatelessWidget {
           child: 
           Stack(
             children: [
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Center(
+                  Center(
                       child: (Text(
-                    "Your learning process",
+                    "Other information",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -59,55 +59,59 @@ class FormData7 extends StatelessWidget {
                     ),
                   ))),
                   SizedBox(height: 30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                  const Column(
+                  Column(
                     //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       RatingSlider(
-                        question: "Weekly study time",
-                        labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
+                        question: "Reason to choose this school",
+                        labels: ['Course', 'Home', 'Reputation', 'Other'], // Truyền danh sách labels
                       ),
-                      StarRating(question: "Number of past class failures"),
-                      // RatingSlider(
-                      //   question: "Number of past class failures",
-                      //   labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
-                      // ),
-                      // UiDesign.buildRadioLevels(
-                      //   'Weekly study time',
-                      //   ['< 2 hours', '2 to 5 hours', '5 to 10 hours', '> 10 hours'],
-                      //   GlobalData().weeklyStudyTime,
-                      //   (index) {
-                      //     setState(() {
-                      //       GlobalData().weeklyStudyTime = index;
-                      //     });
-                      //   },
-                      // ),
+                      RatingSlider(
+                        question: "Your guardian",
+                        labels: ['Mother', 'Father', 'Other'], // Truyền danh sách labels
+                      ),
+                      // StarRating(question: "Number of past class failures"),
+                      // // RatingSlider(
+                      // //   question: "Number of past class failures",
+                      // //   labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
+                      // // ),
+                      // // UiDesign.buildRadioLevels(
+                      // //   'Weekly study time',
+                      // //   ['< 2 hours', '2 to 5 hours', '5 to 10 hours', '> 10 hours'],
+                      // //   GlobalData().weeklyStudyTime,
+                      // //   (index) {
+                      // //     setState(() {
+                      // //       GlobalData().weeklyStudyTime = index;
+                      // //     });
+                      // //   },
+                      // // ),
                     ],
                   ),
-                  SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                  Column(
-                    children: [
-                      UiDesign.buildRadioLevelsLabel(
-                          'Number of past class failures',
-                          ['0', '1', '2', '3', '4']),
-                      UiDesign.buildRadioLevels(
-                        'Number of past class failures',
-                        ['0', '1', '2', '3', '4'],
-                        GlobalData().numOfFailClass,
-                        (index) => GlobalData().numOfFailClass = index,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 40), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // crossAxisAlignment: ,
-                    children: [
-                      UiDesign.buildTextField2("Number of times absent?", true, (value) => GlobalData().absences = int.parse(value),),
-                      UiDesign.buildTextField2("Semester 1 score?", true, (value) => GlobalData().G1 = int.parse(value),),
-                      UiDesign.buildTextField2("Semester 2 score??", true, (value) => GlobalData().G2 = int.parse(value),),
-                    ],
-                  )
-                  ,const SizedBox(height: 60),
+                  // SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
+                  // Column(
+                  //   children: [
+                  //     UiDesign.buildRadioLevelsLabel(
+                  //         'Number of past class failures',
+                  //         ['0', '1', '2', '3', '4']),
+                  //     UiDesign.buildRadioLevels(
+                  //       'Number of past class failures',
+                  //       ['0', '1', '2', '3', '4'],
+                  //       GlobalData().numOfFailClass,
+                  //       (index) => GlobalData().numOfFailClass = index,
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 40), // Khoảng cách giữa tiêu đề và các ô nhập liệu
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   // crossAxisAlignment: ,
+                  //   children: [
+                  //     UiDesign.buildTextField2("Number of times absent?", true, (value) => GlobalData().absences = int.parse(value),),
+                  //     UiDesign.buildTextField2("Semester 1 score?", true, (value) => GlobalData().G1 = int.parse(value),),
+                  //     UiDesign.buildTextField2("Semester 2 score??", true, (value) => GlobalData().G2 = int.parse(value),),
+                  //   ],
+                  
+                  SizedBox(height: 60),
                 ],
               ),
               Positioned(

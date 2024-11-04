@@ -98,7 +98,8 @@ class FormData1 extends StatelessWidget {
                         ),
                           Column(
                             children: [
-                              UiDesign.buildTextField2("Your age?", true),
+                              UiDesign.buildTextField2("Your age?", true,(value) => GlobalData().age = int.parse(value)),
+                            
                             ],
                           )
                         
@@ -106,8 +107,6 @@ class FormData1 extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
-                UiDesign.buildTextField2("Your age?", true,(value) => GlobalData().age = int.parse(value),),
                 const SizedBox(height: 40),
                 UiDesign.buildTextField(
                   "What school are you in?",
