@@ -70,27 +70,42 @@ class FormData1 extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: UiDesign.buildRadioButtonGroup(
-                        "Gender?",
-                        ['Male', 'Female'],
-                        GlobalData().gender,
-                        (value) => GlobalData().gender = value,
-                      ),
-                    ),
-                    Expanded(
-                      child: UiDesign.buildRadioButtonGroup(
-                        "Home location?",
-                        ['Urban', 'Rural'],
-                        GlobalData().location,
-                        (value) => GlobalData().location = value,
-                      ),
+                    Wrap(
+                      spacing: 100,
+                      alignment: WrapAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                          UiDesign.buildRadioButtonGroup(
+                            "Gender?",
+                            ['Male', 'Female'],
+                            GlobalData().gender,
+                            (value) => GlobalData().gender = value,
+                        ),
+                          ]
+                        ),
+                        Column(
+                          children: [
+                            UiDesign.buildRadioButtonGroup(
+                            "Home location?",
+                            ['Urban', 'Rural'],
+                            GlobalData().location,
+                            (value) => GlobalData().location = value,
+                          ),
+                          ],
+                        ),
+                          Column(
+                            children: [
+                              UiDesign.buildTextField2("Your age?", true),
+                            ],
+                          )
+                        
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
-                UiDesign.buildTextField2("Your age?", true),
                 const SizedBox(height: 40),
                 UiDesign.buildTextField(
                   "What school are you in?",

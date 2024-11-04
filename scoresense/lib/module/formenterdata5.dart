@@ -58,21 +58,21 @@ class FormData5 extends StatelessWidget {
                       ),
                   ),
                   const SizedBox(height: 50),
-                  UiDesign.buildRadioButtonSupport(
+                  UiDesign.buildRadioButtonYesNo(
                     "School support",
                     ['Yes', 'No'],
                     GlobalData().schoolSupport,
                     (value) => GlobalData().schoolSupport = value,
                   ),
                   const SizedBox(height: 30),
-                  UiDesign.buildRadioButtonSupport(
+                  UiDesign.buildRadioButtonYesNo(
                     "Family support",
                     ['Yes', 'No'],
                     GlobalData().familySupport,
                     (value) => GlobalData().familySupport = value
                   ),
                   const SizedBox(height: 30),
-                  UiDesign.buildRadioButtonSupport(
+                  UiDesign.buildRadioButtonYesNo(
                     "Extra paid classes",
                     ['Yes', 'No'],
                     GlobalData().paidClasses,
@@ -80,7 +80,7 @@ class FormData5 extends StatelessWidget {
                         GlobalData().paidClasses = value
                   ),
                   const SizedBox(height: 30),
-                  UiDesign.buildRadioButtonSupport(
+                  UiDesign.buildRadioButtonYesNo(
                     "Extracurricular activities",
                     ['Yes', 'No'],
                     GlobalData().extracurricularActivities,

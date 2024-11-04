@@ -1,3 +1,8 @@
+import 'package:scoresense/module/Radio_Buton_Group_Row.dart';
+import 'package:scoresense/module/Radio_Button_Group.dart';
+import 'package:scoresense/module/Radio_Button_YesNo.dart';
+import 'package:scoresense/module/Radio_Levels.dart';
+// import 'package:scoresense/module/Radio_Levels_Label.dart';
 import 'package:scoresense/module/animatedPieChart.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -72,110 +77,13 @@ class UiDesign {
   //kích thước ô bằng nhau của radio (này là ở form 1 có gì tham khảo form 1 nha)
   static Widget buildRadioButtonGroup(String label, List<String> options,
       String selectedValue, Function(String) onChanged) {
-    return SizedBox(
-      width: 220,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color(0xFF0062FF),
-            ),
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFF0062FF)),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Wrap(
-                //spacing: 10,
-                children: options.map((option) {
-                  return GestureDetector(
-                    onTap: () => {onChanged(option)},
-                    child: Container(
-                      width: 100,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: selectedValue == option
-                            ? const Color(0xFF0062FF)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        option,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: selectedValue == option
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ]),
-        ],
-      ),
-    );
+    return RadioButtonGroup(label: label, options: options, initialSelectedValue: selectedValue, onChanged: onChanged);
   }
 
   //hàm ui radio chọn nhưng không có kích thước đồng đều (tham khảo form 2 cho dễ hình dung nha)
   static Widget buildRadioButtonGroupRow(String label, List<String> options,
       String selectedValue, Function(String) onChanged) {
-    return Wrap(
-      runAlignment: WrapAlignment.start,
-      children: [
-        SizedBox(
-          width: 250,
-          child: Text(
-            label,
-            style: const TextStyle(fontSize: 16),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFF0062FF)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Wrap(
-            //spacing: 10,
-            children: options.map((option) {
-              return GestureDetector(
-                onTap: () {
-                  onChanged(option);
-                },
-                child: Container(
-                  padding: option.length < 4
-                      ? const EdgeInsets.symmetric(horizontal: 36, vertical: 8)
-                      : const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: selectedValue == option
-                        ? const Color(0xFF0062FF)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    option,
-                    style: TextStyle(
-                      color:
-                          selectedValue == option ? Colors.white : Colors.black,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      ],
-    );
+    return RadioButtonGroupRow(label: label, options: options, initialSelectedValue: selectedValue, onChanged: onChanged);
   }
 
   //hàm ui này là ui hàng radio tròn cổ điển (tham khảo form 3 nha)
@@ -212,112 +120,15 @@ class UiDesign {
     );
   }
 
+
   static Widget buildRadioLevels(String question, List<String> options,
       int selectedIndex, ValueChanged<int> onChanged) {
-    return Wrap(
-      children: [
-        SizedBox(
-          width: (WidgetsBinding.instance.window.physicalSize.width /
-                      WidgetsBinding.instance.window.devicePixelRatio) >
-                  1300
-              ? 200
-              : 350,
-          child: Text(
-            question,
-            style: TextStyle(
-                fontSize: 16,
-                color: (WidgetsBinding.instance.window.physicalSize.width /
-                            WidgetsBinding.instance.window.devicePixelRatio) >
-                        1300
-                    ? Colors.black
-                    : const Color(0xFF0062FF),
-                  )
-          ),
-        ),
-        Container(
-          width: options.length * 100,
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFF0062FF)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(options.length, (index) {
-              return Column(
-                children: [
-                  SizedBox(
-                    width: 90,
-                    child: Radio<int>(
-                      value: index,
-                      activeColor: const Color(0xFF0062FF),
-                      groupValue: selectedIndex,
-                      onChanged: (int? value) {
-                        if (value != null) {
-                          onChanged(value);
-                        }
-                      },
-                    ),
-                  )
-                ],
-              );
-            }),
-          ),
-        )
-      ],
-    );
+    return RadioLevels(question: question, options: options, initialSelectedValue: selectedIndex, onChanged: onChanged);
   }
 
-  static Widget buildRadioButtonSupport(String label, List<String> options,
+  static Widget buildRadioButtonYesNo( label, List<String> options,
       String selectedValue, Function(String) onChanged) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 350,
-          child: Text(
-            label,
-            style: const TextStyle(fontSize: 20),
-          ),
-        ),
-        SizedBox(width: 155),
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFF0062FF)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Wrap(
-            //spacing: 10,
-            children: options.map((option) {
-              return GestureDetector(
-                onTap: () {
-                  onChanged(option);
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  //option.length < 4? const EdgeInsets.symmetric(horizontal: 36, vertical: 8):const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: selectedValue == option
-                        ? const Color(0xFF0062FF)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    option,
-                    style: TextStyle(
-                      color:
-                          selectedValue == option ? Colors.white : Colors.black,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      ],
-    );
+    return RadioButtonYesNo(label: label, options: options, initialSelectedValue: selectedValue, onChanged: onChanged);
   }
 
   Widget buildAnimatedPieChart(String title, double percentage) {

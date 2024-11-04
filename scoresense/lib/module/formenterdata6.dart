@@ -54,28 +54,28 @@ class FormData6 extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 50),
-                UiDesign.buildRadioButtonSupport(
+                UiDesign.buildRadioButtonYesNo(
                   "Attended nursery school",
                   ['Yes', 'No'],
                   GlobalData().nurserySchool,
                   (value) => GlobalData().nurserySchool = value,
                 ),
                 const SizedBox(height: 30),
-                UiDesign.buildRadioButtonSupport(
+                UiDesign.buildRadioButtonYesNo(
                   "Aspiration for higher education",
                   ['Yes', 'No'],
                   GlobalData().higherEducation,
                   (value) => GlobalData().higherEducation = value,
                 ),
                 const SizedBox(height: 30),
-                UiDesign.buildRadioButtonSupport(
+                UiDesign.buildRadioButtonYesNo(
                   "Access to internet at home",
                   ['Yes', 'No'],
                   GlobalData().internetAtHome,
                   (value) => GlobalData().internetAtHome = value,
                 ),
                 const SizedBox(height: 30),
-                UiDesign.buildRadioButtonSupport(
+                UiDesign.buildRadioButtonYesNo(
                   "In a romantic relationship",
                   ['Yes', 'No'],
                   GlobalData().relationship,

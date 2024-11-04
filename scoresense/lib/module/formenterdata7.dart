@@ -87,7 +87,8 @@ class FormData7 extends StatelessWidget {
                   Column(
                     children: [
                       UiDesign.buildRadioLevelsLabel(
-                          'Number of past class failures', ['0', '1', '2', '3', '4']),
+                          'Number of past class failures',
+                          ['0', '1', '2', '3', '4']),
                       UiDesign.buildRadioLevels(
                         'Number of past class failures',
                         ['0', '1', '2', '3', '4'],
