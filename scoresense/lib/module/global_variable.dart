@@ -40,6 +40,9 @@ class GlobalData {
   int familyQuality = 0;
   int weeklyStudyTime = 0;
   int numOfFailClass = 0;
+  int absences = 0;
+  int G1 = 0;
+  int G2 = 0;
 
   // Private constructor
   GlobalData._internal();
