@@ -49,17 +49,17 @@ class Joinus extends StatelessWidget {
                     color: const Color(0xFF737373),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height:40),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: screenWidth > 600 ? 10.0 : 5.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Flexible widget to allow the email input to take available space
-                      Flexible(
+                      SizedBox(
+                        width: screenWidth > 1000 ? 500 : 95,
                         child: Container(
                           height: 50,
-                          child: TextField(
+                          child:const TextField(
                             decoration: InputDecoration(
                               hintText: 'Your Email',
                               filled: true,
@@ -79,10 +79,9 @@ class Joinus extends StatelessWidget {
                       // Fixed width for the button
                       Container(
                         height: 50,
-                        width: screenWidth > 600 ? 120 : 90, // Adjusted width for small screens
+                        width: screenWidth > 600 ? 110 : 90, // Adjusted width for small screens
                         child: OutlinedButton(
                           onPressed: () {
-                            // Implement "Subscribe" functionality here
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
