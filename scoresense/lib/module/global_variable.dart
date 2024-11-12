@@ -11,10 +11,10 @@ class GlobalData {
   ValueNotifier<int> indexedStackNotifier = ValueNotifier<int>(0);
 
   // Biến data enter
-  String fatherEducation = 'None';
-  String motherEducation = 'None';
-  String motherJob = 'At home';
-  String fatherJob = 'At home';
+  int fatherEducation = 0;
+  int motherEducation = 0;
+  String motherJob = 'At_home';
+  String fatherJob = 'At_home';
   String parentStatus = 'Apart';
   String firstName = '';
   String lastName = '';
@@ -43,6 +43,8 @@ class GlobalData {
   int absences = 0;
   int G1 = 0;
   int G2 = 0;
+  String reason = "Course";
+  String guardian = "Mother";
 
   // Private constructor
   GlobalData._internal();
@@ -56,10 +58,10 @@ class GlobalData {
 
   // Hàm đặt lại tất cả về giá trị mặc định
   void resetValues() {
-    fatherEducation = 'None';
-    motherEducation = 'None';
-    motherJob = 'At home';
-    fatherJob = 'At home';
+    fatherEducation = 0;
+    motherEducation = 0;
+    motherJob = 'At_home';
+    fatherJob = 'At_home';
     parentStatus = 'Apart';
     firstName = '';
     lastName = '';

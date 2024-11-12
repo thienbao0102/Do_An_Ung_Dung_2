@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
 import 'package:scoresense/module/ratingSlider.dart';
-import 'package:scoresense/module/starRating.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
 class FormData7 extends StatelessWidget {
@@ -59,44 +58,40 @@ class FormData7 extends StatelessWidget {
                     ),
                   ))),
                   SizedBox(height: 30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                  const Column(
+                   Column(
                     //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       RatingSlider(
                         question: "Weekly study time",
-                        labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
+                        labels: const ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
+                        onChanged: (option) => GlobalData().weeklyStudyTime = option,
+                        initialSelectedValue:  GlobalData().weeklyStudyTime,
+                        
                       ),
-                      StarRating(question: "Number of past class failures"),
-                      // RatingSlider(
-                      //   question: "Number of past class failures",
-                      //   labels: ['Very low', 'Low', 'Average', 'High', 'Very high'], // Truyền danh sách labels
-                      // ),
-                      // UiDesign.buildRadioLevels(
-                      //   'Weekly study time',
-                      //   ['< 2 hours', '2 to 5 hours', '5 to 10 hours', '> 10 hours'],
-                      //   GlobalData().weeklyStudyTime,
-                      //   (index) {
-                      //     setState(() {
-                      //       GlobalData().weeklyStudyTime = index;
-                      //     });
-                      //   },
-                      // ),
+                      //StarRating(question: "Number of past class failures"),
+                     RatingSlider(
+                        question: "Number of past class failures",
+                        labels: const ['0', '1', '2', '3', '4'], // Truyền danh sách labels
+                        onChanged: (option) => GlobalData().numOfFailClass = option,
+                        initialSelectedValue:  GlobalData().numOfFailClass,
+                        
+                      ),
                     ],
                   ),
                   SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                  Column(
-                    children: [
-                      UiDesign.buildRadioLevelsLabel(
-                          'Number of past class failures',
-                          ['0', '1', '2', '3', '4']),
-                      UiDesign.buildRadioLevels(
-                        'Number of past class failures',
-                        ['0', '1', '2', '3', '4'],
-                        GlobalData().numOfFailClass,
-                        (index) => GlobalData().numOfFailClass = index,
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   children: [
+                  //     UiDesign.buildRadioLevelsLabel(
+                  //         'Number of past class failures',
+                  //         ['0', '1', '2', '3', '4']),
+                  //     UiDesign.buildRadioLevels(
+                  //       'Number of past class failures',
+                  //       ['0', '1', '2', '3', '4'],
+                  //       GlobalData().numOfFailClass,
+                  //       (index) => GlobalData().numOfFailClass = index,
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 40), // Khoảng cách giữa tiêu đề và các ô nhập liệu
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

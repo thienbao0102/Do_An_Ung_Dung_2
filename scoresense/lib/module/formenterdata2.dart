@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
+import 'package:scoresense/module/ratingSlider.dart';
 import 'package:scoresense/module/ui_design.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
@@ -51,30 +52,30 @@ class FormData2 extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                UiDesign.buildRadioButtonGroupRow(
-                  "Father's education",
-                  ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
-                  GlobalData().fatherEducation,
-                  (value) => GlobalData().fatherEducation = value,
+                RatingSlider(
+                  question: "Father's education",
+                  labels: const ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
+                  initialSelectedValue: GlobalData().fatherEducation,
+                  onChanged: (option) => GlobalData().fatherEducation = option,
                 ),
                 const SizedBox(height: 30),
-                UiDesign.buildRadioButtonGroupRow(
-                  "Mother's education",
-                  ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
-                  GlobalData().motherEducation,
-                  (value) => GlobalData().motherEducation = value,
+                RatingSlider(
+                  question: "Mother's education",
+                   labels: const ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
+                  initialSelectedValue: GlobalData().motherEducation,
+                  onChanged: (option) => GlobalData().motherEducation = option,
                 ),
                 const SizedBox(height: 30),
                 UiDesign.buildRadioButtonGroupRow(
                   "Mother's job",
-                  ['At home', 'Health', 'Services', 'Teacher', 'Other'],
+                  ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
                   GlobalData().motherJob,
                   (value) => GlobalData().motherJob = value,
                 ),
                 const SizedBox(height: 30),
                 UiDesign.buildRadioButtonGroupRow(
                   "Father's job",
-                  ['At home', 'Health', 'Services', 'Teacher', 'Other'],
+                  ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
                   GlobalData().fatherJob,
                   (value) => GlobalData().fatherJob = value,
                 ),

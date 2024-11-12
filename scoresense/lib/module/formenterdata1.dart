@@ -73,7 +73,7 @@ class FormData1 extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Wrap(
-                      spacing: 100,
+                      spacing: 50,
                       alignment: WrapAlignment.spaceBetween,
                       children: [
                         Column(
@@ -120,27 +120,7 @@ class FormData1 extends StatelessWidget {
               right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (onPrevious != null)
-                    TextButton(
-                      onPressed: onPrevious,
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: Color(0xFF0062FF)),
-                        ),
-                      ),
-                      child: const Text(
-                        'Previous',
-                        style: TextStyle(
-                          color: Color(0xFF0062FF),
-                          letterSpacing: 1.3,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                children: [                 
                   ElevatedButton(
                     onPressed: isLastPage
                         ? () => Navigator.push(

@@ -16,7 +16,7 @@ class _ContentAndTryState extends State<ContentAndTry> {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('backgound_homepage.png'),
+              image: AssetImage('Background_OtherPage.png'),
               fit: BoxFit.cover)),
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 100, bottom: 160),
@@ -28,6 +28,26 @@ class _ContentAndTryState extends State<ContentAndTry> {
             left: 20,
             child: Header(),
           ),
+          Positioned(
+            right: 40,
+            bottom: 50,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+                image: const DecorationImage(
+                    image: AssetImage('hand_ai.jpg'), fit: BoxFit.cover),
+              ),
+            ),
+            width: 350,
+            height: 350,
+          ),
           Container(
             padding: const EdgeInsets.only(top: 350),
             child: const Column(
@@ -36,12 +56,15 @@ class _ContentAndTryState extends State<ContentAndTry> {
                 TitleSection(),
                 SizedBox(height: 40),
                 ActionButtons(),
-                SizedBox(height: 100,)  
+                SizedBox(
+                  height: 100,
+                )
               ],
             ),
-          )
+          ),
         ],
-      ));
+      ),
+    );
   }
 }
 
@@ -63,7 +86,7 @@ class TitleSection extends StatelessWidget {
             ),
             maxLines: 2,
             maxFontSize: 40,
-            minFontSize: 20,           
+            minFontSize: 20,
           ),
           SizedBox(height: 10),
           AutoSizeText(
@@ -102,7 +125,8 @@ class ActionButtons extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Choosepredictmethod()),
+                MaterialPageRoute(
+                    builder: (context) => const Choosepredictmethod()),
               );
             },
             child: const Text(
@@ -122,8 +146,7 @@ class ActionButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
             ),
-            onPressed: () {
-            },
+            onPressed: () {},
             child: const Text(
               'See More',
               style: TextStyle(

@@ -23,30 +23,30 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
 
   Future<void> _loadData() async {
     List<Map<String, dynamic>> dataPredict = [
-        {
-          "school": GlobalData().school,
-        "sex": GlobalData().gender,
+      {
+        "school": GlobalData().school,
+        "sex": GlobalData().gender=="Male"?"M":"F",
         "age": GlobalData().age,
-        "address": GlobalData().location,
-        "famsize": GlobalData().familySize,
-        "Pstatus": GlobalData().parentStatus,
+        "address": GlobalData().location=="Urban"?"U":"R",
+        "famsize": GlobalData().familySize == "Less than or equal to 3"?"LS3":"GT3",
+        "Pstatus": GlobalData().parentStatus=="Apart"?"A":"T",
         "Medu": GlobalData().motherEducation,
         "Fedu": GlobalData().fatherEducation,
-        "Mjob": GlobalData().motherJob,
-        "Fjob": GlobalData().fatherJob,
-        "reason": GlobalData(),
-        "guardian": GlobalData(),
+        "Mjob": GlobalData().motherJob.toLowerCase(),
+        "Fjob": GlobalData().fatherJob.toLowerCase(),
+        "reason": GlobalData().reason.toLowerCase(),
+        "guardian": GlobalData().guardian.toLowerCase(),
         "traveltime": GlobalData().travelTimeIndex + 1,
-        "studytime": GlobalData().weeklyStudyTime,
-        "failures": GlobalData().numOfFailClass,
-        "schoolsup": GlobalData().schoolSupport,
-        "famsup": GlobalData().familySupport,
-        "paid": GlobalData().paidClasses,
-        "activities": GlobalData().extracurricularActivities,
-        "nursery": GlobalData().nurserySchool,
-        "higher": GlobalData().higherEducation,
-        "internet": GlobalData().internetAtHome,
-        "romantic": GlobalData().relationship,
+        "studytime": GlobalData().weeklyStudyTime + 1,
+        "failures": GlobalData().numOfFailClass, //ko cong 1
+        "schoolsup": GlobalData().schoolSupport.toLowerCase(),
+        "famsup": GlobalData().familySupport.toLowerCase(),
+        "paid": GlobalData().paidClasses.toLowerCase(),
+        "activities": GlobalData().extracurricularActivities.toLowerCase(),
+        "nursery": GlobalData().nurserySchool.toLowerCase(),
+        "higher": GlobalData().higherEducation.toLowerCase(),
+        "internet": GlobalData().internetAtHome.toLowerCase(),
+        "romantic": GlobalData().relationship.toLowerCase(),
         "famrel": GlobalData().familyQuality + 1,
         "freetime": GlobalData().freeTimeIndex + 1,
         "goout": GlobalData().goOutIndex + 1,
@@ -56,14 +56,30 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
         "absences": GlobalData().absences,
         "G1": GlobalData().G1,
         "G2": GlobalData().G2
-        }
-      ];
-    results = await sendData(GlobalData().inputDataImport);
+      }
+    ];
+    List<dynamic> headers = dataPredict[0].keys.toList();
+    List<List<dynamic>> convertedData = dataPredict.map((map) {
+     return map.values.toList();
+  }).toList();
+
+    
+
+    List<List<dynamic>> result = [headers] + convertedData;
+    print(result);
+    results = await sendData(result);
+    print("results: " + results.toString());
     setState(() {
       _isLoading = false;
     });
   }
-  
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     if (_isLoading) {

@@ -5,10 +5,14 @@ import 'package:scoresense/module/global_variable.dart';
 class RatingSlider extends StatefulWidget {
   final List<String> labels; // Thêm tham số labels
   final String question;
+  final int initialSelectedValue;
+  final ValueChanged<int> onChanged;
   const RatingSlider(
       {super.key,
       required this.question,
-      required this.labels}); // Cập nhật constructor
+      required this.labels,
+      required this.onChanged,
+      required this.initialSelectedValue}); // Cập nhật constructor
 
   @override
   // ignore: library_private_types_in_public_api
@@ -22,7 +26,12 @@ class _RatingSliderState extends State<RatingSlider> {
   @override
   void initState() {
     super.initState();
+    currentIndex = widget.initialSelectedValue;
     _pageController = PageController(initialPage: currentIndex);
+  }
+
+  void _handleOptionTap(int option) {
+    widget.onChanged(option);
   }
 
   @override
@@ -32,20 +41,22 @@ class _RatingSliderState extends State<RatingSlider> {
   }
 
   Widget buildRatingSlider() {
-    return SizedBox( //chuyển column thành sizebox or container
-      width: double.infinity,//thêm dòng này vô để nó lấy chiều dài bằng với chiều dài của container cha
+    return SizedBox(
+      //chuyển column thành sizebox or container
+      width: double
+          .infinity, //thêm dòng này vô để nó lấy chiều dài bằng với chiều dài của container cha
       child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,//dòng này để căn giữa text nằm giữa với column thứ 2
+        crossAxisAlignment: WrapCrossAlignment
+            .center, //dòng này để căn giữa text nằm giữa với column thứ 2
         children: [
           Column(
             children: [
               SizedBox(
                 width: 300,
                 child: Text(
-                    widget.question,
-                    style:
-                        TextStyle(fontSize: 16, color: GlobalData().colorText),
-                  ),
+                  widget.question,
+                  style: TextStyle(fontSize: 16, color: GlobalData().colorText),
+                ),
               ),
             ],
           ),
@@ -135,6 +146,7 @@ class _RatingSliderState extends State<RatingSlider> {
         currentIndex++;
         _pageController.animateToPage(currentIndex,
             duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+        _handleOptionTap(currentIndex);
       });
     }
   }
@@ -145,6 +157,7 @@ class _RatingSliderState extends State<RatingSlider> {
         currentIndex--;
         _pageController.animateToPage(currentIndex,
             duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+        _handleOptionTap(currentIndex);
       });
     }
   }

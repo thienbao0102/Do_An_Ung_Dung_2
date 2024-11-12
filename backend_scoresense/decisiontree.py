@@ -1,5 +1,5 @@
 
-
+import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plot
@@ -78,3 +78,8 @@ import pickle
 # save the model to disk
 filename = 'finalized_model.pkl'
 pickle.dump(model, open(filename, 'wb'))
+
+# Lưu cấu trúc cột
+train_columns = X_train.columns.tolist()
+with open("train_columns.json", "w") as f:
+    json.dump(train_columns, f)
