@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/pages/homepage.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Montserrat',
         useMaterial3: true,
       ),
-      home: HomePage()
+      home: Choosepredictmethod()
     );
   }
 }
