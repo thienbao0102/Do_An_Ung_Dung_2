@@ -82,6 +82,8 @@ class _EnterFormDataState extends State<EnterFormData> {
           children: [
             Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
