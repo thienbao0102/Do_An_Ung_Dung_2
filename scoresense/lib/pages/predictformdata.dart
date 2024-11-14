@@ -33,30 +33,37 @@ class _EnterFormDataState extends State<EnterFormData> {
     super.dispose();
   }
 
-  void _nextPage() {
-    if (indexedStack < 7) {
-      setState(() {
-        indexedStack++;
-      });
-      _pageController.animateToPage(
-        indexedStack,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
+  void _nextPage(int pageIndex) {
+    setState(() {
+      indexedStack = pageIndex;
+    });
+    _pageController.animateToPage(
+      pageIndex,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
-  void _previousPage() {
-    if (indexedStack > 0) {
-      setState(() {
-        indexedStack--;
-      });
-      _pageController.animateToPage(
-        indexedStack,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
+  Widget _buildPageNumber(int pageIndex) {
+    bool isSelected = pageIndex == indexedStack;
+    return GestureDetector(
+      onTap: () => _nextPage(pageIndex),
+      child: Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        color: isSelected ? Color(0xFF0062FF) : Colors.transparent,
+        borderRadius: BorderRadius.circular(6.0),
+      ),
+        child: Text(
+          '${pageIndex + 1}',
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -78,22 +85,28 @@ class _EnterFormDataState extends State<EnterFormData> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 1,
-                    height: MediaQuery.of(context).size.height * 1,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.75,
                     child: PageView(
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        FormData1(onNext: _nextPage, onPrevious: _previousPage, isLastPage: indexedStack == 6),
-                        FormData2(onNext: _nextPage, onPrevious: _previousPage),
-                        FormData3(onNext: _nextPage, onPrevious: _previousPage),
-                        FormData4(onNext: _nextPage, onPrevious: _previousPage),
-                        FormData5(onNext: _nextPage, onPrevious: _previousPage),
-                        FormData6(onNext: _nextPage, onPrevious: _previousPage),
-                        FormData7(onNext: _nextPage, onPrevious: _previousPage, isLastPage: false),
-                        FormData8(onNext: _nextPage, onPrevious: _previousPage, isLastPage: true),
+                        FormData1(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1), isLastPage: indexedStack == 6),
+                        FormData2(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1)),
+                        FormData3(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1)),
+                        FormData4(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1)),
+                        FormData5(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1)),
+                        FormData6(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1)),
+                        FormData7(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1), isLastPage: false),
+                        FormData8(onNext: () => _nextPage(indexedStack + 1), onPrevious: () => _nextPage(indexedStack - 1), isLastPage: true),
                       ],
                     ),
+                  ),
+                  const SizedBox(height: 50),
+                  // Thêm phân trang ở đây
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(8, (index) => _buildPageNumber(index)),
                   ),
                 ],
               ),
