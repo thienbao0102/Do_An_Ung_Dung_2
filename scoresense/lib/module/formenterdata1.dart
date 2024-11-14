@@ -22,7 +22,8 @@ class FormData1 extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 1000.0),
         width: MediaQuery.of(context).size.width * 0.6,
         margin: const EdgeInsets.only(top: 70, bottom: 20),
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+        padding: const EdgeInsets.only(
+            top: 50, left: 50, right: 50, bottom: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -37,7 +38,7 @@ class FormData1 extends StatelessWidget {
         child: Stack(
           children: [
             Column(
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Center(

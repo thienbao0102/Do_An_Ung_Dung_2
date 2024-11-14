@@ -42,7 +42,7 @@ class FormData6 extends StatelessWidget {
           Stack(
             children: [
               Column(
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start, 
                 children: [
                 const Text(
