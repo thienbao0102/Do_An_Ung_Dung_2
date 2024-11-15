@@ -44,6 +44,16 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 500),
+                right: 0, // Giá trị động để hiệu ứng trượt
+                bottom: -100,
+                child: Image.asset(
+                  userChoose == 1 ? '5214641.png' : '2808347.png',
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
+                ),
+              ),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -265,16 +275,6 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
                 top: 40,
                 left: MediaQuery.of(context).size.width >= 500 ? 100 : 40,
                 child: Header(),
-              ),
-              AnimatedPositioned(
-                duration: const Duration(milliseconds: 500),
-                right: 0, // Giá trị động để hiệu ứng trượt
-                bottom: -100,
-                child: Image.asset(
-                  userChoose == 1 ? '5214641.png' : '2808347.png',
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
-                ),
               ),
             ],
           ),
