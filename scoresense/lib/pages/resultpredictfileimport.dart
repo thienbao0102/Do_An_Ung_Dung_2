@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/callbackend.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
+import 'package:scoresense/module/predictions.dart';
+import 'package:scoresense/module/ui_design.dart';
 
 class Resultpredictfileimport extends StatelessWidget {
   const Resultpredictfileimport({super.key});
@@ -30,7 +32,9 @@ class ShowResult extends StatefulWidget {
 
 class _ShowResultState extends State<ShowResult> {
   bool _isLoading = true;
-  List results = List.empty();
+  String search = "";
+  int sort = 0;
+  List<Predictions> results = List.empty();
 
   Future<void> _loadData() async {
     results = await sendData(GlobalData().inputDataImport);
@@ -70,32 +74,38 @@ class _ShowResultState extends State<ShowResult> {
                 children: [
                   const Center(
                     child: Text(
-                    "Predict Results",
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF0062FF)),
-                  ),
+                      "Predict Results",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0062FF)),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: [                    
-                      const SizedBox(width: 50,),
+                    children: [
+                      const SizedBox(
+                        width: 50,
+                      ),
                       Text(
-                        "Count: ${results.length}",
+                        "Total: ${results.length}",
                         style: const TextStyle(fontSize: 16),
                       ),
-                      const SizedBox(width: 50,),
+                      const SizedBox(
+                        width: 50,
+                      ),
                       Text(
-                        "Pass: ${results.where((number) => number > 10).toList().length}",
+                        "Pass: ${results.where((predict) => predict.prediction > 10).toList().length}",
                         style: const TextStyle(fontSize: 16),
                       ),
-                      const SizedBox(width: 50,),
+                      const SizedBox(
+                        width: 50,
+                      ),
                       Text(
-                        "Fail: ${results.length - results.where((number) => number > 10).toList().length}",
+                        "Fail: ${results.length - results.where((predict) => predict.prediction > 10).toList().length}",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],
@@ -139,7 +149,8 @@ class _ShowResultState extends State<ShowResult> {
                               centerSpaceRadius: 90,
                               sections: showingSections(
                                   results
-                                      .where((number) => number > 10)
+                                      .where(
+                                          (predict) => predict.prediction > 10)
                                       .toList()
                                       .length,
                                   results.length),
@@ -156,6 +167,45 @@ class _ShowResultState extends State<ShowResult> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Wrap(
+                                alignment: WrapAlignment.end,
+                                spacing: 20,
+                                runSpacing: 20,
+                                children: [
+                                  UiDesign.buildTextField(
+                                      "Search",
+                                      (value) => setState(() {
+                                        search = value;
+                                      }),
+                                    ),
+                                  DropdownMenu(
+                                      width: 200,
+                                      onSelected: (valueChoose) {
+                                        setState(() {
+                                          sort = valueChoose!;
+                                        });
+                                      },
+                                      inputDecorationTheme:
+                                          const InputDecorationTheme(),
+                                      dropdownMenuEntries: const <DropdownMenuEntry<
+                                          int>>[
+                                        DropdownMenuEntry(value: 0, label: ""),
+                                        DropdownMenuEntry(
+                                            value: 1, label: "By name a-z"),
+                                        DropdownMenuEntry(
+                                            value: 2, label: "By name z-a"),
+                                        DropdownMenuEntry(
+                                            value: 3, label: "By result Pass"),
+                                        DropdownMenuEntry(
+                                            value: 4, label: "By result Fail"),
+                                      ],
+                                    ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10,),
                             Table(
                               border: TableBorder.all(),
                               columnWidths: const <int, TableColumnWidth>{
@@ -183,7 +233,7 @@ class _ShowResultState extends State<ShowResult> {
                                       child: Padding(
                                         padding: EdgeInsets.all(4),
                                         child: Text(
-                                          "Score-Predictions",
+                                          "Name",
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
@@ -195,7 +245,7 @@ class _ShowResultState extends State<ShowResult> {
                                       child: Padding(
                                         padding: EdgeInsets.all(4),
                                         child: Text(
-                                          "Predictions",
+                                          "Prediction",
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
@@ -219,7 +269,9 @@ class _ShowResultState extends State<ShowResult> {
                                   },
                                   defaultVerticalAlignment:
                                       TableCellVerticalAlignment.middle,
-                                  children: [...renderContentRow()],
+                                  children: [
+                                    ...renderContentRow(ListSort(results)),
+                                  ],
                                 ),
                               ),
                             ),
@@ -257,7 +309,7 @@ class _ShowResultState extends State<ShowResult> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: const Color(0xFF77CDFF),
+            color: const Color.fromARGB(255, 67, 239, 70),
             value: coutPass / countFull * 100.0,
             title: isTouched ? 'Pass' : '${perPass}%',
             radius: radius,
@@ -285,7 +337,7 @@ class _ShowResultState extends State<ShowResult> {
     });
   }
 
-  List<TableRow> renderContentRow() {
+  List<TableRow> renderContentRow(List<Predictions> results) {
     return List<TableRow>.generate(results.length, (int i) {
       return TableRow(children: [
         TableCell(
@@ -301,7 +353,7 @@ class _ShowResultState extends State<ShowResult> {
             child: Padding(
           padding: const EdgeInsets.all(4),
           child: Text(
-            "${results[i]}",
+            "${results[i].name}",
             style: const TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
@@ -310,12 +362,63 @@ class _ShowResultState extends State<ShowResult> {
             child: Padding(
           padding: const EdgeInsets.all(4),
           child: Text(
-            results[i] > 10 ? "Pass" : "Fail",
+            results[i].prediction > 10 ? "Pass" : "Fail",
             style: const TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
         )),
       ]);
     });
+  }
+
+  //sort data
+  List<Predictions> ListSort(List<Predictions> results) {
+    List<Predictions> listSort = results
+        .where((predict) => predict.name.toLowerCase().contains(search))
+        .toList();
+    if (sort == 1) {
+      listSort = results
+          .where((predict) => predict.name.toLowerCase().contains(search))
+          .toList()
+        ..sort(
+          (a, b) {
+            // So sánh theo tên từ A-Z
+            int nameComparison = a.name.compareTo(b.name);
+            if (nameComparison != 0) {
+              return nameComparison;
+            }
+            // Nếu tên giống nhau, sắp xếp theo prediction từ cao đến thấp
+            return a.prediction.compareTo(b.prediction);
+          },
+        );
+    } else if (sort == 2) {
+      listSort = results
+          .where((predict) => predict.name.toLowerCase().contains(search))
+          .toList()
+        ..sort(
+          (a, b) {
+            // So sánh theo tên từ Z-A
+            int nameComparison = b.name.compareTo(a.name);
+            if (nameComparison != 0) {
+              return nameComparison;
+            }
+            // Nếu tên giống nhau, sắp xếp theo prediction từ cao đến thấp
+            return a.prediction.compareTo(b.prediction);
+          },
+        );
+    } else if (sort == 3) {
+      listSort = results
+          .where((predict) =>
+              predict.name.toLowerCase().contains(search) &&
+              predict.prediction > 10)
+          .toList();
+    } else if (sort == 4) {
+      listSort = results
+          .where((predict) =>
+              predict.name.toLowerCase().contains(search) &&
+              predict.prediction <= 10)
+          .toList();
+    }
+    return listSort;
   }
 }
