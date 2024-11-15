@@ -44,7 +44,7 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
               children: [
                 const Center(
                   child: Text(
-                    "Health status",
+                    "Health status & Family connections",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -88,17 +88,6 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
                       (val) => GlobalData().currentHealth = val,
                     ),
                   ],
-                ),
-                const SizedBox(height: 20),
-                const Center(
-                  child: Text(
-                    "Family Connections",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0062FF),
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 20),
                 UiDesign.buildRadioButtonGroupRow(

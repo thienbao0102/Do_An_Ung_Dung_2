@@ -29,6 +29,14 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
     }
   }
 
+  double _scale = 1.0;
+
+  void _onEnter(bool hover) {
+    setState(() {
+      _scale = hover ? 1.05 : 1.0; // Scale up on hover
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -274,7 +282,49 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
               Positioned(
                 top: 40,
                 left: MediaQuery.of(context).size.width >= 500 ? 100 : 40,
-                child: Header(),
+                child: MouseRegion(
+                  onEnter: (_) => _onEnter(true), // Hover effect
+                  onExit: (_) => _onEnter(false), // Exit hover
+                  cursor: SystemMouseCursors.click, 
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context); // Navigate back
+                    },
+                    child: AnimatedScale(
+                      scale: _scale, // Dynamic scale
+                      duration: const Duration(milliseconds: 200),
+                      // curve: Curves.elasticOut, // Elastic effect
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: 
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.arrow_back,
+                                color: GlobalData().colorText,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Back',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                  color: GlobalData().colorText,
+                                  height: 1.2, // Line height adjustment
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
