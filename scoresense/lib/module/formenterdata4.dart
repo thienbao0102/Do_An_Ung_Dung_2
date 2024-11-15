@@ -39,7 +39,7 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
         child: Stack(
           children: [
             Column(
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Center(

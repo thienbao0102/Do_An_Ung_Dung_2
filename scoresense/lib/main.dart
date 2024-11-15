@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/pages/homepage.dart';
-import 'package:scoresense/pages/resultpredictfileimport.dart';
 
 void main() {
   runApp(const MyApp());
