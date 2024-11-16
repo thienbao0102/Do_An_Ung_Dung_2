@@ -43,6 +43,7 @@ class _RadioLevelsLabelState extends State<RadioLevelsLabel> {
         : 450;
 
     return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         SizedBox(
           width: width,

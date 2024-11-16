@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
-import 'package:scoresense/module/ratingSlider.dart';
-import 'package:scoresense/module/starRating.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
 class FormData8 extends StatelessWidget {
@@ -11,11 +9,11 @@ class FormData8 extends StatelessWidget {
   final bool isLastPage;
 
   const FormData8({
-    Key? key,
+    super.key,
     required this.onNext,
     this.onPrevious,
     this.isLastPage = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +126,7 @@ class FormData8 extends StatelessWidget {
                     //     UiDesign.buildTextField2("Semester 2 score??", true, (value) => GlobalData().G2 = int.parse(value),),
                     //   ],
 
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                   ],
                 ),
                 Positioned(

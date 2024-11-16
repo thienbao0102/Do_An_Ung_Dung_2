@@ -39,10 +39,11 @@ class _RadioLevelsState extends State<RadioLevels> {
     double width = (WidgetsBinding.instance.window.physicalSize.width /
                     WidgetsBinding.instance.window.devicePixelRatio) >
                 1300
-        ? 200
+        ? 300
         : 350;
 
     return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         SizedBox(
           width: width,

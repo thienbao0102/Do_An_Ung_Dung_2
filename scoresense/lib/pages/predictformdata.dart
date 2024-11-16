@@ -134,11 +134,83 @@ class _EnterFormDataState extends State<EnterFormData> {
                       SizedBox(width: 20),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PersonalResultPage(),
-                            ),
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0), // Bo góc nếu cần
+                                ),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.3,
+                                  padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min, // Tự động điều chỉnh chiều cao
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Confirm Finish?',
+                                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: GlobalData().colorPrimary),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'Unanswered questions will be assigned default values, which could impact the accuracy of the prediction.',
+                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: GlobalData().colorText),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed:(){
+                                              Navigator.of(context).pop();
+                                            }, 
+                                            style: ElevatedButton.styleFrom(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                                              backgroundColor: const Color(0xFF0062FF),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                            ),
+                                            child: 
+                                              const Text(
+                                                'Cancel',
+                                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.white),
+                                              )
+                                          ),
+                                          const SizedBox(width: 30),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => const PersonalResultPage(),
+                                                ),
+                                              );
+                                            },
+                                            child: 
+                                              MouseRegion(
+                                                cursor: SystemMouseCursors.click,
+                                                child: 
+                                                  Text('OK',
+                                                    style: 
+                                                      TextStyle(
+                                                        fontSize: 16, 
+                                                        fontWeight: FontWeight.normal, 
+                                                        color: GlobalData().colorPrimary,
+                                                      )),
+                                              ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           );
                         },
                         child: MouseRegion(

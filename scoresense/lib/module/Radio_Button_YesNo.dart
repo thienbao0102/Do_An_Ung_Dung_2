@@ -37,6 +37,7 @@ class _RadioButtonYesNoState extends State<RadioButtonYesNo> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(

@@ -98,7 +98,7 @@ class UiDesign {
           width: (WidgetsBinding.instance.window.physicalSize.width /
                       WidgetsBinding.instance.window.devicePixelRatio) >
                   1300
-              ? 200
+              ? 300
               : 450,
         ),
         Container(
@@ -133,12 +133,10 @@ class UiDesign {
   }
 
   Widget buildAnimatedPieChart(String title, double percentage) {
-    String percentageString = "";
     Color conersColor = Color.fromARGB(255, 0, 0, 0);
     if (percentage < 0 || percentage > 100) {
       throw Exception('Percentage must be between 0 and 100');
     } else {
-      percentageString = percentage.toStringAsFixed(0);
     }
 
     if (percentage >= 0 && percentage < 30) {

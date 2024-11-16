@@ -52,14 +52,26 @@ class FormData2 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
+                // UiDesign.buildRadioButtonGroupRow(
+                //   "Father's education",
+                //   ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
+                //   GlobalData().fatherEducation as String,
+                //   (value) => GlobalData().fatherEducation = value as int,
+                // ),
                 RatingSlider(
                   question: "Father's education",
                   labels: const ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
                   initialSelectedValue: GlobalData().fatherEducation,
                   onChanged: (option) => GlobalData().fatherEducation = option,
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 10),
+                // UiDesign.buildRadioButtonGroupRow(
+                //   "Father's education",
+                //   ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
+                //   GlobalData().motherEducation as String,
+                //   (value) => GlobalData().motherEducation = value as int,
+                // ),
                 RatingSlider(
                   question: "Mother's education",
                    labels: const ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
