@@ -88,7 +88,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 1,
-                    height: MediaQuery.of(context).size.height * 0.75,
+                    height: MediaQuery.of(context).size.height * 0.68,
                     child: PageView(
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),

@@ -61,7 +61,7 @@ class _RadioLevelsState extends State<RadioLevels> {
         ),
         Container(
           width: widget.options.length * 100,
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          padding: const EdgeInsets.only(top: 7, bottom: 7),
           decoration: BoxDecoration(
             border: Border.all(color: const Color(0xFF0062FF)),
             borderRadius: BorderRadius.circular(10),

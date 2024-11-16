@@ -44,7 +44,7 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
               children: [
                 const Center(
                   child: Text(
-                    "Health status & Family connections",
+                    "Health status",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 Column(
                   children: [
                     UiDesign.buildRadioLevelsLabel(
@@ -67,14 +67,14 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 UiDesign.buildRadioLevels(
                   'Weekend alcohol consumption',
                   ['Very low', 'Low', 'Normal', 'High', 'Very high'],
                   GlobalData().weekendAlcohol,
                   (val) => GlobalData().weekendAlcohol = val,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 Column(
                   children: [
                     UiDesign.buildRadioLevelsLabel(
@@ -89,25 +89,6 @@ class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                UiDesign.buildRadioButtonGroupRow(
-                  "Your family size",
-                  ['Greater than 3', 'Less than or equal to 3'],
-                  GlobalData().familySize,
-                  (value) => GlobalData().familySize = value,
-                ),
-                const SizedBox(height: 10),
-                Column(
-                  children: [
-                    UiDesign.buildRadioLevels(
-                      'Quality of family relationships',
-                      ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
-                      GlobalData().familyQuality,
-                      (val) => GlobalData().familyQuality = val,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 60),
               ],
             ),
             Positioned(

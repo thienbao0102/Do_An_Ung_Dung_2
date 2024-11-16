@@ -52,7 +52,7 @@ class FormData3 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
 
                 // Free time after school
                 Column(
@@ -67,7 +67,7 @@ class FormData3 extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
 
                 // Home to school travel time
                 Column(
@@ -84,7 +84,7 @@ class FormData3 extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
 
                 // Go out with friends
                 Column(

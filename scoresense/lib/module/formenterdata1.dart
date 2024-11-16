@@ -51,7 +51,7 @@ class FormData1 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Row(
                   children: [
                     Expanded(
@@ -60,7 +60,7 @@ class FormData1 extends StatelessWidget {
                         (value) => GlobalData().firstName = value,
                       ),
                     ),
-                    const SizedBox(width: 100),
+                    const SizedBox(width: 200),
                     Expanded(
                       child: UiDesign.buildTextField(
                         "Your Last name",

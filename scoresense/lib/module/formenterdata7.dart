@@ -68,6 +68,7 @@ class FormData7 extends StatelessWidget {
                         initialSelectedValue:  GlobalData().weeklyStudyTime,
                         
                       ),
+                      SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
                       //StarRating(question: "Number of past class failures"),
                      RatingSlider(
                         question: "Number of past class failures",
@@ -78,7 +79,7 @@ class FormData7 extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
+                  SizedBox(height: 30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
                   // Column(
                   //   children: [
                   //     UiDesign.buildRadioLevelsLabel(
@@ -92,7 +93,6 @@ class FormData7 extends StatelessWidget {
                   //     ),
                   //   ],
                   // ),
-                  SizedBox(height: 40), // Khoảng cách giữa tiêu đề và các ô nhập liệu
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     // crossAxisAlignment: ,
