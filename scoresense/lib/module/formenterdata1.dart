@@ -21,9 +21,9 @@ class FormData1 extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(maxWidth: 1000.0),
         width: MediaQuery.of(context).size.width * 0.6,
-        margin: const EdgeInsets.only(top: 70, bottom: 20),
+        margin: const EdgeInsets.only(top: 20, bottom: 20),
         padding: const EdgeInsets.only(
-            top: 50, left: 50, right: 50, bottom: 30),
+            top: 30, left: 50, right: 50, bottom: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -112,7 +112,7 @@ class FormData1 extends StatelessWidget {
                 UiDesign.buildTextField(
                   "What school are you in?",
                   (value) => GlobalData().school = value,
-                ),const SizedBox(height: 60),
+                ),
               ],
             ),
             Positioned(

@@ -26,9 +26,9 @@ class FormData7 extends StatelessWidget {
               maxWidth: 1000.0,
             ),
             width: MediaQuery.of(context).size.width * 0.6,
-            margin: const EdgeInsets.only(top: 70, bottom: 20),
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
             padding: const EdgeInsets.only(
-                top: 50, left: 50, right: 50, bottom: 30),
+                top: 30, left: 50, right: 50, bottom: 30),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -101,8 +101,7 @@ class FormData7 extends StatelessWidget {
                       UiDesign.buildTextField2("Semester 1 score?", true, (value) => GlobalData().G1 = int.parse(value),),
                       UiDesign.buildTextField2("Semester 2 score??", true, (value) => GlobalData().G2 = int.parse(value),),
                     ],
-                  )
-                  ,const SizedBox(height: 60),
+                  ),
                 ],
               ),
               Positioned(

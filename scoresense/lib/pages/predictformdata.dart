@@ -104,7 +104,6 @@ class _EnterFormDataState extends State<EnterFormData> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
