@@ -19,82 +19,45 @@ class _ContentAndTryState extends State<ContentAndTry> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       padding: const EdgeInsets.only(left: 0, bottom: 160),
-      color: GlobalData().colorPrimary,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('3214599-2.png'),
+          fit: BoxFit.fitWidth,
+        ),
+      ),
+
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.centerLeft,
         children: [
-          Positioned(
-            left: screenSize.width * -0.4,
-            bottom: screenSize.height * -0.55,
-            child: Container(
-              width: screenSize.width * 0.8,
-              height: screenSize.height * 0.8,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: const Color(0xFF79ACFF), // Màu viền
-                  width: 80,
-                ),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-          // Viền tròn nhỏ
-          Positioned(
-            right: screenSize.width * -0.2,
-            top: screenSize.height * -0.2,
-            child: Container(
-              width: screenSize.width * 0.5,
-              height: screenSize.height * 0.5,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: const Color(0xFF79ACFF), // Màu viền
-                  width: 80,
-                ),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
           const Positioned(
             top: 0,
             left: 0,
             child: Header(),
           ),
-          const Positioned(
-            top: 0,
-            left: 0,
-            child: Header(),
-          ),
-          Positioned(
-            right: 40,
-            bottom: 50,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                ),
-              child: 
-              Image.asset(
-                    '3214599.png',
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
+          Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child:
+                  Container(
+                    margin: const EdgeInsets.only(top: 400, left: 100),
+                    height: MediaQuery.of(context).size.height,
+                    child: 
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TitleSection(),
+                          SizedBox(height: 40),
+                          ActionButtons(),
+                          SizedBox(
+                            height: 100,
+                          )
+                        ],
+                      ),
                   ),
               ),
-            ),
-          Container(
-            padding: const EdgeInsets.only(top: 350, left: 100),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TitleSection(),
-                SizedBox(height: 40),
-                ActionButtons(),
-                SizedBox(
-                  height: 100,
-                )
-              ],
-            ),
+            ],
           ),
         ],
       ),
@@ -169,7 +132,7 @@ class ActionButtons extends StatelessWidget {
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF0062FF)),
+                  color:  Color.fromARGB(255, 9, 5, 43)),
             ),
           ),
           const SizedBox(width: 10),
