@@ -12,9 +12,11 @@ class ContentAndTry extends StatefulWidget {
 }
 
 class _ContentAndTryState extends State<ContentAndTry> {
+  
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final double height = screenSize.height * 0.5;
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -35,23 +37,8 @@ class _ContentAndTryState extends State<ContentAndTry> {
             left: 0,
             child: Header(setColor: Colors.white,),
           ),
-          Positioned(
-            right: 40,
-            bottom: 50,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                ),
-              child: 
-              Image.asset(
-                    '3214599.png',
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
-                  ),
-              ),
-            ),
           Container(
-            padding: const EdgeInsets.only(top: 350, left: 100),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35, left: 100),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -81,25 +68,31 @@ class TitleSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeText(
-            'Achieve Your Best Grades\nwith Smart Predictions',
+            'ScoreSense:',
             style: TextStyle(
-              fontSize: 40,
+              fontSize: 80,
               fontWeight: FontWeight.bold,
+              color: Colors.white,
+              height: 1,
             ),
             maxLines: 2,
-            maxFontSize: 40,
-            minFontSize: 20,
+          ),
+          AutoSizeText(
+            'Predict. Prepare. Succeed!',
+            style: TextStyle(
+              fontSize: 50,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           SizedBox(height: 10),
           AutoSizeText(
-            'Unlock insights into your academic performance\nand stay ahead with accurate score forecasts.',
+            'Achieve Your Best Grades with Smart Predictions',
             style: TextStyle(
               fontSize: 20,
-              color: Colors.black54,
+              color: Colors.white,
             ),
             maxLines: 2,
-            maxFontSize: 20,
-            minFontSize: 13,
           ),
         ],
       ),
