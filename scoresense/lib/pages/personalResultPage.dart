@@ -138,8 +138,8 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
             ),
           ),
           const Positioned(
-            top: 40,
-            left: 120,
+            top: 0,
+            left: 0,
             child: Header(),
           ),
           // Nội dung chính ở giữa
