@@ -18,13 +18,14 @@ class FormData2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int sizeChangeToSlideBar = 900;
     return Center(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 1000.0, minHeight: 500),
         width: MediaQuery.of(context).size.width * 0.6,
         margin: const EdgeInsets.only(top: 20, bottom: 20),
-        padding: const EdgeInsets.only(
-            top: 30, left: 50, right: 50, bottom: 30),
+        padding:
+            const EdgeInsets.only(top: 30, left: 50, right: 50, bottom: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -53,45 +54,155 @@ class FormData2 extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // UiDesign.buildRadioButtonGroupRow(
-                //   "Father's education",
-                //   ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
-                //   GlobalData().fatherEducation as String,
-                //   (value) => GlobalData().fatherEducation = value as int,
-                // ),
-                RatingSlider(
-                  question: "Father's education",
-                  labels: const ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
-                  initialSelectedValue: GlobalData().fatherEducation,
-                  onChanged: (option) => GlobalData().fatherEducation = option,
-                ),
+                MediaQuery.of(context).size.width > sizeChangeToSlideBar
+                    ? UiDesign.buildRadioButtonGroupRow(
+                        "Father's education",
+                        [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ],
+                        [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ].elementAt(GlobalData().fatherEducation), (value) {
+                        int index = [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ].indexOf(value);
+                        GlobalData().fatherEducation = index;
+                      })
+                    : RatingSlider(
+                        question: "Father's education",
+                        labels: const [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ],
+                        initialSelectedValue: GlobalData().fatherEducation,
+                        onChanged: (option) =>
+                            GlobalData().fatherEducation = option,
+                      ),
                 const SizedBox(height: 10),
-                // UiDesign.buildRadioButtonGroupRow(
-                //   "Father's education",
-                //   ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
-                //   GlobalData().motherEducation as String,
-                //   (value) => GlobalData().motherEducation = value as int,
-                // ),
-                RatingSlider(
-                  question: "Mother's education",
-                   labels: const ['None', 'Primary', '5th to 9th grade', 'Secondary', 'Higher education'],
-                  initialSelectedValue: GlobalData().motherEducation,
-                  onChanged: (option) => GlobalData().motherEducation = option,
-                ),
+                MediaQuery.of(context).size.width > sizeChangeToSlideBar
+                    ? UiDesign.buildRadioButtonGroupRow(
+                        "Father's education",
+                        [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ],
+                        [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ].elementAt(GlobalData().motherEducation),
+                        (value) {
+                          int index = [
+                            'None',
+                            'Primary',
+                            '5th to 9th grade',
+                            'Secondary',
+                            'Higher education'
+                          ].indexOf(value);
+                          GlobalData().motherEducation = value as int;
+                        },
+                      )
+                    : RatingSlider(
+                        question: "Mother's education",
+                        labels: const [
+                          'None',
+                          'Primary',
+                          '5th to 9th grade',
+                          'Secondary',
+                          'Higher education'
+                        ],
+                        initialSelectedValue: GlobalData().motherEducation,
+                        onChanged: (option) =>
+                            GlobalData().motherEducation = option,
+                      ),
                 const SizedBox(height: 30),
-                UiDesign.buildRadioButtonGroupRow(
-                  "Mother's job",
-                  ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
-                  GlobalData().motherJob,
-                  (value) => GlobalData().motherJob = value,
-                ),
+                MediaQuery.of(context).size.width > sizeChangeToSlideBar
+                    ? UiDesign.buildRadioButtonGroupRow(
+                        "Mother's job",
+                        ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
+                        GlobalData().motherJob,
+                        (value) => GlobalData().motherJob = value,
+                      )
+                    : RatingSlider(
+                        question: "Mother's job",
+                        labels: const [
+                          'At_home',
+                          'Health',
+                          'Services',
+                          'Teacher',
+                          'Other'
+                        ],
+                        initialSelectedValue: [
+                          'At_home',
+                          'Health',
+                          'Services',
+                          'Teacher',
+                          'Other'
+                        ].indexOf(GlobalData().motherJob),
+                        onChanged: (option) {
+                          String value = [
+                            'At_home',
+                            'Health',
+                            'Services',
+                            'Teacher',
+                            'Other'
+                          ].elementAt(option);
+                          GlobalData().motherJob = value;
+                        }),
                 const SizedBox(height: 30),
+                MediaQuery.of(context).size.width > sizeChangeToSlideBar?
                 UiDesign.buildRadioButtonGroupRow(
                   "Father's job",
                   ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
                   GlobalData().fatherJob,
                   (value) => GlobalData().fatherJob = value,
-                ),
+                ):
+                RatingSlider(
+                        question: "Father's job",
+                        labels: const [
+                          'At_home',
+                          'Health',
+                          'Services',
+                          'Teacher',
+                          'Other'
+                        ],
+                        initialSelectedValue: [
+                          'At_home',
+                          'Health',
+                          'Services',
+                          'Teacher',
+                          'Other'
+                        ].indexOf(GlobalData().fatherJob),
+                        onChanged: (option) {
+                          String value = [
+                            'At_home',
+                            'Health',
+                            'Services',
+                            'Teacher',
+                            'Other'
+                          ].elementAt(option);
+                          GlobalData().fatherJob = value;
+                        }),
                 const SizedBox(height: 30),
                 UiDesign.buildRadioButtonGroupRow(
                   "Parent status",
@@ -112,7 +223,8 @@ class FormData2 extends StatelessWidget {
                     TextButton(
                       onPressed: onPrevious,
                       style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: const BorderSide(color: Color(0xFF0062FF)),
@@ -133,12 +245,14 @@ class FormData2 extends StatelessWidget {
                         ? () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const PersonalResultPage(),
+                                builder: (context) =>
+                                    const PersonalResultPage(),
                               ),
                             )
                         : onNext,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 45, vertical: 15),
                       backgroundColor: const Color(0xFF0062FF),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),

@@ -121,11 +121,12 @@ class _EnterFormDataState extends State<EnterFormData> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Stack(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // Center(
-            //   child: 
-              Column(
+            const Header(),
+            Center(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 // mainAxisSize: MainAxisSize.min,
@@ -323,11 +324,6 @@ class _EnterFormDataState extends State<EnterFormData> {
                   ),
                 ],
               ),
-            // ),
-            const Positioned(
-              top: 40,
-              left: 120,
-              child: Header(),
             ),
           ],
         )

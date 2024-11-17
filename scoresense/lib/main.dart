@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Montserrat',
         useMaterial3: true,
       ),
-      home: const Choosepredictmethod()
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        // '/precicttion': (context) => const Choosepredictmethod(),
+      },
     );
   }
 }

@@ -19,13 +19,13 @@ class _ContentAndTryState extends State<ContentAndTry> {
               image: AssetImage('Background_OtherPage.png'),
               fit: BoxFit.cover)),
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.only(left: 100, bottom: 160),
+      padding: const EdgeInsets.only(left: 0, bottom: 160),
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
           const Positioned(
-            top: 40,
-            left: 20,
+            top: 0,
+            left: 0,
             child: Header(),
           ),
           Positioned(
@@ -49,7 +49,7 @@ class _ContentAndTryState extends State<ContentAndTry> {
             height: 350,
           ),
           Container(
-            padding: const EdgeInsets.only(top: 350),
+            padding: const EdgeInsets.only(top: 350, left: 100),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
