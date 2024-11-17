@@ -93,7 +93,7 @@ class _EnterFormDataState extends State<EnterFormData> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Header(),
+            Header(setColor: GlobalData().colorPrimary,),
             Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

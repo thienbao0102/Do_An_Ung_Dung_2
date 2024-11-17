@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/pages/importfitmodel.dart';
 
 class Header extends StatefulWidget {
-  const Header({super.key});
+  final Color setColor;
+  const Header({super.key, required this.setColor});
 
   @override
   State<Header> createState() => _HeaderState();
@@ -13,22 +13,20 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   // Danh sách trạng thái hover cho từng mục
   final List<bool> isHoveredList = [false, false, false, false, false];
-  bool _isMenuOpen = false;
+  // bool _isMenuOpen = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.only(top: 20, left: 40, right: 20),
-      color: const Color.fromRGBO(105, 105, 105, 0.3),
+      padding: const EdgeInsets.only(top: 20, left: 100, right: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             flex: 4,
             child: Row(
-              //mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 // Home Page
                 _buildNavItem(
@@ -127,23 +125,23 @@ class _HeaderState extends State<Header> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: GlobalData().colorPrimary,
-                    fontSize: 16,
-                    decoration: isHoveredList[index] ? TextDecoration.underline : TextDecoration.none,
-                    decorationColor: isHoveredList[index] ? GlobalData().colorPrimary : Colors.transparent,
+                Container(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: isHoveredList[index]
+                              ? BorderSide(width: 2, color: widget.setColor)
+                              : const BorderSide(
+                                  width: 2, color: Colors.transparent))),
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: widget.setColor,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 4),
-                // AnimatedContainer(
-                //   duration: const Duration(milliseconds: 200),
-                //   curve: Curves.easeInOut,
-                //   height: 2,
-                //   width: isHoveredList[index] ? 90 : 0,
-                //   color: Colors.black,
-                // ),
               ],
             ),
           ),

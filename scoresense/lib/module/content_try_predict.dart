@@ -60,12 +60,7 @@ class _ContentAndTryState extends State<ContentAndTry> {
           const Positioned(
             top: 0,
             left: 0,
-            child: Header(),
-          ),
-          const Positioned(
-            top: 0,
-            left: 0,
-            child: Header(),
+            child: Header(setColor: Colors.white,),
           ),
           Positioned(
             right: 40,
@@ -90,9 +85,9 @@ class _ContentAndTryState extends State<ContentAndTry> {
                 TitleSection(),
                 SizedBox(height: 40),
                 ActionButtons(),
-                SizedBox(
-                  height: 100,
-                )
+                // SizedBox(
+                //   height: 100,
+                // )
               ],
             ),
           ),

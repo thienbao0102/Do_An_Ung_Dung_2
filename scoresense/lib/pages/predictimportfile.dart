@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/initial.dart';
 import 'package:scoresense/module/uploadfile.dart';
@@ -38,7 +39,7 @@ class _FormImportFileState extends State<FormImportFile> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Header(),
+          Header(setColor: GlobalData().colorPrimary,),
           Center(
             child: Container(
               width: 1050,

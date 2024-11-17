@@ -13,7 +13,7 @@ class UiDesign {
   //UiDesign.tên_hàm(paramenter) nha
 
   //hàm ui cho trường nhập input data vào
-  static Widget buildTextField(String label, Function(String) onChanged) {
+  static Widget buildTextField(String label, String value, Function(String) onChanged) {
     return SizedBox(
       width: 310,
       child: Column(
@@ -33,6 +33,7 @@ class UiDesign {
                     width: 2.0), // Độ dày border khi không focus
               ),
             ),
+            initialValue: value,
             onChanged: (val) => onChanged(val),
           )
         ],
@@ -41,7 +42,7 @@ class UiDesign {
   }
 
   // text field with border and top label
-  static Widget buildTextField2(String label, bool numOnly, Function(String) onChanged) {
+  static Widget buildTextField2(String label,String value, bool numOnly, Function(String) onChanged) {
     return SizedBox(
       width: 220,
       child: Column(
@@ -71,6 +72,7 @@ class UiDesign {
                     color: Color(0xFF0062FF), width: 1.0),
               ),
             ),
+            initialValue: value,
             onChanged: (val) => onChanged(val),
           )
         ],
