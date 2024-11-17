@@ -27,37 +27,6 @@ class _EnterFormDataState extends State<EnterFormData> {
   bool _isPaginationHovering = false;
   OverlayEntry? _overlayEntry;
 
-  void _showOverlay(BuildContext context, Offset position, String text) {
-    _overlayEntry = OverlayEntry(
-      builder: (context) {
-        return Positioned(
-          left: position.dx + 10, // Vị trí gần con trỏ
-          top: position.dy + 10,
-          child: Material(
-            color: const Color.fromARGB(0, 153, 138, 138),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(146, 1, 71, 182),
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-              child: Text(
-                text,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-    Overlay.of(context)?.insert(_overlayEntry!);
-  }
-
-  void _removeOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
-
   void _checkCondition() {
     setState(() {
       _isDisabled = GlobalData().firstName.isEmpty ||
@@ -132,6 +101,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                 // mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
+                    margin: const EdgeInsets.only(top: 50.0),
                     width: MediaQuery.of(context).size.width * 1,
                     constraints: const BoxConstraints( minHeight: 500),
 

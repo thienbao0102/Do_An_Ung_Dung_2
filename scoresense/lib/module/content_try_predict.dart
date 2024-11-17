@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 
@@ -13,16 +14,54 @@ class ContentAndTry extends StatefulWidget {
 class _ContentAndTryState extends State<ContentAndTry> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('Background_OtherPage.png'),
-              fit: BoxFit.cover)),
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       padding: const EdgeInsets.only(left: 0, bottom: 160),
+      color: GlobalData().colorPrimary,
       child: Stack(
+        clipBehavior: Clip.none,
         alignment: Alignment.centerLeft,
         children: [
+          Positioned(
+            left: screenSize.width * -0.4,
+            bottom: screenSize.height * -0.55,
+            child: Container(
+              width: screenSize.width * 0.8,
+              height: screenSize.height * 0.8,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: const Color(0xFF79ACFF), // Màu viền
+                  width: 80,
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          // Viền tròn nhỏ
+          Positioned(
+            right: screenSize.width * -0.2,
+            top: screenSize.height * -0.2,
+            child: Container(
+              width: screenSize.width * 0.5,
+              height: screenSize.height * 0.5,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: const Color(0xFF79ACFF), // Màu viền
+                  width: 80,
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          const Positioned(
+            top: 0,
+            left: 0,
+            child: Header(),
+          ),
           const Positioned(
             top: 0,
             left: 0,
@@ -34,20 +73,15 @@ class _ContentAndTryState extends State<ContentAndTry> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
+                ),
+              child: 
+              Image.asset(
+                    '3214599.png',
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
                   ),
-                ],
-                image: const DecorationImage(
-                    image: AssetImage('hand_ai.jpg'), fit: BoxFit.cover),
               ),
             ),
-            width: 350,
-            height: 350,
-          ),
           Container(
             padding: const EdgeInsets.only(top: 350, left: 100),
             child: const Column(
@@ -111,16 +145,17 @@ class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.only(right:  20.0),
       child: Wrap(
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0062FF),
+              backgroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
+              elevation: 3,  // Điều chỉnh giá trị này để thay đổi độ cao của bóng
             ),
             onPressed: () {
               Navigator.push(
@@ -130,21 +165,22 @@ class ActionButtons extends StatelessWidget {
               );
             },
             child: const Text(
-              'Start Your Test Now',
+              'Start Now',
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: const Color(0xFF0062FF)),
             ),
           ),
           const SizedBox(width: 10),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              side: const BorderSide(color: Color(0xFF0062FF)),
+              side: const BorderSide(color: Colors.white),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
+              elevation: 5,  // Điều chỉnh giá trị này để thay đổi độ cao của bóng
             ),
             onPressed: () {},
             child: const Text(
@@ -152,7 +188,7 @@ class ActionButtons extends StatelessWidget {
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0062FF)),
+                  color: Colors.white),
             ),
           ),
         ],

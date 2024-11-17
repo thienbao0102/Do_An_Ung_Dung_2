@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 
 class Header extends StatefulWidget {
@@ -115,26 +116,28 @@ class _HeaderState extends State<Header> {
       child: GestureDetector(
         onTap: onTap,
         child: SizedBox(
-          width: 100,
+          width: 90,
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style: TextStyle(
+                    color: GlobalData().colorPrimary,
                     fontSize: 16,
+                    decoration: isHoveredList[index] ? TextDecoration.underline : TextDecoration.none,
+                    decorationColor: isHoveredList[index] ? GlobalData().colorPrimary : Colors.transparent,
                   ),
                 ),
                 const SizedBox(height: 4),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  height: 2,
-                  width: isHoveredList[index] ? 90 : 0,
-                  color: Colors.black,
-                ),
+                // AnimatedContainer(
+                //   duration: const Duration(milliseconds: 200),
+                //   curve: Curves.easeInOut,
+                //   height: 2,
+                //   width: isHoveredList[index] ? 90 : 0,
+                //   color: Colors.black,
+                // ),
               ],
             ),
           ),

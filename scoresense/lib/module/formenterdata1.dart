@@ -216,10 +216,10 @@ class FormData1 extends StatelessWidget {
                           },
                         );
                       } else {
-                        // print(GlobalData().age);
-                        // print(GlobalData().lastName);
-                        // print(GlobalData().firstName);
-                        // print(GlobalData().school);
+                        print(GlobalData().age);
+                        print(GlobalData().lastName);
+                        print(GlobalData().firstName);
+                        print(GlobalData().school);
                         if (isLastPage) {
                           Navigator.push(
                             context,
