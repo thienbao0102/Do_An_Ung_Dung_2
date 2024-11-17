@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
+import 'package:scoresense/pages/importfitmodel.dart';
 
 class Header extends StatefulWidget {
   const Header({super.key});
@@ -11,7 +12,8 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> {
   // Danh sách trạng thái hover cho từng mục
-  final List<bool> isHoveredList = [false, false, false,false, false];
+  final List<bool> isHoveredList = [false, false, false, false, false];
+  bool _isMenuOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class _HeaderState extends State<Header> {
       height: 60,
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(top: 20, left: 40, right: 20),
-      color: Colors.transparent,
+      color: const Color.fromRGBO(105, 105, 105, 0.3),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -36,8 +38,10 @@ class _HeaderState extends State<Header> {
                   onTap: () {
                     Navigator.pushNamed(context, "/");
                   },
-                ),                
-                const SizedBox(width: 20,),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
                 // Predict Score
                 _buildNavItem(
                   context,
@@ -51,7 +55,9 @@ class _HeaderState extends State<Header> {
                     );
                   },
                 ),
-                const SizedBox(width: 30,),
+                const SizedBox(
+                  width: 30,
+                ),
                 // Fit Model
                 _buildNavItem(
                   context,
@@ -61,7 +67,7 @@ class _HeaderState extends State<Header> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Choosepredictmethod()),
+                          builder: (context) => const ImportFileFitModel()),
                     );
                   },
                 ),
@@ -69,30 +75,30 @@ class _HeaderState extends State<Header> {
             ),
           ),
           Expanded(
-            flex: 2,
-            child:Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                //Sign in
-                _buildNavItem(
-                  context,
-                  "Sign In",
-                  3,
-                  onTap: () {
-                    Navigator.pushNamed(context, "/");
-                  },
-                ),
-                //Sign in
-                _buildNavItem(
-                  context,
-                  "Sign Up",
-                  4,
-                  onTap: () {
-                    Navigator.pushNamed(context, "/");
-                  },
-                ),
-              ],
-            ) )
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  //Sign in
+                  _buildNavItem(
+                    context,
+                    "Sign In",
+                    3,
+                    onTap: () {
+                      Navigator.pushNamed(context, "/");
+                    },
+                  ),
+                  //Sign in
+                  _buildNavItem(
+                    context,
+                    "Sign Up",
+                    4,
+                    onTap: () {
+                      Navigator.pushNamed(context, "/");
+                    },
+                  ),
+                ],
+              ))
         ],
       ),
     );

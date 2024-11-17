@@ -8,23 +8,23 @@ import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
 
-class InitialWidget extends StatefulWidget {
+class InitiaFitModellWidget extends StatefulWidget {
   final Function(bool) onFileUploaded;
-  const InitialWidget({Key? key, required this.onFileUploaded})
+  const InitiaFitModellWidget({Key? key, required this.onFileUploaded})
       : super(key: key);
 
   @override
-  _InitialWidgetState createState() => _InitialWidgetState();
+  _InitiaFitModellWidgetState createState() => _InitiaFitModellWidgetState();
 }
 
-class _InitialWidgetState extends State<InitialWidget> {
+class _InitiaFitModellWidgetState extends State<InitiaFitModellWidget> {
   late DropzoneViewController _dropzoneController;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           width: 1000,
           height: 200,
           child: DropzoneView(
@@ -149,7 +149,8 @@ class _InitialWidgetState extends State<InitialWidget> {
         "health",
         "absences",
         "G1",
-        "G2"
+        "G2",
+        "G3"
       ];
 
       List<dynamic> header = fields.first;

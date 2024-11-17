@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:scoresense/module/predictions.dart';
 
 Future<List<Predictions>> sendData(List<List<dynamic>> inputDataImport) async {
-  //print(inputDataImport);
   // Chuyển đổi List thành JSON
   final jsonData = jsonEncode(inputDataImport);
 
