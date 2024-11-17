@@ -37,13 +37,14 @@ class _RadioButtonYesNoState extends State<RadioButtonYesNo> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           width: 350,
           child: Text(
             widget.label,
-            style: const TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 16),
           ),
         ),
         const SizedBox(width: 155),

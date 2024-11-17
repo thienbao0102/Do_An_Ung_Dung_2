@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
-import 'package:scoresense/module/ratingSlider.dart';
-import 'package:scoresense/module/starRating.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
 class FormData8 extends StatelessWidget {
@@ -11,11 +9,11 @@ class FormData8 extends StatelessWidget {
   final bool isLastPage;
 
   const FormData8({
-    Key? key,
+    super.key,
     required this.onNext,
     this.onPrevious,
     this.isLastPage = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +24,9 @@ class FormData8 extends StatelessWidget {
               maxWidth: 1000.0,
             ),
             width: MediaQuery.of(context).size.width * 0.6,
-            margin: const EdgeInsets.only(top: 70, bottom: 20),
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
             padding:
-                const EdgeInsets.only(top: 50, left: 50, right: 50, bottom: 30),
+                const EdgeInsets.only(top: 30, left: 50, right: 50, bottom: 30),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -44,10 +42,38 @@ class FormData8 extends StatelessWidget {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  // mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
+                    const Center(
+                      child: Text(
+                        "Family connections",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0062FF),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    UiDesign.buildRadioButtonGroupRow(
+                      "Your family size",
+                      ['Greater than 3', 'Less than or equal to 3'],
+                      GlobalData().familySize,
+                      (value) => GlobalData().familySize = value,
+                    ),
+                    const SizedBox(height: 30),
+                    Column(
+                      children: [
+                        UiDesign.buildRadioLevels(
+                          'Quality of family relationships',
+                          ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
+                          GlobalData().familyQuality,
+                          (val) => GlobalData().familyQuality = val,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const Center(
                         child: (Text(
                       "Other information",
                       style: TextStyle(
@@ -56,7 +82,7 @@ class FormData8 extends StatelessWidget {
                         color: Color(0xFF0062FF),
                       ),
                     ))),
-                    SizedBox(
+                    const SizedBox(
                         height:
                             30), // Khoảng cách giữa tiêu đề và các ô nhập liệu
                     Column(
@@ -90,45 +116,16 @@ class FormData8 extends StatelessWidget {
                           ['Course', 'Home', 'Reputation', 'Other'],
                           GlobalData().reason,
                           (value) => GlobalData().reason = value,
-                        ),
+                        ),const SizedBox(height: 30),
 
                         UiDesign.buildRadioButtonGroupRow(
                           "Your guardian",
-                          [
-                            'Mother',
-                            'Father',
-                            'Other'
-                          ],
+                          ['Mother','Father','Other'],
                           GlobalData().guardian,
                           (value) => GlobalData().guardian = value,
                         )
                       ],
                     ),
-                    // SizedBox(height: 20), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                    // Column(
-                    //   children: [
-                    //     UiDesign.buildRadioLevelsLabel(
-                    //         'Number of past class failures',
-                    //         ['0', '1', '2', '3', '4']),
-                    //     UiDesign.buildRadioLevels(
-                    //       'Number of past class failures',
-                    //       ['0', '1', '2', '3', '4'],
-                    //       GlobalData().numOfFailClass,
-                    //       (index) => GlobalData().numOfFailClass = index,
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(height: 40), // Khoảng cách giữa tiêu đề và các ô nhập liệu
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   // crossAxisAlignment: ,
-                    //   children: [
-                    //     UiDesign.buildTextField2("Number of times absent?", true, (value) => GlobalData().absences = int.parse(value),),
-                    //     UiDesign.buildTextField2("Semester 1 score?", true, (value) => GlobalData().G1 = int.parse(value),),
-                    //     UiDesign.buildTextField2("Semester 2 score??", true, (value) => GlobalData().G2 = int.parse(value),),
-                    //   ],
-
-                    SizedBox(height: 60),
                   ],
                 ),
                 Positioned(

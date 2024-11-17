@@ -41,11 +41,10 @@ class _RatingSliderState extends State<RatingSlider> {
   }
 
   Widget buildRatingSlider() {
-    return SizedBox(
-      //chuyển column thành sizebox or container
-      width: double
-          .infinity, //thêm dòng này vô để nó lấy chiều dài bằng với chiều dài của container cha
+    return Container(
+      // width: double.infinity,
       child: Wrap(
+        // alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment
             .center, //dòng này để căn giữa text nằm giữa với column thứ 2
         children: [

@@ -21,9 +21,9 @@ class FormData3 extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(maxWidth: 1000.0),
         width: MediaQuery.of(context).size.width * 0.6,
-        margin: const EdgeInsets.only(top: 70, bottom: 20),
+        margin: const EdgeInsets.only(top: 20, bottom: 20),
         padding: const EdgeInsets.only(
-            top: 50, left: 50, right: 50, bottom: 30),
+            top: 30, left: 50, right: 50, bottom: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -52,7 +52,7 @@ class FormData3 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
 
                 // Free time after school
                 Column(
@@ -67,7 +67,7 @@ class FormData3 extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
 
                 // Home to school travel time
                 Column(
@@ -84,7 +84,7 @@ class FormData3 extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
 
                 // Go out with friends
                 Column(
@@ -104,7 +104,7 @@ class FormData3 extends StatelessWidget {
                       (index) => GlobalData().goOutIndex = index,
                     ),
                   ],
-                ),const SizedBox(height: 60),
+                ),
               ],
             ),
 
