@@ -40,48 +40,34 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('Background_OtherPage.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SingleChildScrollView(
-            child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-            const Header(),
+        body: Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('Background_OtherPage.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Header(
+                    setColor: GlobalData().colorPrimary,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      
-                      // Stack(
-                      //   children: [
-                      //     AnimatedPositioned(
-                      //       duration: const Duration(milliseconds: 500),
-                      //       right: 0, // Giá trị động để hiệu ứng trượt
-                      //       top: 150, // Giá trị động để hiệu ứng trượt 
-                      //       child: 
-                      //       ),
-                      //     ), 
-                      //   ],
-                      // ),
                       Expanded(
                         flex: 5,
                         child: Padding(
                           padding: EdgeInsets.only(
-                            top: 60,
+                            top: 0,
                             left: MediaQuery.of(context).size.width >= 500
                                 ? 100
                                 : 40,
                             right: MediaQuery.of(context).size.width * 0.1,
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -310,64 +296,64 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 180),
-                        child: 
-                          Image.asset(
-                            userChoose == 1 ? '5214641.png' : '2808347.png',
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height:500,
-                                fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
-                          ),
+                        child: Image.asset(
+                          userChoose == 1 ? '5214641.png' : '2808347.png',
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: 500,
+                          fit: BoxFit
+                              .contain, // Đảm bảo hình ảnh phù hợp với vùng
+                        ),
                       ),
                     ],
                   ),
-                // Positioned(
-                //   top: 20,
-                //   left: MediaQuery.of(context).size.width >= 500 ? 100 : 40,
-                //   child: MouseRegion(
-                //     onEnter: (_) => _onEnter(true), // Hover effect
-                //     onExit: (_) => _onEnter(false), // Exit hover
-                //     cursor: SystemMouseCursors.click,
-                //     child: GestureDetector(
-                //       onTap: () {
-                //         Navigator.pushNamed(context, "/"); // Navigate back
-                //       },
-                //       child: AnimatedScale(
-                //         scale: _scale, // Dynamic scale
-                //         duration: const Duration(milliseconds: 200),
-                //         // curve: Curves.elasticOut, // Elastic effect
-                //         child: Container(
-                //           // padding: const EdgeInsets.all(10),
-                //           // decoration: BoxDecoration(
-                //           //   borderRadius: BorderRadius.circular(10),
-                //           // ),
-                //           child: Row(
-                //             crossAxisAlignment: CrossAxisAlignment.center,
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Icon(
-                //                 Icons.arrow_back,
-                //                 color: GlobalData().colorText,
-                //                 size: 16,
-                //               ),
-                //               const SizedBox(width: 8),
-                //               Text(
-                //                 'Back',
-                //                 style: TextStyle(
-                //                   fontSize: 16,
-                //                   fontWeight: FontWeight.normal,
-                //                   color: GlobalData().colorText,
-                //                   height: 1.2, // Line height adjustment
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
-            ),
-        )));
+                  // Positioned(
+                  //   top: 20,
+                  //   left: MediaQuery.of(context).size.width >= 500 ? 100 : 40,
+                  //   child: MouseRegion(
+                  //     onEnter: (_) => _onEnter(true), // Hover effect
+                  //     onExit: (_) => _onEnter(false), // Exit hover
+                  //     cursor: SystemMouseCursors.click,
+                  //     child: GestureDetector(
+                  //       onTap: () {
+                  //         Navigator.pushNamed(context, "/"); // Navigate back
+                  //       },
+                  //       child: AnimatedScale(
+                  //         scale: _scale, // Dynamic scale
+                  //         duration: const Duration(milliseconds: 200),
+                  //         // curve: Curves.elasticOut, // Elastic effect
+                  //         child: Container(
+                  //           // padding: const EdgeInsets.all(10),
+                  //           // decoration: BoxDecoration(
+                  //           //   borderRadius: BorderRadius.circular(10),
+                  //           // ),
+                  //           child: Row(
+                  //             crossAxisAlignment: CrossAxisAlignment.center,
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Icon(
+                  //                 Icons.arrow_back,
+                  //                 color: GlobalData().colorText,
+                  //                 size: 16,
+                  //               ),
+                  //               const SizedBox(width: 8),
+                  //               Text(
+                  //                 'Back',
+                  //                 style: TextStyle(
+                  //                   fontSize: 16,
+                  //                   fontWeight: FontWeight.normal,
+                  //                   color: GlobalData().colorText,
+                  //                   height: 1.2, // Line height adjustment
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+            )));
   }
 }

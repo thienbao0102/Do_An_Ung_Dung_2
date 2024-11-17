@@ -58,6 +58,7 @@ class FormData1 extends StatelessWidget {
                     Expanded(
                       child: UiDesign.buildTextField(
                         "Your First name",
+                        GlobalData().firstName,
                         (value) => GlobalData().firstName = value,
                       ),
                     ),
@@ -65,6 +66,7 @@ class FormData1 extends StatelessWidget {
                     Expanded(
                       child: UiDesign.buildTextField(
                         "Your Last name",
+                        GlobalData().lastName,
                         (value) => GlobalData().lastName = value,
                       ),
                     ),
@@ -100,7 +102,7 @@ class FormData1 extends StatelessWidget {
                         ),
                           Column(
                             children: [
-                              UiDesign.buildTextField2("Your age?", true,(value) => GlobalData().age = int.parse(value)),
+                              UiDesign.buildTextField2("Your age?",GlobalData().age.toString(), true,(value) => GlobalData().age = int.parse(value)),
                             ],
                           )
                         
@@ -111,6 +113,7 @@ class FormData1 extends StatelessWidget {
                 const SizedBox(height: 40),
                 UiDesign.buildTextField(
                   "What school are you in?",
+                  GlobalData().school,
                   (value) => GlobalData().school = value,
                 ),
               ],

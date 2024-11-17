@@ -138,10 +138,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 0,
             left: 0,
-            child: Header(),
+            child: Header(setColor: GlobalData().colorPrimary,),
           ),
           // Nội dung chính ở giữa
           Center(

@@ -33,31 +33,36 @@ class _ContentAndTryState extends State<ContentAndTry> {
           const Positioned(
             top: 0,
             left: 0,
-            child: Header(),
+            child: Header(setColor: Colors.white,),
           ),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child:
-                  Container(
-                    margin: const EdgeInsets.only(top: 400, left: 100),
-                    height: MediaQuery.of(context).size.height,
-                    child: 
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TitleSection(),
-                          SizedBox(height: 40),
-                          ActionButtons(),
-                          SizedBox(
-                            height: 100,
-                          )
-                        ],
-                      ),
+          Positioned(
+            right: 40,
+            bottom: 50,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                ),
+              child: 
+              Image.asset(
+                    '3214599.png',
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    fit: BoxFit.contain, // Đảm bảo hình ảnh phù hợp với vùng
                   ),
               ),
-            ],
+            ),
+          Container(
+            padding: const EdgeInsets.only(top: 350, left: 100),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TitleSection(),
+                SizedBox(height: 40),
+                ActionButtons(),
+                // SizedBox(
+                //   height: 100,
+                // )
+              ],
+            ),
           ),
         ],
       ),

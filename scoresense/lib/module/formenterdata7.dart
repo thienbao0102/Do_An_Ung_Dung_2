@@ -97,9 +97,9 @@ class FormData7 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     // crossAxisAlignment: ,
                     children: [
-                      UiDesign.buildTextField2("Number of times absent?", true, (value) => GlobalData().absences = int.parse(value),),
-                      UiDesign.buildTextField2("Semester 1 score?", true, (value) => GlobalData().G1 = int.parse(value),),
-                      UiDesign.buildTextField2("Semester 2 score??", true, (value) => GlobalData().G2 = int.parse(value),),
+                      UiDesign.buildTextField2("Number of times absent?",GlobalData().absences.toString(), true, (value) => GlobalData().absences = int.parse(value),),
+                      UiDesign.buildTextField2("Semester 1 score?",GlobalData().G1.toString(), true, (value) => GlobalData().G1 = int.parse(value),),
+                      UiDesign.buildTextField2("Semester 2 score??",GlobalData().G2.toString(), true, (value) => GlobalData().G2 = int.parse(value),),
                     ],
                   ),
                 ],

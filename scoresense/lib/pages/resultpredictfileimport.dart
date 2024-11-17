@@ -62,7 +62,7 @@ class _ShowResultState extends State<ShowResult> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Header(),
+          Header(setColor: GlobalData().colorPrimary,),
           Center(
             child: Container(
               margin: const EdgeInsets.only(top: 140, bottom: 50),
@@ -178,6 +178,7 @@ class _ShowResultState extends State<ShowResult> {
                                 children: [
                                   UiDesign.buildTextField(
                                       "Search",
+                                      "",
                                       (value) => setState(() {
                                         search = value;
                                       }),
