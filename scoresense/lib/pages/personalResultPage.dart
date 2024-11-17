@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/header.dart';
+import 'package:scoresense/module/predictions.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/module/ui_design.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -19,7 +20,7 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
   @override
   double _percentInRadians = 80.0;
   bool _isLoading = true;
-  List results = List.empty();
+  List<Predictions> results = List.empty();
 
   Future<void> _loadData() async {
     List<Map<String, dynamic>> dataPredict = [
