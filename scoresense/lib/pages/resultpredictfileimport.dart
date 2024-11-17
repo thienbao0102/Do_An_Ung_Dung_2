@@ -59,8 +59,10 @@ class _ShowResultState extends State<ShowResult> {
       );
     }
     return SingleChildScrollView(
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
+          const Header(),
           Center(
             child: Container(
               margin: const EdgeInsets.only(top: 140, bottom: 50),
@@ -283,11 +285,6 @@ class _ShowResultState extends State<ShowResult> {
                 ],
               ),
             ),
-          ),
-          const Positioned(
-            top: 40,
-            left: 120,
-            child: Header(),
           ),
         ],
       ),

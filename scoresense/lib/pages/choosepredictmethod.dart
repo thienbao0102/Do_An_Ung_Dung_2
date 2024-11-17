@@ -41,8 +41,10 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
           ),
         ),
         child: SingleChildScrollView(
-          child: Stack(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
+              const Header(),
               Row(
                 children: [
                   Expanded(
@@ -255,11 +257,6 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
                     ),
                   ),
                 ],
-              ),
-              Positioned(
-                top: 40,
-                left: MediaQuery.of(context).size.width >= 500 ? 100 : 40,
-                child: Header(),
               ),
             ],
           ),

@@ -35,8 +35,10 @@ class _FormImportFileState extends State<FormImportFile> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
+          const Header(),
           Center(
             child: Container(
               width: 1050,
@@ -124,10 +126,6 @@ class _FormImportFileState extends State<FormImportFile> {
               ),
             ),
           ),
-          Positioned(
-              top: 40,
-              left: MediaQuery.of(context).size.width >= 500 ? 120 : 50,
-              child: const Header()),
         ],
       ),
     );
