@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/ui_design.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
@@ -100,7 +101,6 @@ class FormData1 extends StatelessWidget {
                           Column(
                             children: [
                               UiDesign.buildTextField2("Your age?", true,(value) => GlobalData().age = int.parse(value)),
-                            
                             ],
                           )
                         
@@ -123,14 +123,115 @@ class FormData1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [                 
                   ElevatedButton(
-                    onPressed: isLastPage
-                        ? () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const PersonalResultPage(),
-                              ),
-                            )
-                        : onNext,
+                    onPressed: () {
+                      if (GlobalData().firstName.isEmpty||GlobalData().lastName.isEmpty||GlobalData().age==0||GlobalData().school.isEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: Colors.transparent,
+                              child: 
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),  // Bo góc trên bên trái
+                                    topRight: Radius.circular(10), // Bo góc trên bên phải
+                                    bottomLeft: Radius.circular(10), // Bo góc dưới bên trái
+                                    bottomRight: Radius.circular(10), // Bo góc dưới bên phải
+                                  ),
+                                  child: Center(
+                                    child: 
+                                    Container(
+                                      padding: const EdgeInsets.only(top: 10, right: 20, bottom: 20, left: 20),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      constraints: const BoxConstraints(
+                                        maxWidth: 400,
+                                      ),
+                                      child: 
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Image.asset(
+                                            '11104.png',
+                                            width: 300,
+                                            fit: BoxFit.contain,
+                                            colorBlendMode: BlendMode.saturation,  // Mượt mà hơn khi xử lý các cạnh
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            "Alert!",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: GlobalData().colorText,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            "Please finish at least the questions on Page 1 before continuing!",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                              color: GlobalData().colorText,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          MouseRegion(
+                                            cursor: SystemMouseCursors.click,
+                                            child:
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: 
+                                                Container(
+                                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                                  width: double.infinity,  // Chiếm hết chiều ngang
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    color: const Color(0xFF0062FF),
+                                                    borderRadius: BorderRadius.circular(8.0)),
+                                                  child: const Text(
+                                                    'OK',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      letterSpacing: 1.3,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ),
+                              );
+                          },
+                        );
+                      } else {
+                        // print(GlobalData().age);
+                        // print(GlobalData().lastName);
+                        // print(GlobalData().firstName);
+                        // print(GlobalData().school);
+                        if (isLastPage) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PersonalResultPage(),
+                            ),
+                          );
+                        } else {
+                          onNext();
+                        }
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
                       backgroundColor: const Color(0xFF0062FF),

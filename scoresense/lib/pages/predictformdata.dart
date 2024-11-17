@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:scoresense/module/formenterdata1.dart';
 import 'package:scoresense/module/formenterdata2.dart';
 import 'package:scoresense/module/formenterdata3.dart';
@@ -9,8 +10,6 @@ import 'package:scoresense/module/formenterdata7.dart';
 import 'package:scoresense/module/formenterdata8.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
-import 'dart:math';
-
 import 'package:scoresense/pages/personalResultPage.dart';
 
 class EnterFormData extends StatefulWidget {
@@ -24,6 +23,49 @@ class _EnterFormDataState extends State<EnterFormData> {
   int indexedStack = 0;
   PageController _pageController = PageController();
   bool _isHovering = false;
+  bool _isDisabled = false;
+  bool _isPaginationHovering = false;
+  OverlayEntry? _overlayEntry;
+
+  void _showOverlay(BuildContext context, Offset position, String text) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) {
+        return Positioned(
+          left: position.dx + 10, // Vị trí gần con trỏ
+          top: position.dy + 10,
+          child: Material(
+            color: const Color.fromARGB(0, 153, 138, 138),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(146, 1, 71, 182),
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              child: Text(
+                text,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    Overlay.of(context)?.insert(_overlayEntry!);
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  void _checkCondition() {
+    setState(() {
+      _isDisabled = GlobalData().firstName.isEmpty ||
+          GlobalData().lastName.isEmpty ||
+          GlobalData().age == 0 ||
+          GlobalData().school.isEmpty;
+    });
+  }
 
   // Hàm chuyển đến trang tiếp theo
   void _nextPage(int pageIndex) {
@@ -43,7 +85,8 @@ class _EnterFormDataState extends State<EnterFormData> {
   Widget _buildPagination(int pageIndex) {
     bool isSelected = pageIndex == indexedStack;
     return GestureDetector(
-      onTap: () => _nextPage(pageIndex),
+      // onTap: () => _nextPage(pageIndex),
+      onTap: _isDisabled ? null : () => _nextPage(pageIndex),
       child: Container(
         margin: const EdgeInsets.only(right: 8.0),
         // padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
@@ -80,14 +123,17 @@ class _EnterFormDataState extends State<EnterFormData> {
         ),
         child: Stack(
           children: [
-            Center(
-              child: Column(
+            // Center(
+            //   child: 
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(
+                  Container(
                     width: MediaQuery.of(context).size.width * 1,
+                    constraints: const BoxConstraints( minHeight: 500),
+
                     height: MediaQuery.of(context).size.height * 0.68,
                     child: PageView(
                       controller: _pageController,
@@ -104,145 +150,180 @@ class _EnterFormDataState extends State<EnterFormData> {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
+                  MouseRegion(
+                    onEnter: (_){
+                      _checkCondition();
+                      setState(() {
+                        _isPaginationHovering = true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        _isPaginationHovering = false;
+                      });
+                    },  
+                    child: 
+                      Column(
                         children: [
-                          AnimatedPositioned(
-                            duration: const Duration(milliseconds: 500),
-                            left: indexedStack * 48, // Thay đổi vị trí ô màu xanh
-                            top: 0,
-                            bottom: 0,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Stack(
+                                children: [
+                                  AnimatedPositioned(
+                                    duration: const Duration(milliseconds: 500),
+                                    left: indexedStack * 48, // Thay đổi vị trí ô màu xanh
+                                    top: 0,
+                                    bottom: 0,
+                                    child: Container(
+                                      width: 40, // Chiều rộng ô màu xanh
+                                      decoration: BoxDecoration(
+                                        color: GlobalData().colorPrimary,
+                                        borderRadius: BorderRadius.circular(6.0),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      ...List.generate(8, (index) => _buildPagination(index)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              AbsorbPointer(
+                                absorbing: _isDisabled,
+                                child: 
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10.0), // Bo góc nếu cần
+                                            ),
+                                            child: Container(
+                                              width: MediaQuery.of(context).size.width * 0.3,
+                                              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min, // Tự động điều chỉnh chiều cao
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Confirm Finish?',
+                                                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: GlobalData().colorPrimary),
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                  Text(
+                                                    'Unanswered questions will be assigned default values, which could impact the accuracy of the prediction.',
+                                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: GlobalData().colorText),
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  const SizedBox(height: 20),
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    children: [
+                                                      ElevatedButton(
+                                                        onPressed:(){
+                                                          Navigator.of(context).pop();
+                                                        }, 
+                                                        style: ElevatedButton.styleFrom(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                                                          backgroundColor: const Color(0xFF0062FF),
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(8),
+                                                          ),
+                                                        ),
+                                                        child: 
+                                                          const Text(
+                                                            'Cancel',
+                                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.white),
+                                                          )
+                                                      ),
+                                                      const SizedBox(width: 30),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.of(context).pop();
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) => const PersonalResultPage(),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: 
+                                                          MouseRegion(
+                                                            cursor: SystemMouseCursors.click,
+                                                            child: 
+                                                              Text('OK',
+                                                                style: 
+                                                                  TextStyle(
+                                                                    fontSize: 16, 
+                                                                    fontWeight: FontWeight.normal, 
+                                                                    color: GlobalData().colorPrimary,
+                                                                  )),
+                                                          ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: MouseRegion(
+                                      onEnter: (_) {
+                                        setState(() {
+                                          _isHovering = true;
+                                        });
+                                      },
+                                      onExit: (_) {
+                                        setState(() {
+                                          _isHovering = false;
+                                        });
+                                      },
+                                      cursor: SystemMouseCursors.click,
+                                      child: Text(
+                                        'Finish',
+                                        style: TextStyle(
+                                          color: GlobalData().colorPrimary,
+                                          fontWeight: FontWeight.normal,
+                                          decoration: _isHovering ? TextDecoration.underline : TextDecoration.none,
+                                          decorationColor: _isHovering ? GlobalData().colorPrimary : Colors.transparent,
+                                          decorationThickness: 2.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Material(
+                            color: const Color.fromARGB(0, 153, 138, 138),
                             child: Container(
-                              width: 40, // Chiều rộng ô màu xanh
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: GlobalData().colorPrimary,
+                                color: _isDisabled && _isPaginationHovering? const Color.fromARGB(255, 233, 49, 49) : Colors.transparent,
                                 borderRadius: BorderRadius.circular(6.0),
+                              ),
+                              child: Text(
+                                "Please finish at least the questions on Page 1 before continuing!",
+                                style: TextStyle(color: _isDisabled && _isPaginationHovering? Colors.white : Colors.transparent),
                               ),
                             ),
                           ),
-                          Row(
-                            children: [
-                              ...List.generate(8, (index) => _buildPagination(index)),
-                            ],
-                          )
-                          
                         ],
                       ),
-                      SizedBox(width: 20),
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0), // Bo góc nếu cần
-                                ),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.3,
-                                  padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min, // Tự động điều chỉnh chiều cao
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Confirm Finish?',
-                                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: GlobalData().colorPrimary),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        'Unanswered questions will be assigned default values, which could impact the accuracy of the prediction.',
-                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: GlobalData().colorText),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed:(){
-                                              Navigator.of(context).pop();
-                                            }, 
-                                            style: ElevatedButton.styleFrom(
-                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                                              backgroundColor: const Color(0xFF0062FF),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                            child: 
-                                              const Text(
-                                                'Cancel',
-                                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.white),
-                                              )
-                                          ),
-                                          const SizedBox(width: 30),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context).pop();
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => const PersonalResultPage(),
-                                                ),
-                                              );
-                                            },
-                                            child: 
-                                              MouseRegion(
-                                                cursor: SystemMouseCursors.click,
-                                                child: 
-                                                  Text('OK',
-                                                    style: 
-                                                      TextStyle(
-                                                        fontSize: 16, 
-                                                        fontWeight: FontWeight.normal, 
-                                                        color: GlobalData().colorPrimary,
-                                                      )),
-                                              ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: MouseRegion(
-                          onEnter: (_) {
-                            setState(() {
-                              _isHovering = true;
-                            });
-                          },
-                          onExit: (_) {
-                            setState(() {
-                              _isHovering = false;
-                            });
-                          },
-                          cursor: SystemMouseCursors.click,
-                          child: Text(
-                            'Finish',
-                            style: TextStyle(
-                              color: GlobalData().colorPrimary,
-                              fontWeight: FontWeight.normal,
-                              decoration: _isHovering ? TextDecoration.underline : TextDecoration.none,
-                              decorationColor: _isHovering ? GlobalData().colorPrimary : Colors.transparent,
-                              decorationThickness: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
-            ),
-            // Hiệu ứng di chuyển ô màu xanh khi chuyển trang
-            
+            // ),
             const Positioned(
               top: 40,
               left: 120,

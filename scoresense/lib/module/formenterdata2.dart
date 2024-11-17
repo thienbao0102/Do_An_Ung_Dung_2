@@ -20,7 +20,7 @@ class FormData2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1000.0),
+        constraints: const BoxConstraints(maxWidth: 1000.0, minHeight: 500),
         width: MediaQuery.of(context).size.width * 0.6,
         margin: const EdgeInsets.only(top: 20, bottom: 20),
         padding: const EdgeInsets.only(

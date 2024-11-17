@@ -6,6 +6,7 @@ import 'package:scoresense/module/Radio_Levels.dart';
 import 'package:scoresense/module/animatedPieChart.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 
 class UiDesign {
   //cách gọi hàm
@@ -55,16 +56,19 @@ class UiDesign {
           ),
           TextFormField(
             keyboardType: numOnly ? TextInputType.number : TextInputType.text,
+            inputFormatters: numOnly
+                ? [FilteringTextInputFormatter.digitsOnly] // Chỉ cho phép nhập số
+                : null,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0), // Đặt bán kính bo góc
-                borderSide: BorderSide(
-                    color: Color(0xFF0062FF), width: 1.0), // Viền xung quanh
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(
+                    color: Color(0xFF0062FF), width: 1.0),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0), // Đặt bán kính bo góc
-                borderSide: BorderSide(
-                    color: Color(0xFF0062FF), width: 1.0), // Viền xung quanh
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(
+                    color: Color(0xFF0062FF), width: 1.0),
               ),
             ),
             onChanged: (val) => onChanged(val),
