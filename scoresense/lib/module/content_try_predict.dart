@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 
@@ -15,8 +14,6 @@ class _ContentAndTryState extends State<ContentAndTry> {
   
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final double height = screenSize.height * 0.5;
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,

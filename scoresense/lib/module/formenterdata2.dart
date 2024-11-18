@@ -22,7 +22,7 @@ class FormData2 extends StatelessWidget {
     return Center(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 1000.0, minHeight: 500),
-        width: MediaQuery.of(context).size.width * 0.6,
+        width: MediaQuery.of(context).size.width * 0.65,
         margin: const EdgeInsets.only(top: 20, bottom: 20),
         padding:
             const EdgeInsets.only(top: 30, left: 50, right: 50, bottom: 30),
@@ -112,7 +112,7 @@ class FormData2 extends StatelessWidget {
                           'Higher education'
                         ].elementAt(GlobalData().motherEducation),
                         (value) {
-                          int index = [
+                          [
                             'None',
                             'Primary',
                             '5th to 9th grade',

@@ -138,23 +138,10 @@ class UiDesign {
     return RadioButtonYesNo(label: label, options: options, initialSelectedValue: selectedValue, onChanged: onChanged);
   }
 
-  Widget buildAnimatedPieChart(String title, double percentage) {
-    Color conersColor = Color.fromARGB(255, 0, 0, 0);
+  Widget buildAnimatedPieChart(String title, double percentage, Color conersColor) {
     if (percentage < 0 || percentage > 100) {
       throw Exception('Percentage must be between 0 and 100');
     } else {
-    }
-
-    if (percentage >= 0 && percentage < 30) {
-      conersColor = Color.fromARGB(255, 211, 0, 4);
-    } else if (percentage >= 30 && percentage < 50) {
-      conersColor = Color.fromARGB(255, 214, 97, 99);
-    } else if (percentage >= 50 && percentage < 70) {
-      conersColor = Color.fromARGB(255, 76, 75, 22);
-    } else if (percentage >= 70 && percentage < 100) {
-      conersColor = Color.fromARGB(255, 4, 203, 110);
-    } else {
-      conersColor = Color.fromARGB(255, 243, 198, 35);
     }
 
     // Dữ liệu cho biểu đồ
@@ -172,44 +159,17 @@ class UiDesign {
     );
   }
 
-  Widget addTextToAnimatedPieChart(percentage) {
-    String percentageString = "";
-    Color conersColor = Color.fromARGB(255, 0, 0, 0);
-    if (percentage < 0 || percentage > 100) {
-      throw Exception('Percentage must be between 0 and 100');
-    } else {
-      percentageString = percentage.toStringAsFixed(0);
-    }
-
-    if (percentage >= 0 && percentage < 30) {
-      conersColor = Color.fromARGB(255, 211, 0, 4);
-    } else if (percentage >= 30 && percentage < 50) {
-      conersColor = Color.fromARGB(255, 214, 97, 99);
-    } else if (percentage >= 50 && percentage < 70) {
-      conersColor = Color.fromARGB(255, 76, 75, 22);
-    } else if (percentage >= 70 && percentage < 100) {
-      conersColor = Color.fromARGB(255, 4, 203, 110);
-    } else {
-      conersColor = Color.fromARGB(255, 243, 198, 35);
-    }
+  Widget addTextToAnimatedPieChart(conersColor, String text) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          '${percentageString}%', // Phần trăm
+          text, // Chữ "Pass" nằm dưới phần trăm
           style: TextStyle(
-              fontSize: 50,
+              fontSize: 60, // Kích thước chữ có thể thay đổi
               fontWeight: FontWeight.bold,
-              color: conersColor, // Màu chữ
-              height: 1.0),
-        ),
-        Text(
-          'Pass', // Chữ "Pass" nằm dưới phần trăm
-          style: TextStyle(
-              fontSize: 30, // Kích thước chữ có thể thay đổi
-              fontWeight: FontWeight.bold,
-              color: conersColor, // Màu chữ
+              color: conersColor, // Màu chữr
               height: 1.0),
         ),
       ],

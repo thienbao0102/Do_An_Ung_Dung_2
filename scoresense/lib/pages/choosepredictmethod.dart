@@ -29,13 +29,11 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
     }
   }
 
-  double _scale = 1.0;
-
-  void _onEnter(bool hover) {
-    setState(() {
-      _scale = hover ? 1.05 : 1.0; // Scale up on hover
-    });
-  }
+  // void _onEnter(bool hover) {
+  //   setState(() {
+  //     _scale = hover ? 1.05 : 1.0; // Scale up on hover
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

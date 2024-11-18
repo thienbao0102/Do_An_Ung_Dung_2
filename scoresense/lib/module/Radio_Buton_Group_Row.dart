@@ -41,7 +41,7 @@ class _RadioButtonGroupRowState extends State<RadioButtonGroupRow> {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         SizedBox(
-          width: 300,
+          width: 250,
           child: Text(
             widget.label,
             style: const TextStyle(fontSize: 16),
