@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class GlobalData {
   static final GlobalData _instance = GlobalData._internal();
   String fileName = '';
+  int version = 1;
 
   // Nội dung file csv import
   List<List<dynamic>> inputDataImport = List<List<dynamic>>.empty();

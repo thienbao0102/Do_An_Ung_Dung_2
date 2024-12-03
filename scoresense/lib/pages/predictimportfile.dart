@@ -39,7 +39,9 @@ class _FormImportFileState extends State<FormImportFile> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Header(setColor: GlobalData().colorPrimary,),
+          Header(
+            setColor: GlobalData().colorPrimary,
+          ),
           Center(
             child: Container(
               width: 1050,
@@ -60,7 +62,29 @@ class _FormImportFileState extends State<FormImportFile> {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(right: 20),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: DropdownMenu(
+                        width: 150,
+                        onSelected: (valueChoose) {
+                          setState(() {
+                            GlobalData().version = valueChoose!;
+                          });
+                        },
+                        initialSelection: 1,
+                        inputDecorationTheme: const InputDecorationTheme(),
+                        dropdownMenuEntries: const <DropdownMenuEntry<int>>[
+                          DropdownMenuEntry(value: 1, label: "Model_v1"),
+                          DropdownMenuEntry(value: 2, label: "Model_v2"),
+                        ],
+                      ),
+                    ),
+                  ),
                   Container(
                       width: double.infinity,
                       margin: const EdgeInsets.all(10),

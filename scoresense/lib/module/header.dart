@@ -59,7 +59,7 @@ class _HeaderState extends State<Header> {
                 // Fit Model
                 _buildNavItem(
                   context,
-                  "Fit Model",
+                  "Train Model",
                   2,
                   onTap: () {
                     Navigator.push(
@@ -120,7 +120,7 @@ class _HeaderState extends State<Header> {
       child: GestureDetector(
         onTap: onTap,
         child: SizedBox(
-          width: 90,
+          width: 100,
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

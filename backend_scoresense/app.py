@@ -8,7 +8,7 @@ from handelRequest.handelApi import PredictScore
 
 app = Flask('scoresense')
 CORS(app)
-model = load('finalized_model.pkl')
+
 
 @app.route('/predict', methods=['POST'])
 def predict():

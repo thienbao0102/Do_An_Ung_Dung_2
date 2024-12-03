@@ -342,7 +342,7 @@ class _ShowResultState extends State<ShowResult> {
             child: Padding(
           padding: const EdgeInsets.all(4),
           child: Text(
-            "${i}",
+            "${i + 1}",
             style: const TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
