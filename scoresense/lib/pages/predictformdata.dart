@@ -25,7 +25,6 @@ class _EnterFormDataState extends State<EnterFormData> {
   bool _isHovering = false;
   bool _isDisabled = false;
   bool _isPaginationHovering = false;
-  OverlayEntry? _overlayEntry;
 
   void _checkCondition() {
     setState(() {
@@ -105,7 +104,7 @@ class _EnterFormDataState extends State<EnterFormData> {
                     width: MediaQuery.of(context).size.width * 1,
                     constraints: const BoxConstraints( minHeight: 500),
 
-                    height: MediaQuery.of(context).size.height * 0.68,
+                    height: MediaQuery.of(context).size.height * 0.7,
                     child: PageView(
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),

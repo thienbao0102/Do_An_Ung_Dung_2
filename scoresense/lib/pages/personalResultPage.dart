@@ -17,11 +17,9 @@ class PersonalResultPage extends StatefulWidget {
 }
 
 class _PersonalResultPageState extends State<PersonalResultPage> {
-  @override
-  double _percentInRadians = 80.0;
   bool _isLoading = true;
   List<Predictions> results = List.empty();
-
+  String _result = "";
   Future<void> _loadData() async {
     List<Map<String, dynamic>> dataPredict = [
       {
@@ -72,6 +70,7 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
     print("results: " + results.toString());
     setState(() {
       _isLoading = false;
+      _result = results[0].prediction > 10 ? "Pass" : "Fail";
     });
   }
 
@@ -83,6 +82,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
 
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    String titleResultPage = _result == "Pass" ? "Congratulation!" : "Improvement...";
+    String descriptionResultPage = _result == "Pass"
+        ? "Your hard work has paid off! Celebrate this achievement and keep reaching for new heights!"
+        : "Every step forward counts. Embrace the journey of growth and keep striving for your best!";
     if (_isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -155,15 +158,15 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Column(
+                  child: Column(
                     mainAxisSize: MainAxisSize
                         .min, // Cho phép Column tự điều chỉnh chiều cao
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Đặt nội dung căn lề trái
                     children: [
                       AutoSizeText(
-                        "Excellent! This is the highest I've ever seen",
-                        style: TextStyle(
+                        titleResultPage,
+                        style: const TextStyle(
                           fontSize: 36, // Kích thước mặc định
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF0062FF), // Màu chữ
@@ -173,13 +176,17 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                         maxFontSize: 36, // Kích thước tối đa có thể phóng to
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Text(
-                        "Congratulations on your perfect score! Keep up the great work and continue to challenge yourself—there's always room for growth!",
+                      AutoSizeText(
+                        descriptionResultPage,
                         style: TextStyle(
-                          fontSize: 20, // Giảm kích thước font cho đoạn văn
-                          fontWeight: FontWeight.normal, // Thay đổi độ đậm
+                          fontSize: 16, // Kích thước mặc định
+                          fontWeight: FontWeight.normal,
+                          color: GlobalData().colorText // Màu chữ
                         ),
-                        textAlign: TextAlign.left, // Căn trái đoạn văn
+                        maxLines: 2,
+                        minFontSize: 13, // Kích thước nhỏ nhất có thể thu nhỏ
+                        maxFontSize: 20, // Kích thước tối đa có thể phóng to
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -207,19 +214,20 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                 alignment: Alignment.center,
                                 children: [
                                   UiDesign().buildAnimatedPieChart(
-                                      "", _percentInRadians),
+                                      "",100,_result == "Pass" ? const Color(0xFF04CB6E) : const Color(0xFFE74C3C)),
                                   UiDesign().addTextToAnimatedPieChart(
-                                      _percentInRadians),
+                                    _result == "Pass" ? const Color(0xFF04CB6E) : const Color(0xFFE74C3C),_result
+                                      ),
                                 ],
                               )
                               // UiDesign().buildPieChart(100), // Widget Pie Chart
                               ),
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
+                                const Row(
                                   mainAxisAlignment: MainAxisAlignment
                                       .center, // Căn giữa tiêu đề
                                   children: [
@@ -235,10 +243,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 30),
+                                const SizedBox(height: 30),
                                 Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 100,
                                       child: Text(
                                         "Student:",
@@ -250,8 +258,8 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                       ),
                                     ),
                                     Text(
-                                      "Hoai Bao Linh",
-                                      style: TextStyle(
+                                      "${GlobalData().firstName} ${GlobalData().lastName}",
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.normal,
                                         color: Color.fromARGB(255, 0, 0, 0),
@@ -259,10 +267,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 100,
                                       child: Text(
                                         "School:",
@@ -274,8 +282,8 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                       ),
                                     ),
                                     Text(
-                                      "Van Lang University",
-                                      style: TextStyle(
+                                      GlobalData().school,
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.normal,
                                         color: Color.fromARGB(255, 0, 0, 0),
@@ -283,10 +291,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 200,
                                       child: Text(
                                         "Predicted Pass Rate:",
@@ -298,16 +306,16 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                       ),
                                     ),
                                     Text(
-                                      "80 %",
+                                      _result,
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 4, 203, 110),
+                                        color: _result == "Pass" ? const Color(0xFF04CB6E) : const Color(0xFFE74C3C),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 40),
+                                const SizedBox(height: 40),
                               ],
                             ),
                           ),

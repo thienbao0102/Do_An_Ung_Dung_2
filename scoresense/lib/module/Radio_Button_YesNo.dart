@@ -41,7 +41,7 @@ class _RadioButtonYesNoState extends State<RadioButtonYesNo> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          width: 350,
+          width: 300,
           child: Text(
             widget.label,
             style: const TextStyle(fontSize: 16),
