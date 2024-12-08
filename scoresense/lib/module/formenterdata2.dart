@@ -26,17 +26,6 @@ class FormData2 extends StatelessWidget {
         margin: const EdgeInsets.only(top: 20, bottom: 20),
         padding:
             const EdgeInsets.only(top: 30, left: 50, right: 50, bottom: 30),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 10,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
         child: Stack(
           children: [
             Column(
@@ -53,7 +42,7 @@ class FormData2 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 MediaQuery.of(context).size.width > sizeChangeToSlideBar
                     ? UiDesign.buildRadioButtonGroupRow(
                         "Father's education",
