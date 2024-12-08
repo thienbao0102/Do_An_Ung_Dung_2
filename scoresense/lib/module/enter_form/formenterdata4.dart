@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
-import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
-class FormData3 extends StatelessWidget {
+class FormData4 extends StatelessWidget {  // Changed to StatefulWidget
   final VoidCallback onNext;
   final VoidCallback? onPrevious;
   final bool isLastPage;
 
-  const FormData3({
+  const FormData4({
     Key? key,
     required this.onNext,
     this.onPrevious,
@@ -19,11 +19,12 @@ class FormData3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1000.0),
+        constraints: const BoxConstraints(
+          maxWidth: 1000.0,
+        ),
         width: MediaQuery.of(context).size.width * 0.65,
         margin: const EdgeInsets.only(top: 20, bottom: 20),
-        padding: const EdgeInsets.only(
-            top: 30, left: 50, right: 50, bottom: 30),
+        padding: const EdgeInsets.only(top: 30, left: 50, right: 50, bottom: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -41,10 +42,9 @@ class FormData3 extends StatelessWidget {
               // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
                 const Center(
                   child: Text(
-                    "Your daily activities",
+                    "Health status",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -53,62 +53,44 @@ class FormData3 extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-
-                // Free time after school
                 Column(
                   children: [
-                    UiDesign.buildRadioLevelsLabel('Free time after school',
-                        ['Very low', 'Low', 'Normal', 'High', 'Very high']),
+                    UiDesign.buildRadioLevelsLabel(
+                      'Workday alcohol consumption',
+                      ['Very low', 'Low', 'Normal', 'High', 'Very high']
+                    ),
                     UiDesign.buildRadioLevels(
-                      'Free time after school',
+                      'Workday alcohol consumption',
                       ['Very low', 'Low', 'Normal', 'High', 'Very high'],
-                      GlobalData().freeTimeIndex,
-                      (index) => GlobalData().freeTimeIndex = index,
+                      GlobalData().workdayAlcohol,
+                      (val) => GlobalData().workdayAlcohol = val,
                     ),
                   ],
                 ),
-                const SizedBox(height: 30),
-
-                // Home to school travel time
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    UiDesign.buildRadioLevelsLabel(
-                        'Home to school travel time',
-                        ['< 15"', '15" to 30"', '30" to 1 hour', '> 1 hour']),
-                    UiDesign.buildRadioLevels(
-                      'Home to school travel time',
-                      ['< 15"', '15" to 30"', '30" to 1 hour', '> 1 hour'],
-                      GlobalData().travelTimeIndex,
-                      (index) => GlobalData().travelTimeIndex = index,
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                UiDesign.buildRadioLevels(
+                  'Weekend alcohol consumption',
+                  ['Very low', 'Low', 'Normal', 'High', 'Very high'],
+                  GlobalData().weekendAlcohol,
+                  (val) => GlobalData().weekendAlcohol = val,
                 ),
                 const SizedBox(height: 30),
-
-                // Go out with friends
                 Column(
                   children: [
                     UiDesign.buildRadioLevelsLabel(
-                        'Go out with friends', [
-                      'Very rarely',
-                      'Rarely',
-                      'Sometimes',
-                      'Often',
-                      'Very often'
-                    ]),
+                      'Current health status',
+                      ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent']
+                    ),
                     UiDesign.buildRadioLevels(
-                      'Go out with friends',
-                      ['Very rarely', 'Rarely', 'Sometimes', 'Often', 'Very often'],
-                      GlobalData().goOutIndex,
-                      (index) => GlobalData().goOutIndex = index,
+                      'Current health status',
+                      ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
+                      GlobalData().currentHealth,
+                      (val) => GlobalData().currentHealth = val,
                     ),
                   ],
                 ),
               ],
             ),
-
-            // Navigation buttons
             Positioned(
               bottom: 0,
               left: 0,
@@ -116,7 +98,6 @@ class FormData3 extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Previous button, only visible if onPrevious is provided
                   if (onPrevious != null)
                     TextButton(
                       onPressed: onPrevious,
@@ -137,7 +118,6 @@ class FormData3 extends StatelessWidget {
                         ),
                       ),
                     ),
-                  // Next or Submit button
                   ElevatedButton(
                     onPressed: isLastPage
                         ? () => Navigator.push(

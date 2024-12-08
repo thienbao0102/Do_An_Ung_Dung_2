@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
-import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:scoresense/pages/personalResultPage.dart';
 
 class FormData5 extends StatelessWidget {

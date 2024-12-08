@@ -3,11 +3,10 @@ import pandas as pd
 from flask import Flask, request, jsonify
 import json
 import os
+from decisiontree import train_model
 
 
-
-def PredictScore(data):
-    print(data)
+def PredictScore(data, version):
     # xử lý tách cột name nếu có
     name_column = 'name'
     columnName = None
@@ -15,12 +14,15 @@ def PredictScore(data):
         columnName = data.pop(name_column)
 
     # xử lý dữ liệu để predict
+    filenameColumns = "Column_Trains/train_columns{}.json".format(version)
+    filenameModel = "models/finalized_model_v{}.pkl".format(version)
+
     data = pd.get_dummies(data,drop_first=True)
-    with open("train_columns.json", "r") as f:
+    with open(filenameColumns, "r") as f:
         train_columns = json.load(f)
     data = data.reindex(columns=train_columns, fill_value=0)
-    print(data.columns)
-    model = load('models/finalized_model.pkl')
+
+    model = load(filenameModel)
     # Thực hiện dự đoán
     predictions = model.predict(data)
     
@@ -29,13 +31,17 @@ def PredictScore(data):
         'name': columnName if columnName is not None else [None] * len(predictions),
         'prediction': predictions
     })
-    print("result")
-    print(result)
+    # print("result")
+    # print(result)
     # Trả kết quả
     return jsonify(result.to_dict(orient='records'))  # Chuyển kết quả về JSON
 
 # hàm xử lý train model
-# def TrainModel(data):
+def TrainModel(data):
+    version = count_models()
+    print("version", version)
+    train_model(version, data)
+
 
 #bien can thiet de ho tro loadmodel
 folder_path = "models"
@@ -63,7 +69,7 @@ def count_models():
         # Đếm số lượng model
         model_count = len(model_files)
         
-        return model_count
+        return model_count + 1
     except FileNotFoundError:
         print(f"Thư mục models không tồn tại.")
         return 0

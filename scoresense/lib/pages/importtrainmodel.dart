@@ -2,12 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
-import 'package:scoresense/module/initial.dart';
+import 'package:scoresense/module/import_file/initial.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:scoresense/module/uploadfile.dart';
-import 'package:scoresense/pages/resultpredictfileimport.dart';
+import 'package:scoresense/module/callbackend.dart';
+import 'package:scoresense/pages/homepage.dart';
 
-class ImportFileFitModel extends StatelessWidget {
-  const ImportFileFitModel({super.key});
+class ImportFileTrainModel extends StatelessWidget {
+  const ImportFileTrainModel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +35,25 @@ class FormImportFile extends StatefulWidget {
 class _FormImportFileState extends State<FormImportFile> {
   bool fileUpload = false;
 
+  Future<void> _loadData() async {
+    int numModel = await sendDataTrainModel(GlobalData().inputDataImport);
+    if (numModel != 0) {
+      GlobalData().numModel = numModel;
+      UiDesign.showToast("Train Model success");
+    } else {
+      UiDesign.showToast("Train Model Fail");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Header(setColor: GlobalData().colorPrimary,),
+          Header(
+            setColor: GlobalData().colorPrimary,
+          ),
           Center(
             child: Container(
               width: 1050,
@@ -63,9 +77,7 @@ class _FormImportFileState extends State<FormImportFile> {
                 children: [
                   const AutoSizeText(
                     "Import file data to fit model",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black),
+                    style: TextStyle(fontSize: 20, color: Colors.black),
                     maxFontSize: 20,
                     minFontSize: 14,
                     maxLines: 1,
@@ -103,11 +115,12 @@ class _FormImportFileState extends State<FormImportFile> {
                   ElevatedButton(
                     onPressed: () {
                       if (fileUpload) {
+                        _loadData();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const Resultpredictfileimport()),
+                            builder: (context) => const HomePage(),
+                          ),
                         );
                       }
                     },

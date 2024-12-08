@@ -1,9 +1,9 @@
-import 'package:scoresense/module/Radio_Buton_Group_Row.dart';
-import 'package:scoresense/module/Radio_Button_Group.dart';
-import 'package:scoresense/module/Radio_Button_YesNo.dart';
-import 'package:scoresense/module/Radio_Levels.dart';
+import 'package:scoresense/module/ui_design/Radio_Buton_Group_Row.dart';
+import 'package:scoresense/module/ui_design/Radio_Button_Group.dart';
+import 'package:scoresense/module/ui_design/Radio_Button_YesNo.dart';
+import 'package:scoresense/module/ui_design/Radio_Levels.dart';
 // import 'package:scoresense/module/Radio_Levels_Label.dart';
-import 'package:scoresense/module/animatedPieChart.dart';
+import 'package:scoresense/module/ui_design/animatedPieChart.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
