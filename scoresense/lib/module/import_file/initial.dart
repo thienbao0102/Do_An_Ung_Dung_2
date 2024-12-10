@@ -6,25 +6,25 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:scoresense/module/global_variable.dart';
-import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 
-class InitiaFitModellWidget extends StatefulWidget {
+class InitialWidget extends StatefulWidget {
   final Function(bool) onFileUploaded;
-  const InitiaFitModellWidget({Key? key, required this.onFileUploaded})
+  const InitialWidget({Key? key, required this.onFileUploaded})
       : super(key: key);
 
   @override
-  _InitiaFitModellWidgetState createState() => _InitiaFitModellWidgetState();
+  _InitialWidgetState createState() => _InitialWidgetState();
 }
 
-class _InitiaFitModellWidgetState extends State<InitiaFitModellWidget> {
+class _InitialWidgetState extends State<InitialWidget> {
   late DropzoneViewController _dropzoneController;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SizedBox(
+        Container(
           width: 1000,
           height: 200,
           child: DropzoneView(
@@ -149,8 +149,7 @@ class _InitiaFitModellWidgetState extends State<InitiaFitModellWidget> {
         "health",
         "absences",
         "G1",
-        "G2",
-        "G3"
+        "G2"
       ];
 
       List<dynamic> header = fields.first;

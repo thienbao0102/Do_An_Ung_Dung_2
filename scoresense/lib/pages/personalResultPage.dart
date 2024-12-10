@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/predictions.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
-import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:scoresense/module/callbackend.dart';
 
@@ -66,7 +66,7 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
 
     List<List<dynamic>> result = [headers] + convertedData;
     print(result);
-    results = await sendData(result);
+    results = await sendData(result,GlobalData().version);
     print("results: " + results.toString());
     setState(() {
       _isLoading = false;

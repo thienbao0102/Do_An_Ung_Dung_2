@@ -85,6 +85,7 @@ flutter:
     - assets/chevron-forward-outline.svg
     - assets/star-filled.svg
     - assets/star-bordered.svg
+    - assets/3214599-2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

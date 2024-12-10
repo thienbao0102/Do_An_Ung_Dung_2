@@ -6,25 +6,25 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:scoresense/module/global_variable.dart';
-import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 
-class InitialWidget extends StatefulWidget {
+class InitiaTrainModellWidget extends StatefulWidget {
   final Function(bool) onFileUploaded;
-  const InitialWidget({Key? key, required this.onFileUploaded})
+  const InitiaTrainModellWidget({Key? key, required this.onFileUploaded})
       : super(key: key);
 
   @override
-  _InitialWidgetState createState() => _InitialWidgetState();
+  _InitiaTrainModellWidgetState createState() => _InitiaTrainModellWidgetState();
 }
 
-class _InitialWidgetState extends State<InitialWidget> {
+class _InitiaTrainModellWidgetState extends State<InitiaTrainModellWidget> {
   late DropzoneViewController _dropzoneController;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           width: 1000,
           height: 200,
           child: DropzoneView(
@@ -113,6 +113,7 @@ class _InitialWidgetState extends State<InitialWidget> {
     String csvContent = utf8.decode(fileBytes);
     GlobalData().inputDataImport = CsvToListConverter().convert(csvContent);
     checkFileImport(GlobalData().inputDataImport);
+    print(GlobalData().inputDataImport);
   }
 
   void checkFileImport(List<List<dynamic>> fields) {
@@ -149,7 +150,8 @@ class _InitialWidgetState extends State<InitialWidget> {
         "health",
         "absences",
         "G1",
-        "G2"
+        "G2",
+        // "G3",
       ];
 
       List<dynamic> header = fields.first;

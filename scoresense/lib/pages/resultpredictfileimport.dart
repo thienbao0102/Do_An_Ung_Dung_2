@@ -5,7 +5,7 @@ import 'package:scoresense/module/data_detail_table.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/predictions.dart';
-import 'package:scoresense/module/ui_design.dart';
+import 'package:scoresense/module/ui_design/ui_design.dart';
 
 class Resultpredictfileimport extends StatelessWidget {
   const Resultpredictfileimport({super.key});
@@ -39,7 +39,7 @@ class _ShowResultState extends State<ShowResult> {
   List<List<String>> dataInput = List.empty();
 
   Future<void> _loadData() async {
-    results = await sendData(GlobalData().inputDataImport);
+    results = await sendData(GlobalData().inputDataImport,GlobalData().version);
     addResultToDataInput();
     setState(() {
       _isLoading = false;
@@ -86,11 +86,13 @@ class _ShowResultState extends State<ShowResult> {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget> [
-          Header(setColor: GlobalData().colorPrimary,),
+        children: [
+          Header(
+            setColor: GlobalData().colorPrimary,
+          ),
           Center(
             child: Container(
-              margin: const EdgeInsets.only(top: 140, bottom: 50),
+              margin: const EdgeInsets.only(top: 20, bottom: 30),
               padding: const EdgeInsets.all(30),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20), color: Colors.white),
@@ -190,7 +192,7 @@ class _ShowResultState extends State<ShowResult> {
                             ? MediaQuery.of(context).size.width * 0.8
                             : MediaQuery.of(context).size.width * 0.55,
                         margin: const EdgeInsets.only(
-                            left: 20, top: 30, bottom: 40),
+                            left: 20, bottom: 20),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -202,38 +204,40 @@ class _ShowResultState extends State<ShowResult> {
                                 runSpacing: 20,
                                 children: [
                                   UiDesign.buildTextField(
-                                      "Search",
-                                      "",
-                                      (value) => setState(() {
-                                        search = value;
-                                      }),
-                                    ),
+                                    "Search",
+                                    "",
+                                    (value) => setState(() {
+                                      search = value;
+                                    }),
+                                  ),
                                   DropdownMenu(
-                                      width: 200,
-                                      onSelected: (valueChoose) {
-                                        setState(() {
-                                          sort = valueChoose!;
-                                        });
-                                      },
-                                      inputDecorationTheme:
-                                          const InputDecorationTheme(),
-                                      dropdownMenuEntries: const <DropdownMenuEntry<
-                                          int>>[
-                                        DropdownMenuEntry(value: 0, label: ""),
-                                        DropdownMenuEntry(
-                                            value: 1, label: "By name a-z"),
-                                        DropdownMenuEntry(
-                                            value: 2, label: "By name z-a"),
-                                        DropdownMenuEntry(
-                                            value: 3, label: "By result Pass"),
-                                        DropdownMenuEntry(
-                                            value: 4, label: "By result Fail"),
-                                      ],
-                                    ),
+                                    width: 200,
+                                    onSelected: (valueChoose) {
+                                      setState(() {
+                                        sort = valueChoose!;
+                                      });
+                                    },
+                                    inputDecorationTheme:
+                                        const InputDecorationTheme(),
+                                    dropdownMenuEntries: const <DropdownMenuEntry<
+                                        int>>[
+                                      DropdownMenuEntry(value: 0, label: ""),
+                                      DropdownMenuEntry(
+                                          value: 1, label: "By name a-z"),
+                                      DropdownMenuEntry(
+                                          value: 2, label: "By name z-a"),
+                                      DropdownMenuEntry(
+                                          value: 3, label: "By result Pass"),
+                                      DropdownMenuEntry(
+                                          value: 4, label: "By result Fail"),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Table(
                               border: TableBorder.all(),
                               columnWidths: const <int, TableColumnWidth>{
@@ -286,7 +290,7 @@ class _ShowResultState extends State<ShowResult> {
                               ],
                             ),
                             SizedBox(
-                              height: 500,
+                              height: 400,
                               child: SingleChildScrollView(
                                 child: Table(
                                   border: TableBorder.all(),
@@ -387,14 +391,50 @@ class _ShowResultState extends State<ShowResult> {
           ),
         )),
         TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(4),
-          child: Text(
-            results[i].prediction > 10 ? "Pass" : "Fail",
-            style: const TextStyle(fontSize: 16),
-            textAlign: TextAlign.center,
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_) {
+                setState(() {
+                  
+                });
+              },
+              onExit: (_) {
+                setState(() {
+                  
+                });
+              },
+              child: GestureDetector(
+                onTap: (){},
+                child: SizedBox(
+                  width: 100,
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          // decoration: BoxDecoration(
+                          //     border: Border(
+                          //         bottom: isHoveredList[index]
+                          //             ? BorderSide(width: 2, color: widget.setColor)
+                          //             : const BorderSide(
+                          //                 width: 2, color: Colors.transparent))),
+                          child: Text(
+                            results[i].prediction > 10 ? "Pass" : "Fail",
+                            style: const TextStyle(fontSize: 16),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
-        )),
+        ),
       ]);
     });
   }

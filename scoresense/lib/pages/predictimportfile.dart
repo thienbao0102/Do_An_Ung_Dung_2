@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
-import 'package:scoresense/module/initial.dart';
+import 'package:scoresense/module/import_file/initial.dart';
 import 'package:scoresense/module/uploadfile.dart';
 import 'package:scoresense/pages/resultpredictfileimport.dart';
 
@@ -78,10 +78,13 @@ class _FormImportFileState extends State<FormImportFile> {
                         },
                         initialSelection: 1,
                         inputDecorationTheme: const InputDecorationTheme(),
-                        dropdownMenuEntries: const <DropdownMenuEntry<int>>[
-                          DropdownMenuEntry(value: 1, label: "Model_v1"),
-                          DropdownMenuEntry(value: 2, label: "Model_v2"),
-                        ],
+                        dropdownMenuEntries: List.generate(
+                          GlobalData().numModel-1,
+                          (index) => DropdownMenuEntry(
+                            value: index + 1,
+                            label: "Model_v${index + 1}",
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
-import 'package:scoresense/pages/importfitmodel.dart';
+import 'package:scoresense/pages/importtrainmodel.dart';
 
 class Header extends StatefulWidget {
   final Color setColor;
@@ -65,7 +65,7 @@ class _HeaderState extends State<Header> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ImportFileFitModel()),
+                          builder: (context) => const ImportFileTrainModel()),
                     );
                   },
                 ),

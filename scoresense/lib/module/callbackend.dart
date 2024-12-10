@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:scoresense/module/predictions.dart';
 
-Future<List<Predictions>> sendData(List<List<dynamic>> inputDataImport) async {
+Future<List<Predictions>> sendData(
+    List<List<dynamic>> inputDataImport, int version) async {
   // Chuyển đổi List thành JSON
-  final jsonData = jsonEncode(inputDataImport);
-
+  final jsonData = jsonEncode({
+    "version": version,
+    "inputDataImport": inputDataImport,
+  });
   // Gửi yêu cầu POST lên server
   final response = await http.post(
     Uri.parse('http://127.0.0.1:5000/predict'),
@@ -25,3 +28,38 @@ Future<List<Predictions>> sendData(List<List<dynamic>> inputDataImport) async {
   return [];
 }
 
+Future<int> sendDataTrainModel(List<List<dynamic>> inputDataImport) async {
+  // Chuyển đổi List thành JSON
+  final jsonData = jsonEncode(inputDataImport);
+  print(jsonData);
+  // Gửi yêu cầu POST lên server
+  final response = await http.post(
+    Uri.parse('http://127.0.0.1:5000/trainmodel'),
+    headers: {"Content-Type": "application/json"},
+    body: jsonData,
+  );
+  if (response.statusCode == 200) {
+    final jsonResponse = jsonDecode(response.body);
+
+    return jsonResponse['numModel'];
+  }
+  print('Failed to send data. Status code: ${response.statusCode}');
+  return 0;
+}
+
+Future<int> getTotalModel() async{
+  // Gửi yêu cầu POST lên server
+  final response = await http.get(
+    Uri.parse('http://127.0.0.1:5000/totalmodel'),
+    headers: {"Content-Type": "application/json"},
+  );
+  if (response.statusCode == 200) {
+    final jsonResponse = jsonDecode(response.body);
+
+    return jsonResponse['numModel'];
+  }
+  else {
+    print('Failed to fetch data. Status code: ${response.statusCode}');
+    throw Exception('Failed to fetch data from server');
+  }
+}
