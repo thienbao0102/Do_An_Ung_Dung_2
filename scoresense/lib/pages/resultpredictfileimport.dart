@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/callbackend.dart';
+import 'package:scoresense/module/data_detail_table.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/predictions.dart';
@@ -35,12 +36,36 @@ class _ShowResultState extends State<ShowResult> {
   String search = "";
   int sort = 0;
   List<Predictions> results = List.empty();
+  List<List<String>> dataInput = List.empty();
 
   Future<void> _loadData() async {
     results = await sendData(GlobalData().inputDataImport);
+    addResultToDataInput();
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void addResultToDataInput() {
+    List<List<String>> result = results.map((prediction) {
+      return [prediction.name, prediction.prediction.toString()];
+    }).toList();
+    dataInput = GlobalData().inputDataImport.map((innerList) {
+      return innerList.map((e) => e.toString()).toList();
+    }).toList();
+    dataInput.removeAt(0);  // Xóa dòng header của dataInput
+    // Kiểm tra kích thước của dataInput và result
+    if (dataInput.length == result.length) {
+      for (int i = 0; i < dataInput.length; i++) {
+        dataInput[i].insert(0, (i + 1).toString());
+        dataInput[i].add(result[i][1]);// Thêm giá trị vào cuối mỗi dòng của dataInput
+      }
+    } else {
+      for (int i = 0; i < dataInput.length; i++) {
+        dataInput[i].insert(0, (i + 1).toString());
+        dataInput[i].add("N/A");  // Thêm giá trị vào cuối mỗi dòng của dataInput
+      }
+    }
   }
 
   @override
@@ -61,7 +86,7 @@ class _ShowResultState extends State<ShowResult> {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget> [
           Header(setColor: GlobalData().colorPrimary,),
           Center(
             child: Container(
@@ -287,6 +312,11 @@ class _ShowResultState extends State<ShowResult> {
               ),
             ),
           ),
+          Flexible(
+            fit: FlexFit.loose,
+            child: 
+              CustomTable(data: dataInput),
+          )
         ],
       ),
     );

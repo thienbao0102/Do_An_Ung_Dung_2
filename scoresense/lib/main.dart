@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => HomePage(),
         // '/precicttion': (context) => const Choosepredictmethod(),
       },
     );
