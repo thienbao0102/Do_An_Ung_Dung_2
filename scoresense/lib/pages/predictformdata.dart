@@ -38,7 +38,9 @@ class _EnterFormDataState extends State<EnterFormData> {
   // Hàm chuyển đến trang tiếp theo
   void _nextPage(int pageIndex) {
     setState(() {
-      currentPageIndex = pageIndex;
+      pageIndex >= 0 && pageIndex <= 7
+          ? currentPageIndex = pageIndex
+          : currentPageIndex = currentPageIndex;
     });
   }
 
@@ -72,43 +74,15 @@ class _EnterFormDataState extends State<EnterFormData> {
   Widget build(BuildContext context) {
     // Danh sách các trang
     final pages = [
-      FormData1(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-        isLastPage: currentPageIndex == 6,
-      ),
-      FormData2(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-      ),
-      FormData3(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-      ),
-      FormData4(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-      ),
-      FormData5(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-      ),
-      FormData6(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-      ),
-      FormData7(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-        isLastPage: false,
-      ),
-      FormData8(
-        onNext: () => _nextPage(currentPageIndex + 1),
-        onPrevious: () => _nextPage(currentPageIndex - 1),
-        isLastPage: true,
-      ),
+      FormData1(onNext: () => _nextPage(currentPageIndex + 1),isLastPage: currentPageIndex == 6,),
+      FormData2( onNext: () => _nextPage(currentPageIndex + 1),onPrevious: () => _nextPage(currentPageIndex - 1),),
+      FormData3(onNext: () => _nextPage(currentPageIndex + 1),onPrevious: () => _nextPage(currentPageIndex - 1),),
+      FormData4(onNext: () => _nextPage(currentPageIndex + 1),onPrevious: () => _nextPage(currentPageIndex - 1),),
+      FormData5(onNext: () => _nextPage(currentPageIndex + 1),onPrevious: () => _nextPage(currentPageIndex - 1),),
+      FormData6(onNext: () => _nextPage(currentPageIndex + 1),onPrevious: () => _nextPage(currentPageIndex - 1),),
+      FormData7(onNext: () => _nextPage(currentPageIndex + 1),onPrevious: () => _nextPage(currentPageIndex - 1),isLastPage: false,),
+      FormData8(onNext: () => _nextPage(currentPageIndex + 0),onPrevious: () => _nextPage(currentPageIndex - 1),isLastPage: true,),
     ];
-
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -164,6 +138,32 @@ class _EnterFormDataState extends State<EnterFormData> {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            if (currentPageIndex > 0)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 98.0),
+                                child: TextButton(
+                                  onPressed: () {
+                                    _nextPage(currentPageIndex - 1);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 15),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      side: const BorderSide(color: Color(0xFF0062FF)),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Previous',
+                                    style: TextStyle(
+                                      color: Color(0xFF0062FF),
+                                      letterSpacing: 1.3,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             Stack(
                               children: [
                                 AnimatedPositioned(
@@ -186,7 +186,6 @@ class _EnterFormDataState extends State<EnterFormData> {
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 20),
                             AbsorbPointer(
                               absorbing: _isDisabled,
                               child: GestureDetector(
@@ -309,7 +308,123 @@ class _EnterFormDataState extends State<EnterFormData> {
                                   ),
                                 ),
                               ),
-                            )
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 98.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (GlobalData().firstName.isEmpty ||
+                                      GlobalData().lastName.isEmpty ||
+                                      GlobalData().age == 0 ||
+                                      GlobalData().school.isEmpty) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Dialog(
+                                          backgroundColor: Colors.transparent,
+                                          child: ClipRRect(
+                                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                            child: Center(
+                                              child: Container(
+                                                padding: const EdgeInsets.all(20),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(10.0),
+                                                ),
+                                                constraints: const BoxConstraints(maxWidth: 400),
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    Image.asset(
+                                                      '11104.png',
+                                                      width: 300,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      "Alert!",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: GlobalData().colorText,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      "Please finish at least the questions on Page 1 before continuing!",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.normal,
+                                                        color: GlobalData().colorText,
+                                                      ),
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                    const SizedBox(height: 20),
+                                                    MouseRegion(
+                                                      cursor: SystemMouseCursors.click,
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.pop(context);
+                                                        },
+                                                        child: Container(
+                                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                                          width: double.infinity,
+                                                          alignment: Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                            color: const Color(0xFF0062FF),
+                                                            borderRadius: BorderRadius.circular(8.0),
+                                                          ),
+                                                          child: const Text(
+                                                            'OK',
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 16,
+                                                              letterSpacing: 1.3,
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    if (currentPageIndex == 7) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const PersonalResultPage(),
+                                        ),
+                                      );
+                                    } else {
+                                      _nextPage(currentPageIndex + 1);
+                                    }
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                                  backgroundColor: const Color(0xFF0062FF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                child: Text(
+                                  currentPageIndex == 7 ? 'Submit' : 'Next',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    letterSpacing: 1.3,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 10),
