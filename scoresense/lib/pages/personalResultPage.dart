@@ -5,6 +5,7 @@ import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:scoresense/module/callbackend.dart';
 import 'package:scoresense/pages/predictformdata.dart';
+import 'package:scoresense/pages/resultpredictfileimport.dart';
 
 import '../module/global_variable.dart';
 
@@ -24,11 +25,13 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
     List<Map<String, dynamic>> dataPredict = [
       {
         "school": GlobalData().school,
-        "sex": GlobalData().gender=="Male"?"M":"F",
+        "sex": GlobalData().gender == "Male" ? "M" : "F",
         "age": GlobalData().age,
-        "address": GlobalData().location=="Urban"?"U":"R",
-        "famsize": GlobalData().familySize == "Less than or equal to 3"?"LS3":"GT3",
-        "Pstatus": GlobalData().parentStatus=="Apart"?"A":"T",
+        "address": GlobalData().location == "Urban" ? "U" : "R",
+        "famsize": GlobalData().familySize == "Less than or equal to 3"
+            ? "LS3"
+            : "GT3",
+        "Pstatus": GlobalData().parentStatus == "Apart" ? "A" : "T",
         "Medu": GlobalData().motherEducation,
         "Fedu": GlobalData().fatherEducation,
         "Mjob": GlobalData().motherJob.toLowerCase(),
@@ -59,14 +62,12 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
     ];
     List<dynamic> headers = dataPredict[0].keys.toList();
     List<List<dynamic>> convertedData = dataPredict.map((map) {
-     return map.values.toList();
-  }).toList();
-
-    
+      return map.values.toList();
+    }).toList();
 
     List<List<dynamic>> result = [headers] + convertedData;
     // print(result);
-    results = await sendData(result,GlobalData().version);
+    results = await sendData(result, GlobalData().version);
     // print("results: " + results.toString());
     setState(() {
       _isLoading = false;
@@ -82,7 +83,8 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
 
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    String titleResultPage = _result == "Pass" ? "Congratulation!" : "Improvement...";
+    String titleResultPage =
+        _result == "Pass" ? "Congratulation!" : "Improvement...";
     String descriptionResultPage = _result == "Pass"
         ? "Your hard work has paid off! Celebrate this achievement and keep reaching for new heights!"
         : "Every step forward counts. Embrace the journey of growth and keep striving for your best!";
@@ -144,7 +146,9 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
           Positioned(
             top: 0,
             left: 0,
-            child: Header(setColor: GlobalData().colorPrimary,),
+            child: Header(
+              setColor: GlobalData().colorPrimary,
+            ),
           ),
           // Nội dung chính ở giữa
           Center(
@@ -179,10 +183,10 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                       AutoSizeText(
                         descriptionResultPage,
                         style: TextStyle(
-                          fontSize: 16, // Kích thước mặc định
-                          fontWeight: FontWeight.normal,
-                          color: GlobalData().colorText // Màu chữ
-                        ),
+                            fontSize: 16, // Kích thước mặc định
+                            fontWeight: FontWeight.normal,
+                            color: GlobalData().colorText // Màu chữ
+                            ),
                         maxLines: 2,
                         minFontSize: 13, // Kích thước nhỏ nhất có thể thu nhỏ
                         maxFontSize: 20, // Kích thước tối đa có thể phóng to
@@ -214,10 +218,16 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                 alignment: Alignment.center,
                                 children: [
                                   UiDesign().buildAnimatedPieChart(
-                                      "",100,_result == "Pass" ? const Color(0xFF04CB6E) : const Color(0xFFE74C3C)),
+                                      "",
+                                      100,
+                                      _result == "Pass"
+                                          ? const Color(0xFF04CB6E)
+                                          : const Color(0xFFE74C3C)),
                                   UiDesign().addTextToAnimatedPieChart(
-                                    _result == "Pass" ? const Color(0xFF04CB6E) : const Color(0xFFE74C3C),_result
-                                      ),
+                                      _result == "Pass"
+                                          ? const Color(0xFF04CB6E)
+                                          : const Color(0xFFE74C3C),
+                                      _result),
                                 ],
                               )
                               // UiDesign().buildPieChart(100), // Widget Pie Chart
@@ -310,7 +320,9 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: _result == "Pass" ? const Color(0xFF04CB6E) : const Color(0xFFE74C3C),
+                                        color: _result == "Pass"
+                                            ? const Color(0xFF04CB6E)
+                                            : const Color(0xFFE74C3C),
                                       ),
                                     ),
                                   ],
@@ -325,36 +337,74 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const EnterFormData()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
-                      (Route<dynamic> route) =>
-                          false, // Loại bỏ tất cả các trang trước đó
-                    );
-                    //GlobalData().resetValues();
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFF0062FF), // Màu nền
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Bo góc
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const EnterFormData()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
+                          (Route<dynamic> route) =>
+                              false, // Loại bỏ tất cả các trang trước đó
+                        );
+                        //GlobalData().resetValues();
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: const Color(0xFF0062FF), // Màu nền
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10), // Bo góc
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 18), // Padding tùy chọn
+                      ),
+                      child: const Text(
+                        'Retake the test',
+                        style: TextStyle(
+                          color: Color(0xFBFBFBFB), // Màu chữ
+                          fontSize: 16,
+                          letterSpacing: 1.3,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 18), // Padding tùy chọn
-                  ),
-                  child: const Text(
-                    'Retake the test',
-                    style: TextStyle(
-                      color: Color(0xFBFBFBFB), // Màu chữ
-                      fontSize: 16,
-                      letterSpacing: 1.3,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                    if (GlobalData().gotoDetal)
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            GlobalData().gotoDetal = false;
+                          });
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Resultpredictfileimport()),
+                            (Route<dynamic> route) => false,
+                          );
+                          //GlobalData().resetValues();
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xFF0062FF), // Màu nền
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10), // Bo góc
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 18), // Padding tùy chọn
+                        ),
+                        child: const Text(
+                          'Back to Overview',
+                          style: TextStyle(
+                            color: Color(0xFBFBFBFB), // Màu chữ
+                            fontSize: 16,
+                            letterSpacing: 1.3,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                  ],
+                )
               ],
             ),
           )
