@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scoresense/module/data_detail_table.dart';
+import 'package:scoresense/pages/detailed_page.dart';
 import 'package:scoresense/pages/homepage.dart';
 
 void main() {

@@ -6,6 +6,7 @@ import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/predictions.dart';
 import 'package:scoresense/module/ui_design/ui_design.dart';
+import 'package:scoresense/pages/detailed_page.dart';
 import 'package:scoresense/pages/predictformdata.dart';
 import 'package:scoresense/pages/predictimportfile.dart';
 
@@ -61,8 +62,11 @@ class _ShowResultState extends State<ShowResult> {
     if (dataInput.length == result.length) {
       for (int i = 0; i < dataInput.length; i++) {
         dataInput[i].insert(0, (i + 1).toString());
-        dataInput[i]
-            .add(result[i][1]); // Thêm giá trị vào cuối mỗi dòng của dataInput
+        if(int.parse(result[i][1]) > 10) {
+          dataInput[i].add( "Pass");// Thêm giá trị vào cuối mỗi dòng của dataInput
+        } else {
+          dataInput[i].add( "Fail");
+        }
       }
     } else {
       for (int i = 0; i < dataInput.length; i++) {
@@ -166,6 +170,38 @@ class _ShowResultState extends State<ShowResult> {
                                 SizedBox(width: 8),
                                 Text(
                                   "Other File",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailedPage( data: dataInput,)),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: const Color.fromARGB(255, 160, 233, 255)),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.add, size: 24),
+                                SizedBox(width: 8),
+                                Text(
+                                  "See Detail",
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ],
@@ -351,10 +387,6 @@ class _ShowResultState extends State<ShowResult> {
               ),
             ),
           ),
-          Flexible(
-            fit: FlexFit.loose,
-            child: CustomTable(data: dataInput),
-          )
         ],
       ),
     );

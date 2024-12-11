@@ -48,7 +48,7 @@ class _FormImportFileState extends State<FormImportFile> {
               //height: 400,
               margin: const EdgeInsets.only(
                   top: 140, left: 20, right: 20, bottom: 40),
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(right: 20, left: 20, top: 10, bottom: 20),
               decoration: BoxDecoration(
                 color: const Color(0xFFFBFBFB),
                 borderRadius: BorderRadius.circular(20),
@@ -123,6 +123,30 @@ class _FormImportFileState extends State<FormImportFile> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 80, vertical: 25),
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const AutoSizeText(
+                          "Cancel",
+                          style: TextStyle(
+                              color: Color.fromARGB(221, 44, 44, 44),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          minFontSize: 10,
+                          maxFontSize: 16,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
                           if (fileUpload) {
                             Navigator.push(
                               context,
@@ -153,29 +177,7 @@ class _FormImportFileState extends State<FormImportFile> {
                           maxFontSize: 16,
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 80, vertical: 25),
-                          backgroundColor: Colors.black87,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const AutoSizeText(
-                          "Cancel",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                          maxLines: 1,
-                          minFontSize: 10,
-                          maxFontSize: 16,
-                        ),
-                      ),
+                      
                     ],
                   )
                 ],

@@ -74,19 +74,11 @@ class TitleSection extends StatelessWidget {
             ),
             maxLines: 2,
           ),
-          AutoSizeText(
-            'Predict. Prepare. Succeed!',
-            style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           AutoSizeText(
             'Achieve Your Best Grades with Smart Predictions',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 30,
               color: Colors.white,
             ),
             maxLines: 2,
