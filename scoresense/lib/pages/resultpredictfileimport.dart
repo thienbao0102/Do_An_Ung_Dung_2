@@ -5,6 +5,8 @@ import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/predictions.dart';
 import 'package:scoresense/module/ui_design/ui_design.dart';
+import 'package:scoresense/pages/predictformdata.dart';
+import 'package:scoresense/pages/predictimportfile.dart';
 
 class Resultpredictfileimport extends StatelessWidget {
   const Resultpredictfileimport({super.key});
@@ -37,7 +39,8 @@ class _ShowResultState extends State<ShowResult> {
   List<Predictions> results = List.empty();
 
   Future<void> _loadData() async {
-    results = await sendData(GlobalData().inputDataImport,GlobalData().version);
+    results =
+        await sendData(GlobalData().inputDataImport, GlobalData().version);
     setState(() {
       _isLoading = false;
     });
@@ -112,6 +115,38 @@ class _ShowResultState extends State<ShowResult> {
                         "Fail: ${results.length - results.where((predict) => predict.prediction > 10).toList().length}",
                         style: const TextStyle(fontSize: 16),
                       ),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ImportFilePredict()),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: const Color(0xFF8FD14F)),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.upload_file, size: 24),
+                                SizedBox(width: 8),
+                                Text(
+                                  "Other File",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -166,8 +201,7 @@ class _ShowResultState extends State<ShowResult> {
                         width: MediaQuery.of(context).size.width < 1150
                             ? MediaQuery.of(context).size.width * 0.8
                             : MediaQuery.of(context).size.width * 0.55,
-                        margin: const EdgeInsets.only(
-                            left: 20, bottom: 20),
+                        margin: const EdgeInsets.only(left: 20, bottom: 20),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -192,19 +226,19 @@ class _ShowResultState extends State<ShowResult> {
                                         sort = valueChoose!;
                                       });
                                     },
+                                    initialSelection: 0,
                                     inputDecorationTheme:
                                         const InputDecorationTheme(),
                                     dropdownMenuEntries: const <DropdownMenuEntry<
                                         int>>[
-                                      DropdownMenuEntry(value: 0, label: ""),
                                       DropdownMenuEntry(
-                                          value: 1, label: "By name a-z"),
+                                          value: 0, label: "By name a-z"),
                                       DropdownMenuEntry(
-                                          value: 2, label: "By name z-a"),
+                                          value: 1, label: "By name z-a"),
                                       DropdownMenuEntry(
-                                          value: 3, label: "By result Pass"),
+                                          value: 2, label: "By result Pass"),
                                       DropdownMenuEntry(
-                                          value: 4, label: "By result Fail"),
+                                          value: 3, label: "By result Fail"),
                                     ],
                                   ),
                                 ],
@@ -265,7 +299,7 @@ class _ShowResultState extends State<ShowResult> {
                               ],
                             ),
                             SizedBox(
-                              height: 400,
+                              height: 380,
                               child: SingleChildScrollView(
                                 child: Table(
                                   border: TableBorder.all(),
@@ -366,17 +400,20 @@ class _ShowResultState extends State<ShowResult> {
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               onEnter: (_) {
-                setState(() {
-                  
-                });
+                setState(() {});
               },
               onExit: (_) {
-                setState(() {
-                  
-                });
+                setState(() {});
               },
               child: GestureDetector(
-                onTap: (){},
+                onTap: () {
+                  viewDetail(results[i].originalIndex);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EnterFormData()),
+                  );
+                },
                 child: SizedBox(
                   width: 100,
                   child: Center(
@@ -385,12 +422,6 @@ class _ShowResultState extends State<ShowResult> {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(bottom: 4),
-                          // decoration: BoxDecoration(
-                          //     border: Border(
-                          //         bottom: isHoveredList[index]
-                          //             ? BorderSide(width: 2, color: widget.setColor)
-                          //             : const BorderSide(
-                          //                 width: 2, color: Colors.transparent))),
                           child: Text(
                             results[i].prediction > 10 ? "Pass" : "Fail",
                             style: const TextStyle(fontSize: 16),
@@ -411,10 +442,8 @@ class _ShowResultState extends State<ShowResult> {
 
   //sort data
   List<Predictions> ListSort(List<Predictions> results) {
-    List<Predictions> listSort = results
-        .where((predict) => predict.name.toLowerCase().contains(search))
-        .toList();
-    if (sort == 1) {
+    List<Predictions> listSort;
+    if (sort == 0) {
       listSort = results
           .where((predict) => predict.name.toLowerCase().contains(search))
           .toList()
@@ -429,7 +458,7 @@ class _ShowResultState extends State<ShowResult> {
             return a.prediction.compareTo(b.prediction);
           },
         );
-    } else if (sort == 2) {
+    } else if (sort == 1) {
       listSort = results
           .where((predict) => predict.name.toLowerCase().contains(search))
           .toList()
@@ -444,13 +473,13 @@ class _ShowResultState extends State<ShowResult> {
             return a.prediction.compareTo(b.prediction);
           },
         );
-    } else if (sort == 3) {
+    } else if (sort == 2) {
       listSort = results
           .where((predict) =>
               predict.name.toLowerCase().contains(search) &&
               predict.prediction > 10)
           .toList();
-    } else if (sort == 4) {
+    } else {
       listSort = results
           .where((predict) =>
               predict.name.toLowerCase().contains(search) &&
@@ -459,4 +488,49 @@ class _ShowResultState extends State<ShowResult> {
     }
     return listSort;
   }
+}
+
+//get object want to view detail predicttion
+void viewDetail(int indexObject) {
+  List<dynamic> row = GlobalData().inputDataImport[indexObject + 1];
+  GlobalData().firstName = row[0];
+  GlobalData().lastName = " ";
+  GlobalData().school = row[1];
+  GlobalData().gender = row[2] == "M" ? "Male" : "Female";
+  GlobalData().age = row[3];
+  GlobalData().location = row[4] == "U" ? "Urban" : "Rural";
+  GlobalData().familySize =
+      row[5] == "LS3" ? "Less than or equal to 3" : "Greater than 3";
+  GlobalData().parentStatus = row[6] == "A" ? "Apart" : "Together";
+  GlobalData().motherEducation = row[7];
+  GlobalData().fatherEducation = row[8];
+  GlobalData().motherJob = capitalizeFirstLetter(row[9]);
+  GlobalData().fatherJob = capitalizeFirstLetter(row[10]);
+  GlobalData().reason = capitalizeFirstLetter(row[11]);
+  GlobalData().guardian = capitalizeFirstLetter(row[12]);
+  GlobalData().travelTimeIndex = row[13] - 1;
+  GlobalData().weeklyStudyTime = row[14] - 1;
+  GlobalData().numOfFailClass = row[15];
+  GlobalData().schoolSupport = capitalizeFirstLetter(row[16]);
+  GlobalData().familySupport = capitalizeFirstLetter(row[17]);
+  GlobalData().paidClasses = capitalizeFirstLetter(row[18]);
+  GlobalData().extracurricularActivities = capitalizeFirstLetter(row[19]);
+  GlobalData().nurserySchool = capitalizeFirstLetter(row[20]);
+  GlobalData().higherEducation = capitalizeFirstLetter(row[21]);
+  GlobalData().internetAtHome = capitalizeFirstLetter(row[22]);
+  GlobalData().relationship = capitalizeFirstLetter(row[23]);
+  GlobalData().familyQuality = row[24] - 1;
+  GlobalData().freeTimeIndex = row[25] - 1;
+  GlobalData().goOutIndex = row[26] - 1;
+  GlobalData().workdayAlcohol = row[27] - 1;
+  GlobalData().weekendAlcohol = row[28] - 1;
+  GlobalData().currentHealth = row[29] - 1;
+  GlobalData().absences = row[30];
+  GlobalData().G1 = row[31];
+  GlobalData().G2 = row[32];
+}
+
+String capitalizeFirstLetter(String input) {
+  if (input.isEmpty) return input; // Nếu chuỗi rỗng, trả về chuỗi gốc
+  return input[0].toUpperCase() + input.substring(1).toLowerCase();
 }

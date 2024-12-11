@@ -4,6 +4,7 @@ import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/pages/predictformdata.dart';
 import 'package:scoresense/pages/predictimportfile.dart';
+import 'package:scoresense/pages/resultpredictfileimport.dart';
 
 class Choosepredictmethod extends StatefulWidget {
   const Choosepredictmethod({super.key});
@@ -22,10 +23,18 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
         MaterialPageRoute(builder: (context) => const EnterFormData()),
       );
     } else if (userChoose == 2) {
-      Navigator.push(
+      if (GlobalData().inputDataImport.isEmpty) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ImportFilePredict()),
+          );
+      }
+      else{
+        Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ImportFilePredict()),
+        MaterialPageRoute(builder: (context) => const Resultpredictfileimport()),
       );
+      }
     }
   }
 

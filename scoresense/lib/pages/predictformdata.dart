@@ -131,8 +131,32 @@ class _EnterFormDataState extends State<EnterFormData> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 50.0),
-                    width: MediaQuery.of(context).size.width * 1,
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(right: 20),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: DropdownMenu(
+                        width: 150,
+                        onSelected: (valueChoose) {
+                          setState(() {
+                            GlobalData().version = valueChoose!;
+                          });
+                        },
+                        initialSelection: 1,
+                        inputDecorationTheme: const InputDecorationTheme(),
+                        dropdownMenuEntries: List.generate(
+                          GlobalData().numModel-1,
+                          (index) => DropdownMenuEntry(
+                            value: index + 1,
+                            label: "Model_v${index + 1}",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 0.0),
+                    width: MediaQuery.of(context).size.width * 1, 
                     constraints: const BoxConstraints(minHeight: 500),
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: AnimatedSwitcher(

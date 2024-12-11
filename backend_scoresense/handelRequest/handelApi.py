@@ -31,7 +31,9 @@ def PredictScore(data, version):
         'name': columnName if columnName is not None else [None] * len(predictions),
         'prediction': predictions
     })
-    # print("result")
+
+    result['originalIndex'] = range(len(result))
+    print(result['originalIndex'])
     # print(result)
     # Trả kết quả
     return jsonify(result.to_dict(orient='records'))  # Chuyển kết quả về JSON

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:scoresense/module/global_variable.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/import_file/initial.dart';
-import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:scoresense/module/uploadfile.dart';
 import 'package:scoresense/module/callbackend.dart';
-import 'package:scoresense/pages/homepage.dart';
+import 'package:scoresense/pages/allmodeltrain.dart';
 
 class ImportFileTrainModel extends StatelessWidget {
   const ImportFileTrainModel({super.key});
@@ -36,13 +35,7 @@ class _FormImportFileState extends State<FormImportFile> {
   bool fileUpload = false;
 
   Future<void> _loadData() async {
-    int numModel = await sendDataTrainModel(GlobalData().inputDataImport);
-    if (numModel != 0) {
-      GlobalData().numModel = numModel;
-      UiDesign.showToast("Train Model success");
-    } else {
-      UiDesign.showToast("Train Model Fail");
-    }
+    await sendDataTrainModel(GlobalData().inputDataImport);
   }
 
   @override
@@ -76,7 +69,7 @@ class _FormImportFileState extends State<FormImportFile> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const AutoSizeText(
-                    "Import file data to fit model",
+                    "Import file data to Train model",
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     maxFontSize: 20,
                     minFontSize: 14,
@@ -112,39 +105,67 @@ class _FormImportFileState extends State<FormImportFile> {
                             : InitialWidget(onFileUploaded: handleFileUploaded),
                       )),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (fileUpload) {
-                        _loadData();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if (fileUpload) {
+                            _loadData();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AllModelTrain(),
+                              ),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 80, vertical: 25),
+                          backgroundColor: fileUpload
+                              ? const Color(0xFF0062FF)
+                              : const Color(0xFF7DAFFF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 80, vertical: 25),
-                      backgroundColor: fileUpload
-                          ? const Color(0xFF0062FF)
-                          : const Color(0xFF7DAFFF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const AutoSizeText(
+                          "Train Model",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          minFontSize: 10,
+                          maxFontSize: 16,
+                        ),
                       ),
-                    ),
-                    child: const AutoSizeText(
-                      "update Model",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      minFontSize: 10,
-                      maxFontSize: 16,
-                    ),
-                  ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 80, vertical: 25),
+                          backgroundColor: Colors.black87,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const AutoSizeText(
+                          "Cancel",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          minFontSize: 10,
+                          maxFontSize: 16,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

@@ -2,7 +2,6 @@ from joblib import load
 from flask_cors import CORS
 import pandas as pd
 from flask import Flask, request, jsonify
-import json
 
 from handelRequest.handelApi import PredictScore,TrainModel,count_models
 
@@ -25,8 +24,7 @@ def trainModel():
     data = request.get_json() 
     data = pd.DataFrame(data[1:], columns=data[0])
     TrainModel(data)
-    numModel = count_models()
-    return jsonify(numModel = numModel)
+    return jsonify({"status": "success"})
 
 @app.route('/totalmodel', methods=['Get'])
 def totalModel():

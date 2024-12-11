@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:scoresense/module/header.dart';
 import 'package:scoresense/module/predictions.dart';
-import 'package:scoresense/pages/choosepredictmethod.dart';
 import 'package:scoresense/module/ui_design/ui_design.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:scoresense/module/callbackend.dart';
+import 'package:scoresense/pages/predictformdata.dart';
 
 import '../module/global_variable.dart';
 
@@ -65,9 +65,9 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
     
 
     List<List<dynamic>> result = [headers] + convertedData;
-    print(result);
+    // print(result);
     results = await sendData(result,GlobalData().version);
-    print("results: " + results.toString());
+    // print("results: " + results.toString());
     setState(() {
       _isLoading = false;
       _result = results[0].prediction > 10 ? "Pass" : "Fail";
@@ -331,11 +331,11 @@ class _PersonalResultPageState extends State<PersonalResultPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const Choosepredictmethod()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
+                              const EnterFormData()), // Thay thế ChoosePredictMethodPage bằng widget của bạn
                       (Route<dynamic> route) =>
                           false, // Loại bỏ tất cả các trang trước đó
                     );
-                    GlobalData().resetValues();
+                    //GlobalData().resetValues();
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: const Color(0xFF0062FF), // Màu nền
