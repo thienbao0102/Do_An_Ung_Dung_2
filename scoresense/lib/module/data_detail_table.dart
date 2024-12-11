@@ -17,25 +17,18 @@ class _CustomTableState extends State<CustomTable> {
   final ScrollController _horizontalScrollController = ScrollController();
   final ScrollController _verticalScrollController1 = ScrollController();
   final ScrollController _verticalScrollController2 = ScrollController();
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   bool _showCheckboxes = false;
+  bool _showDropdownMenu = false;
   bool isChecked = false;
+  bool isComparing = false;
   bool isInFunction = false;
   bool isNoResult = false;
-  final Map<int, bool> checkboxes = {};
+  Map<int, bool> checkboxes = {};
   List<List<String>>? printData;
+  List<int> rowIdSelected = [];
   final Map<int, int> _sortButtonDegrees = {};
-  // List<List<String>> data = [
-  //   ["1","Bryce Sims", "GP", "F", "18", "U", "GT3", "A", "4", "4", "at_home", "teacher", "course", "mother", "2", "2", "0", "yes", "no", "no", "no", "yes", "yes", "no", "no", "4", "3", "4", "1", "1", "3", "6", "5", "6", "Fail"],
-  //   ["2","Brandi Thompson", "GP", "F", "17", "U", "GT3", "T", "1", "1", "at_home", "other", "course", "father", "1", "2", "0", "no", "yes", "no", "no", "no", "yes", "yes", "no", "5", "3", "3", "1", "1", "3", "4", "5", "5", "Fail"],
-  //   ["3","Edwin Shaw", "GP", "F", "15", "U", "LE3", "T", "1", "1", "at_home", "other", "other", "mother", "1", "2", "3", "yes", "no", "yes", "no", "yes", "yes", "yes", "no", "4", "3", "2", "2", "3", "3", "10", "7", "8", "Pass"],
-  //   ["4","Tammy Bishop", "GP", "F", "15", "U", "GT3", "T", "4", "2", "health", "services", "home", "mother", "1", "3", "0", "no", "yes", "yes", "yes", "yes", "yes", "yes", "yes", "3", "2", "2", "1", "1", "5", "2", "15", "14", "Pass"],
-  //   ["5","Patricia Lopez", "GP", "F", "16", "U", "GT3", "T", "3", "3", "other", "other", "home", "father", "1", "2", "0", "no", "yes", "yes", "no", "yes", "yes", "no", "no", "4", "3", "2", "1", "2", "5", "4", "6", "10", "Fail"],
-  //   ["6","Rachael Herring", "GP", "M", "16", "U", "LE3", "T", "4", "3", "services", "other", "reputation", "mother", "1", "2", "0", "no", "yes", "yes", "yes", "yes", "yes", "yes", "no", "5", "4", "2", "1", "2", "5", "10", "15", "15", "Fail"],
-  //   ["7","Jenna Trujillo", "GP", "M", "16", "U", "LE3", "T", "2", "2", "other", "other", "home", "mother", "1", "2", "0", "no", "no", "no", "no", "yes", "yes", "yes", "no", "4", "4", "4", "1", "1", "3", "0", "12", "12", "Pass"],
-  //   ["8","Joseph Huynh", "GP", "F", "17", "U", "GT3", "A", "4", "4", "other", "teacher", "home", "mother", "2", "2", "0", "yes", "yes", "no", "no", "yes", "yes", "no", "no", "4", "1", "4", "1", "1", "1", "6", "6", "5", "Pass"],
-  //   ["9","Gary Mercer", "GP", "M", "15", "U", "LE3", "A", "3", "2", "services", "other", "home", "mother", "1", "2", "0", "no", "yes", "yes", "no", "yes", "yes", "yes", "no", "4", "2", "2", "1", "1", "1", "0", "16", "18", "Fail"]
-  // ];
+  
   @override
   void dispose() {
     // Đừng quên hủy bỏ ScrollController khi không còn sử dụng
@@ -80,6 +73,16 @@ class _CustomTableState extends State<CustomTable> {
   void _toggleCheckboxVisibility() {
     setState(() {
       _showCheckboxes = !_showCheckboxes;
+      if(rowIdSelected.isNotEmpty){
+        isComparing = !isComparing;
+        if(isInFunction){
+          printData = compareRowSelected(rowIdSelected, printData!);
+        }
+        else{
+          isInFunction = true;
+          printData = compareRowSelected(rowIdSelected, widget.data);
+        }  
+      }
     });
   }
   
@@ -87,278 +90,334 @@ class _CustomTableState extends State<CustomTable> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 0, left: 16, top: 16, bottom: 16),
+      color: const Color.fromARGB(255, 205, 245, 253),
+      padding: const EdgeInsets.only(right: 0, left: 25, top: 16, bottom: 16),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 310,
-                height: 45,
-                child: Material(
-                  child: 
-                    TextFormField(
-                      controller: _controller,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        focusColor: Colors.white,
-                        hoverColor: Colors.white,
-                        labelText: "Search",
-                        labelStyle:
-                            TextStyle(color: Color(0xFF0062FF), fontSize: 14),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF0062FF), width: 2.0),
+              Container(
+                height: 47,
+                alignment: Alignment.bottomLeft,
+                child:
+                  Row(
+                    children: [
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: SvgPicture.asset(
+                            'arrow_back.svg',
+                            width: 24,
+                            height: 24,
+                          ),
                         ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 204, 204, 204),
-                              width: 2.0), // Độ dày border khi không focus
-                        ),
-                        prefixIcon: Icon(Icons.search, size: 20,),
                       ),
-                      // initialValue: value,
-                      onChanged: (text){
-                        setState(() {
-                          isInFunction = true;
-                          List<List<String>> searchResult = search(widget.data, _controller.text);
-                          if(searchResult.isEmpty){
-                            isNoResult = true;
-                          }else{
-                            isNoResult = false;
-                          }
-                          _chooseDataToPrint(searchResult, isInFunction);
-                        });
-                      },
-                    )
-                ),
+                      const SizedBox(width: 16),
+                      Text(
+                        "Detailed input data",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal,
+                          color: GlobalData().colorText,
+                        ),
+                      ),
+                    ],
+                  )
+                  
               ),
-              const SizedBox(width: 50),
-              ElevatedButton(
-                onPressed:  _toggleCheckboxVisibility,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: GlobalData().colorPrimary,
-                  shape: StadiumBorder(),
-                  minimumSize: const Size(100, 47),
-                  shadowColor: Colors.transparent
-                  // overlayColor: , // Màu khi nhấn
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                  width: 310,
+                  height: 45,
+                  child: Material(
+                    child: 
+                      TextFormField(
+                        controller: _controller,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 205, 245, 253),
+                          focusColor: Color.fromARGB(255, 205, 245, 253),
+                          hoverColor: Color.fromARGB(255, 205, 245, 253),
+                          labelText: "Search",
+                          labelStyle:
+                              TextStyle(color: Color(0xFF0062FF), fontSize: 14),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF0062FF), width: 2.0),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 204, 204, 204),
+                                width: 2.0), // Độ dày border khi không focus
+                          ),
+                          prefixIcon: Icon(Icons.search, size: 20,),
+                        ),
+                        // initialValue: value,
+                        onChanged: (text){
+                          setState(() {
+                            isInFunction = true;
+                            List<List<String>> searchResult = search(widget.data, _controller.text);
+                            if(searchResult.isEmpty){
+                              isNoResult = true;
+                            }else{
+                              isNoResult = false;
+                            }
+                            _chooseDataToPrint(searchResult, isInFunction);
+                          });
+                        },
+                      )
+                  ),
                 ),
-                child: const Text("Compare", style: TextStyle(color: Colors.white,fontSize: 14)),
-              ),
-              const SizedBox(width: 16),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
-                  minimumSize: const Size(120, 47),
-                  shadowColor: Colors.transparent,
-                  backgroundColor: Color.fromARGB(255, 244, 244, 244),
-                  side: BorderSide(color: Color.fromARGB(255, 225, 225, 225), width: 2),
+                const SizedBox(width: 50),
+                ElevatedButton(
+                  onPressed:(){
+                    _toggleCheckboxVisibility();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: GlobalData().colorPrimary,
+                    shape: const StadiumBorder(),
+                    minimumSize: const Size(100, 47),
+                    shadowColor: Colors.transparent
+                  ),
+                  child: Text(!isComparing && _showCheckboxes? "Save" : "Compare", style: const TextStyle(color: Colors.white,fontSize: 14)),
                 ),
-                child: const Text("Edit",style: TextStyle(fontSize: 14,),),
-              ),
-              const SizedBox(width: 16),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if(isComparing || _showCheckboxes){
+                        isInFunction = false;
+                        isComparing = false;
+                        _showCheckboxes = false;
+                        rowIdSelected.clear();
+                        checkboxes.clear();
+                        printData = widget.data;
+                      }
+                      if(isComparing) {
+                        checkboxes.clear();
+                      }
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(),
+                    minimumSize: const Size(120, 47),
+                    shadowColor: Colors.transparent,
+                    backgroundColor: const Color.fromARGB(255, 244, 244, 244),
+                    side: const BorderSide(color: Color.fromARGB(255, 225, 225, 225), width: 2),
+                  ),
+                  child: Text(_showCheckboxes||isComparing? "Cancle" : "Edit",style: const TextStyle(fontSize: 14)),
+                ),
+                const SizedBox(width: 16),
+                ],
+              )
             ],
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              ScrollbarTheme(
-                data: ScrollbarThemeData(
-                  thumbColor: WidgetStateProperty.all(const Color.fromARGB(118, 0, 98, 255)), // Màu của thanh cuộn
-                  radius: const Radius.circular(10), // Bo tròn các góc của thanh cuộn
-                  thickness: WidgetStateProperty.all(6), // Độ dày của thanh cuộn
-                  minThumbLength: 50, // Độ dài tối thiểu của thanh cuộn
-                ),
-                child: Scrollbar(
-                  controller: _verticalScrollController1,
-                  thumbVisibility: false,
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    controller: _verticalScrollController1, // Gán ScrollController vào SingleChildScrollView
-                    scrollDirection: Axis.vertical, // Cuộn dọc
-                    child: Table(
-                      columnWidths: _showCheckboxes? {
-                        0: const IntrinsicColumnWidth(),
-                        1: const IntrinsicColumnWidth(),
-                        2: const IntrinsicColumnWidth(),
-                      } : {
-                        0: const IntrinsicColumnWidth(),
-                        1: const IntrinsicColumnWidth(),
-                      },
-                      children: [
-                        TableRow(
-                          children:_showCheckboxes? [
-                            SizedBox(),
-                            Container(
-                              clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(0), bottomLeft: Radius.circular(0)),
-                              ),
-                              child: _buildHeader("No", 1),
-                            ),
-                            _buildHeader("Name", 2),
-                          ]: [
-                            Container(
-                              clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(0), bottomLeft: Radius.circular(0)),
-                              ),
-                              child: _buildHeader("No", 1),
-                            ),
-                            _buildHeader("Name", 2),
-                          ],
-                        ),
-                        TableRow(
-                          children: _showCheckboxes? [
-                            SizedBox(height: 10),
-                            SizedBox(height: 10),
-                            SizedBox(height: 10),
-                          ]: [
-                            SizedBox(height: 10),
-                            SizedBox(height: 10),
-                          ],
-                        ),
-                        if(printData!.isNotEmpty)
-                          for (int i = 0; i < printData!.length; i++)
-                            _buildFixedRow(printData![i][0], printData![i][1], int.parse(printData![i][0]), i),
-                      ],
-                    )
+          Flexible(
+            fit: FlexFit.loose,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                ScrollbarTheme(
+                  data: ScrollbarThemeData(
+                    thumbColor: WidgetStateProperty.all(const Color.fromARGB(118, 0, 98, 255)), // Màu của thanh cuộn
+                    radius: const Radius.circular(10), // Bo tròn các góc của thanh cuộn
+                    thickness: WidgetStateProperty.all(6), // Độ dày của thanh cuộn
+                    minThumbLength: 50, // Độ dài tối thiểu của thanh cuộn
                   ),
-                ),
-              ),
-              Expanded( // Sử dụng Expanded để chiếm phần không gian còn lại
-              child: ScrollbarTheme(
-                data: ScrollbarThemeData(
-                  thumbColor: WidgetStateProperty.all(const Color.fromARGB(118, 0, 98, 255)), // Màu của thanh cuộn
-                  radius: const Radius.circular(10), // Bo tròn các góc của thanh cuộn
-                  thickness: WidgetStateProperty.all(6), // Độ dày của thanh cuộn
-                  minThumbLength: 50, // Độ dài tối thiểu của thanh cuộn
-                ), 
-                child: Scrollbar(
-                  thumbVisibility: true,
-                  controller: _horizontalScrollController, // Gán ScrollController vào Scrollbar
-                  child: SingleChildScrollView(
-                    controller: _horizontalScrollController, // Gán ScrollController vào SingleChildScrollView
-                    scrollDirection: Axis.horizontal, // Cuộn ngang
-                    child: 
-                        Scrollbar(
-                          thumbVisibility: false,
-                          controller: _verticalScrollController2,
-                          child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical, // Cuộn dọc
-                          physics: const BouncingScrollPhysics(),
-                          controller: _verticalScrollController2, // Gán ScrollController vào SingleChildScrollView
-                          child: Row(
-                            children: [
-                              Table(
-                                columnWidths: {
-                                  for (int i = 0; i < 33; i++) i: const FixedColumnWidth(150),
-                                },
-                                children: [
-                                  TableRow(
-                                    children: [
-                                        _buildHeader("School", 3),
-                                        _buildHeader("Sex", 4),
-                                        _buildHeader("Age", 5),
-                                        _buildHeader("Address", 6),
-                                        _buildHeader("Famsize", 7),
-                                        _buildHeader("Pstatus", 8),
-                                        _buildHeader("Medu", 9),
-                                        _buildHeader("Fedu", 10),
-                                        _buildHeader("Mjob", 11),
-                                        _buildHeader("Fjob", 12),
-                                        _buildHeader("Reason", 13),
-                                        _buildHeader("Guardian", 14),
-                                        _buildHeader("Travel Time", 15),
-                                        _buildHeader("Study Time", 16),
-                                        _buildHeader("Failures", 17),
-                                        _buildHeader("School Sup", 18),
-                                        _buildHeader("Fam Sup", 19),
-                                        _buildHeader("Paid", 20),
-                                        _buildHeader("Activities", 21),
-                                        _buildHeader("Nursery", 22),
-                                        _buildHeader("Higher", 23),
-                                        _buildHeader("Internet", 24),
-                                        _buildHeader("Romantic", 25),
-                                        _buildHeader("Famrel", 26),
-                                        _buildHeader("Free Time", 27),
-                                        _buildHeader("Go Out", 28),
-                                        _buildHeader("Dalc", 29),
-                                        _buildHeader("Walc", 30),
-                                        _buildHeader("Health", 31),
-                                        _buildHeader("Absences", 32),
-                                        _buildHeader("G1", 33),
-                                        _buildHeader("G2", 34),
-                                        Container(
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0)),
-                                          ),
-                                          child: _buildHeader("Result", 35),
-                                        ),
-                                        const SizedBox(width: 16,),                                  
-                                      ],
-                                    ),
-                                    const TableRow(
-                                      children: [
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                        SizedBox(height: 10),
-                                      ],
-                                    ),
-                                      if(printData!.isNotEmpty)
-                                      for (int i = 0; i < printData!.length; i++)
-                                        _buildRow(printData![i][0], printData![i][1], printData![i][2], printData![i][3], printData![i][4], printData![i][5], printData![i][6], printData![i][7], printData![i][8], printData![i][9], printData![i][10], printData![i][11], printData![i][12], printData![i][13], printData![i][14], printData![i][15], printData![i][16], printData![i][17], printData![i][18], printData![i][19], printData![i][20], printData![i][21], printData![i][22], printData![i][23], printData![i][24], printData![i][25], printData![i][26], printData![i][27], printData![i][28], printData![i][29], printData![i][30], printData![i][31], printData![i][32], printData![i][33], printData![i][34], int.parse(printData![i][0]), i),
-                                ],
+                  child: Scrollbar(
+                    controller: _verticalScrollController1,
+                    thumbVisibility: false,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      controller: _verticalScrollController1, // Gán ScrollController vào SingleChildScrollView
+                      scrollDirection: Axis.vertical, // Cuộn dọc
+                      child: Table(
+                        columnWidths: _showCheckboxes? {
+                          0: const IntrinsicColumnWidth(),
+                          1: const IntrinsicColumnWidth(),
+                          2: const IntrinsicColumnWidth(),
+                        } : {
+                          0: const IntrinsicColumnWidth(),
+                          1: const IntrinsicColumnWidth(),
+                        },
+                        children: [
+                          TableRow(
+                            children:_showCheckboxes? [
+                              const SizedBox(),
+                              Container(
+                                clipBehavior: Clip.antiAlias,
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(0), bottomLeft: Radius.circular(0)),
+                                ),
+                                child: _buildHeader("No", 1),
                               ),
-                              const SizedBox(width: 16),
+                              _buildHeader("Name", 2),
+                            ]: [
+                              Container(
+                                clipBehavior: Clip.antiAlias,
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(0), bottomLeft: Radius.circular(0)),
+                                ),
+                                child: _buildHeader("No", 1),
+                              ),
+                              _buildHeader("Name", 2),
                             ],
-                          )
-                        ),
+                          ),
+                          TableRow(
+                            children: _showCheckboxes? [
+                              const SizedBox(height: 10),
+                              const SizedBox(height: 10),
+                              const SizedBox(height: 10),
+                            ]: [
+                              const SizedBox(height: 10),
+                              const SizedBox(height: 10),
+                            ],
+                          ),
+                          if(printData!.isNotEmpty)
+                            for (int i = 0; i < printData!.length; i++)
+                              _buildFixedRow(printData![i][0], printData![i][1], int.parse(printData![i][0]), i),
+                        ],
                       )
                     ),
+                  ),
+                ),
+                Expanded( // Sử dụng Expanded để chiếm phần không gian còn lại
+                child: ScrollbarTheme(
+                  data: ScrollbarThemeData(
+                    thumbColor: WidgetStateProperty.all(const Color.fromARGB(118, 0, 98, 255)), // Màu của thanh cuộn
+                    radius: const Radius.circular(10), // Bo tròn các góc của thanh cuộn
+                    thickness: WidgetStateProperty.all(6), // Độ dày của thanh cuộn
+                    minThumbLength: 50, // Độ dài tối thiểu của thanh cuộn
+                  ), 
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    controller: _horizontalScrollController, // Gán ScrollController vào Scrollbar
+                    child: SingleChildScrollView(
+                      controller: _horizontalScrollController, // Gán ScrollController vào SingleChildScrollView
+                      scrollDirection: Axis.horizontal, // Cuộn ngang
+                      child: 
+                          Scrollbar(
+                            thumbVisibility: false,
+                            controller: _verticalScrollController2,
+                            child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical, // Cuộn dọc
+                            physics: const BouncingScrollPhysics(),
+                            controller: _verticalScrollController2, // Gán ScrollController vào SingleChildScrollView
+                            child: Column(
+                              children: [
+                                Table(
+                                  columnWidths: {
+                                    for (int i = 0; i < 33; i++) i: const FixedColumnWidth(150),
+                                  },
+                                  children: [
+                                    TableRow(
+                                      children: [
+                                          _buildHeader("School", 3),
+                                          _buildHeader("Sex", 4),
+                                          _buildHeader("Age", 5),
+                                          _buildHeader("Address", 6),
+                                          _buildHeader("Famsize", 7),
+                                          _buildHeader("Pstatus", 8),
+                                          _buildHeader("Medu", 9),
+                                          _buildHeader("Fedu", 10),
+                                          _buildHeader("Mjob", 11),
+                                          _buildHeader("Fjob", 12),
+                                          _buildHeader("Reason", 13),
+                                          _buildHeader("Guardian", 14),
+                                          _buildHeader("Travel Time", 15),
+                                          _buildHeader("Study Time", 16),
+                                          _buildHeader("Failures", 17),
+                                          _buildHeader("School Sup", 18),
+                                          _buildHeader("Fam Sup", 19),
+                                          _buildHeader("Paid", 20),
+                                          _buildHeader("Activities", 21),
+                                          _buildHeader("Nursery", 22),
+                                          _buildHeader("Higher", 23),
+                                          _buildHeader("Internet", 24),
+                                          _buildHeader("Romantic", 25),
+                                          _buildHeader("Famrel", 26),
+                                          _buildHeader("Free Time", 27),
+                                          _buildHeader("Go Out", 28),
+                                          _buildHeader("Dalc", 29),
+                                          _buildHeader("Walc", 30),
+                                          _buildHeader("Health", 31),
+                                          _buildHeader("Absences", 32),
+                                          _buildHeader("G1", 33),
+                                          _buildHeader("G2", 34),
+                                          Container(
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0)),
+                                            ),
+                                            child: _buildHeader("Result", 35),
+                                          ),
+                                          const SizedBox(width: 16,),                                  
+                                        ],
+                                      ),
+                                      const TableRow(
+                                        children: [
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                          SizedBox(height: 10),
+                                        ],
+                                      ),
+                                        if(printData!.isNotEmpty)
+                                        for (int i = 0; i < printData!.length; i++)
+                                          _buildRow(printData![i][0], printData![i][1], printData![i][2], printData![i][3], printData![i][4], printData![i][5], printData![i][6], printData![i][7], printData![i][8], printData![i][9], printData![i][10], printData![i][11], printData![i][12], printData![i][13], printData![i][14], printData![i][15], printData![i][16], printData![i][17], printData![i][18], printData![i][19], printData![i][20], printData![i][21], printData![i][22], printData![i][23], printData![i][24], printData![i][25], printData![i][26], printData![i][27], printData![i][28], printData![i][29], printData![i][30], printData![i][31], printData![i][32], printData![i][33], printData![i][34], int.parse(printData![i][0]), i),
+                                  ],
+                                ),
+                                const SizedBox(width: 16),
+                              ],
+                            )
+                          ),
+                        )
+                      ),
+                    )
                   )
                 )
-              )
-            ]
-          ),
+              ]
+            ),
+          )
         ],
       )
     );
@@ -425,7 +484,12 @@ class _CustomTableState extends State<CustomTable> {
         child: (text == "Pass" || text == "Fail")
         ? Container(
           width: 70,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
+            border: Border.all(
+              color: text == "Pass" ? const Color.fromARGB(255, 108, 160, 120) : const Color.fromARGB(255, 197, 161, 161), // Nếu là "Pass" thì màu xanh, ngược lại màu đỏ
+              width: 1,
+            ),
             borderRadius: BorderRadius.circular(10),
             color: text == "Pass" ? const Color.fromARGB(255, 210, 255, 217) : const Color.fromARGB(255, 253, 224, 228),), // Nếu là "Pass" thì màu xanh, ngược lại màu đỏ),
           child: Text(
@@ -524,7 +588,13 @@ class _CustomTableState extends State<CustomTable> {
                 onTap: () {
                   setState(() {
                     checkboxes[rowId] = !(checkboxes[rowId] ?? false); // Đảo ngược trạng thái của dòng
-                    print("rowId: $rowId, checked: ${checkboxes[rowId]}");
+                    if (checkboxes[rowId] == true) {
+                      // Nếu dòng được chọn, thêm vào danh sách
+                      rowIdSelected.add(rowId);
+                    } else {
+                      // Nếu bỏ chọn, loại khỏi danh sách
+                      rowIdSelected.remove(rowId);
+                    }
                   });
                 },
                 child: Container(
@@ -712,6 +782,12 @@ class _CustomTableState extends State<CustomTable> {
       }
     }
     
+    return result;
+  }
+
+  List<List<String>> compareRowSelected(List<int> rowIdSelected, List<List<String>> data) {
+    List<List<String>> result = [];
+    result = data.where((row) => rowIdSelected.contains(int.parse(row[0]))).toList();
     return result;
   }
 }
