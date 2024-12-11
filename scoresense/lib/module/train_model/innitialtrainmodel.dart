@@ -151,7 +151,7 @@ class _InitiaTrainModellWidgetState extends State<InitiaTrainModellWidget> {
         "absences",
         "G1",
         "G2",
-        // "G3",
+        "G3",
       ];
 
       List<dynamic> header = fields.first;

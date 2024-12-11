@@ -79,7 +79,7 @@ class _FormImportFileState extends State<FormImportFile> {
                         initialSelection: 1,
                         inputDecorationTheme: const InputDecorationTheme(),
                         dropdownMenuEntries: List.generate(
-                          GlobalData().numModel-1,
+                          GlobalData().numModel - 1,
                           (index) => DropdownMenuEntry(
                             value: index + 1,
                             label: "Model_v${index + 1}",
@@ -118,38 +118,66 @@ class _FormImportFileState extends State<FormImportFile> {
                             : InitialWidget(onFileUploaded: handleFileUploaded),
                       )),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (fileUpload) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const Resultpredictfileimport()),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 80, vertical: 25),
-                      backgroundColor: fileUpload
-                          ? const Color(0xFF0062FF)
-                          : const Color(0xFF7DAFFF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if (fileUpload) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const Resultpredictfileimport()),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 80, vertical: 25),
+                          backgroundColor: fileUpload
+                              ? const Color(0xFF0062FF)
+                              : const Color(0xFF7DAFFF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const AutoSizeText(
+                          "Predict",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          minFontSize: 10,
+                          maxFontSize: 16,
+                        ),
                       ),
-                    ),
-                    child: const AutoSizeText(
-                      "Predict",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      minFontSize: 10,
-                      maxFontSize: 16,
-                    ),
-                  ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 80, vertical: 25),
+                          backgroundColor: Colors.black87,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const AutoSizeText(
+                          "Cancel",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          minFontSize: 10,
+                          maxFontSize: 16,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
