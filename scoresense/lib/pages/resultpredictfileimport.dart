@@ -41,7 +41,8 @@ class _ShowResultState extends State<ShowResult> {
   List<List<String>> dataInput = List.empty();
 
   Future<void> _loadData() async {
-    results = await sendData(GlobalData().inputDataImport,GlobalData().version);
+    results =
+        await sendData(GlobalData().inputDataImport, GlobalData().version);
     addResultToDataInput();
     setState(() {
       _isLoading = false;
@@ -55,17 +56,18 @@ class _ShowResultState extends State<ShowResult> {
     dataInput = GlobalData().inputDataImport.map((innerList) {
       return innerList.map((e) => e.toString()).toList();
     }).toList();
-    dataInput.removeAt(0);  // Xóa dòng header của dataInput
+    dataInput.removeAt(0); // Xóa dòng header của dataInput
     // Kiểm tra kích thước của dataInput và result
     if (dataInput.length == result.length) {
       for (int i = 0; i < dataInput.length; i++) {
         dataInput[i].insert(0, (i + 1).toString());
-        dataInput[i].add(result[i][1]);// Thêm giá trị vào cuối mỗi dòng của dataInput
+        dataInput[i]
+            .add(result[i][1]); // Thêm giá trị vào cuối mỗi dòng của dataInput
       }
     } else {
       for (int i = 0; i < dataInput.length; i++) {
         dataInput[i].insert(0, (i + 1).toString());
-        dataInput[i].add("N/A");  // Thêm giá trị vào cuối mỗi dòng của dataInput
+        dataInput[i].add("N/A"); // Thêm giá trị vào cuối mỗi dòng của dataInput
       }
     }
   }
@@ -351,8 +353,7 @@ class _ShowResultState extends State<ShowResult> {
           ),
           Flexible(
             fit: FlexFit.loose,
-            child: 
-              CustomTable(data: dataInput),
+            child: CustomTable(data: dataInput),
           )
         ],
       ),
@@ -437,6 +438,9 @@ class _ShowResultState extends State<ShowResult> {
               child: GestureDetector(
                 onTap: () {
                   viewDetail(results[i].originalIndex);
+                  setState(() {
+                    GlobalData().gotoDetal = true;
+                  });
                   Navigator.push(
                     context,
                     MaterialPageRoute(

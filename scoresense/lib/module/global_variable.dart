@@ -6,6 +6,8 @@ class GlobalData {
   int version = 1;
   int numModel = 0;
 
+  bool gotoDetal = false;
+
   // Nội dung file csv import
   List<List<dynamic>> inputDataImport = List<List<dynamic>>.empty();
 

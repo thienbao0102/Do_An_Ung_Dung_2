@@ -65,7 +65,7 @@ class TitleSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeText(
-            'ScoreSense:',
+            'ScoreSense',
             style: TextStyle(
               fontSize: 80,
               fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class TitleSection extends StatelessWidget {
           AutoSizeText(
             'Predict. Prepare. Succeed!',
             style: TextStyle(
-              fontSize: 50,
+              fontSize: 35,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
