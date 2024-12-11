@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:scoresense/module/global_variable.dart';
@@ -5,7 +7,7 @@ import 'package:scoresense/module/global_variable.dart';
 class CustomTable extends StatefulWidget {
   final List<List<String>> data;
 
-  const CustomTable({super.key, required this.data});
+  const CustomTable({super.key, required this.data}); //, required this.data
   @override
   // ignore: library_private_types_in_public_api
   _CustomTableState createState() => _CustomTableState();
@@ -15,11 +17,25 @@ class _CustomTableState extends State<CustomTable> {
   final ScrollController _horizontalScrollController = ScrollController();
   final ScrollController _verticalScrollController1 = ScrollController();
   final ScrollController _verticalScrollController2 = ScrollController();
+  TextEditingController _controller = TextEditingController();
+  bool _showCheckboxes = false;
+  bool isChecked = false;
+  bool isInFunction = false;
+  bool isNoResult = false;
+  final Map<int, bool> checkboxes = {};
   List<List<String>>? printData;
-  int numOfRow = 0;
-  int numOfRow2 = 0;
   final Map<int, int> _sortButtonDegrees = {};
-
+  // List<List<String>> data = [
+  //   ["1","Bryce Sims", "GP", "F", "18", "U", "GT3", "A", "4", "4", "at_home", "teacher", "course", "mother", "2", "2", "0", "yes", "no", "no", "no", "yes", "yes", "no", "no", "4", "3", "4", "1", "1", "3", "6", "5", "6", "Fail"],
+  //   ["2","Brandi Thompson", "GP", "F", "17", "U", "GT3", "T", "1", "1", "at_home", "other", "course", "father", "1", "2", "0", "no", "yes", "no", "no", "no", "yes", "yes", "no", "5", "3", "3", "1", "1", "3", "4", "5", "5", "Fail"],
+  //   ["3","Edwin Shaw", "GP", "F", "15", "U", "LE3", "T", "1", "1", "at_home", "other", "other", "mother", "1", "2", "3", "yes", "no", "yes", "no", "yes", "yes", "yes", "no", "4", "3", "2", "2", "3", "3", "10", "7", "8", "Pass"],
+  //   ["4","Tammy Bishop", "GP", "F", "15", "U", "GT3", "T", "4", "2", "health", "services", "home", "mother", "1", "3", "0", "no", "yes", "yes", "yes", "yes", "yes", "yes", "yes", "3", "2", "2", "1", "1", "5", "2", "15", "14", "Pass"],
+  //   ["5","Patricia Lopez", "GP", "F", "16", "U", "GT3", "T", "3", "3", "other", "other", "home", "father", "1", "2", "0", "no", "yes", "yes", "no", "yes", "yes", "no", "no", "4", "3", "2", "1", "2", "5", "4", "6", "10", "Fail"],
+  //   ["6","Rachael Herring", "GP", "M", "16", "U", "LE3", "T", "4", "3", "services", "other", "reputation", "mother", "1", "2", "0", "no", "yes", "yes", "yes", "yes", "yes", "yes", "no", "5", "4", "2", "1", "2", "5", "10", "15", "15", "Fail"],
+  //   ["7","Jenna Trujillo", "GP", "M", "16", "U", "LE3", "T", "2", "2", "other", "other", "home", "mother", "1", "2", "0", "no", "no", "no", "no", "yes", "yes", "yes", "no", "4", "4", "4", "1", "1", "3", "0", "12", "12", "Pass"],
+  //   ["8","Joseph Huynh", "GP", "F", "17", "U", "GT3", "A", "4", "4", "other", "teacher", "home", "mother", "2", "2", "0", "yes", "yes", "no", "no", "yes", "yes", "no", "no", "4", "1", "4", "1", "1", "1", "6", "6", "5", "Pass"],
+  //   ["9","Gary Mercer", "GP", "M", "15", "U", "LE3", "A", "3", "2", "services", "other", "home", "mother", "1", "2", "0", "no", "yes", "yes", "no", "yes", "yes", "yes", "no", "4", "2", "2", "1", "1", "1", "0", "16", "18", "Fail"]
+  // ];
   @override
   void dispose() {
     // Đừng quên hủy bỏ ScrollController khi không còn sử dụng
@@ -28,11 +44,19 @@ class _CustomTableState extends State<CustomTable> {
     super.dispose();
   }
 
+  void _chooseDataToPrint(List<List<String>> updatedData, bool isInFunction) {
+    if(isInFunction){
+      printData = updatedData;
+    }else{
+      printData = widget.data;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
-    printData = widget.data;//Khoi tao mang chua gia tri in len bang
+    _chooseDataToPrint(widget.data, isInFunction);
 
     // Lắng nghe scroll của controller1 và gán cho controller2
     _verticalScrollController1.addListener(() {
@@ -52,6 +76,12 @@ class _CustomTableState extends State<CustomTable> {
       }
     });
   }
+
+  void _toggleCheckboxVisibility() {
+    setState(() {
+      _showCheckboxes = !_showCheckboxes;
+    });
+  }
   
 
   @override
@@ -60,8 +90,81 @@ class _CustomTableState extends State<CustomTable> {
       padding: const EdgeInsets.only(right: 0, left: 16, top: 16, bottom: 16),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Stack(
+      child: Column(
         children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                width: 310,
+                height: 45,
+                child: Material(
+                  child: 
+                    TextFormField(
+                      controller: _controller,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        focusColor: Colors.white,
+                        hoverColor: Colors.white,
+                        labelText: "Search",
+                        labelStyle:
+                            TextStyle(color: Color(0xFF0062FF), fontSize: 14),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF0062FF), width: 2.0),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 204, 204, 204),
+                              width: 2.0), // Độ dày border khi không focus
+                        ),
+                        prefixIcon: Icon(Icons.search, size: 20,),
+                      ),
+                      // initialValue: value,
+                      onChanged: (text){
+                        setState(() {
+                          isInFunction = true;
+                          List<List<String>> searchResult = search(widget.data, _controller.text);
+                          if(searchResult.isEmpty){
+                            isNoResult = true;
+                          }else{
+                            isNoResult = false;
+                          }
+                          _chooseDataToPrint(searchResult, isInFunction);
+                        });
+                      },
+                    )
+                ),
+              ),
+              const SizedBox(width: 50),
+              ElevatedButton(
+                onPressed:  _toggleCheckboxVisibility,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: GlobalData().colorPrimary,
+                  shape: StadiumBorder(),
+                  minimumSize: const Size(100, 47),
+                  shadowColor: Colors.transparent
+                  // overlayColor: , // Màu khi nhấn
+                ),
+                child: const Text("Compare", style: TextStyle(color: Colors.white,fontSize: 14)),
+              ),
+              const SizedBox(width: 16),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  shape: StadiumBorder(),
+                  minimumSize: const Size(120, 47),
+                  shadowColor: Colors.transparent,
+                  backgroundColor: Color.fromARGB(255, 244, 244, 244),
+                  side: BorderSide(color: Color.fromARGB(255, 225, 225, 225), width: 2),
+                ),
+                child: const Text("Edit",style: TextStyle(fontSize: 14,),),
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
+          const SizedBox(height: 16),
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -80,13 +183,18 @@ class _CustomTableState extends State<CustomTable> {
                     controller: _verticalScrollController1, // Gán ScrollController vào SingleChildScrollView
                     scrollDirection: Axis.vertical, // Cuộn dọc
                     child: Table(
-                      columnWidths: const {
-                        0: FixedColumnWidth(75), // Cột đầu tiên có độ rộng cố định
-                        1: IntrinsicColumnWidth(),
+                      columnWidths: _showCheckboxes? {
+                        0: const IntrinsicColumnWidth(),
+                        1: const IntrinsicColumnWidth(),
+                        2: const IntrinsicColumnWidth(),
+                      } : {
+                        0: const IntrinsicColumnWidth(),
+                        1: const IntrinsicColumnWidth(),
                       },
                       children: [
                         TableRow(
-                          children: [
+                          children:_showCheckboxes? [
+                            SizedBox(),
                             Container(
                               clipBehavior: Clip.antiAlias,
                               decoration: const BoxDecoration(
@@ -94,18 +202,31 @@ class _CustomTableState extends State<CustomTable> {
                               ),
                               child: _buildHeader("No", 1),
                             ),
-                            
+                            _buildHeader("Name", 2),
+                          ]: [
+                            Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(topLeft: Radius.circular(0), bottomLeft: Radius.circular(0)),
+                              ),
+                              child: _buildHeader("No", 1),
+                            ),
                             _buildHeader("Name", 2),
                           ],
                         ),
-                        const TableRow(
-                          children: [
+                        TableRow(
+                          children: _showCheckboxes? [
+                            SizedBox(height: 10),
+                            SizedBox(height: 10),
+                            SizedBox(height: 10),
+                          ]: [
                             SizedBox(height: 10),
                             SizedBox(height: 10),
                           ],
                         ),
-                        for (int i = 0; i < printData!.length; i++)
-                          _buildFixedRow(printData![i][0], printData![i][1], numOfRow++),
+                        if(printData!.isNotEmpty)
+                          for (int i = 0; i < printData!.length; i++)
+                            _buildFixedRow(printData![i][0], printData![i][1], int.parse(printData![i][0]), i),
                       ],
                     )
                   ),
@@ -222,9 +343,9 @@ class _CustomTableState extends State<CustomTable> {
                                         SizedBox(height: 10),
                                       ],
                                     ),
-                                    
-                                    for (int i = 0; i < printData!.length; i++)
-                                      _buildRow(printData![i][0], printData![i][1], printData![i][2], printData![i][3], printData![i][4], printData![i][5], printData![i][6], printData![i][7], printData![i][8], printData![i][9], printData![i][10], printData![i][11], printData![i][12], printData![i][13], printData![i][14], printData![i][15], printData![i][16], printData![i][17], printData![i][18], printData![i][19], printData![i][20], printData![i][21], printData![i][22], printData![i][23], printData![i][24], printData![i][25], printData![i][26], printData![i][27], printData![i][28], printData![i][29], printData![i][30], printData![i][31], printData![i][32], printData![i][33], printData![i][34], numOfRow2++)
+                                      if(printData!.isNotEmpty)
+                                      for (int i = 0; i < printData!.length; i++)
+                                        _buildRow(printData![i][0], printData![i][1], printData![i][2], printData![i][3], printData![i][4], printData![i][5], printData![i][6], printData![i][7], printData![i][8], printData![i][9], printData![i][10], printData![i][11], printData![i][12], printData![i][13], printData![i][14], printData![i][15], printData![i][16], printData![i][17], printData![i][18], printData![i][19], printData![i][20], printData![i][21], printData![i][22], printData![i][23], printData![i][24], printData![i][25], printData![i][26], printData![i][27], printData![i][28], printData![i][29], printData![i][30], printData![i][31], printData![i][32], printData![i][33], printData![i][34], int.parse(printData![i][0]), i),
                                 ],
                               ),
                               const SizedBox(width: 16),
@@ -250,8 +371,6 @@ class _CustomTableState extends State<CustomTable> {
         onTap: () {
           // Cập nhật giá trị trong setState
           setState(() {
-            numOfRow = 0;
-            numOfRow2 = 0;
             if(_sortButtonDegrees[buttonId] == 0 || _sortButtonDegrees[buttonId] == null){
               _sortButtonDegrees[buttonId] = 180;
               printData = sortData(printData!, buttonId, true);
@@ -300,6 +419,7 @@ class _CustomTableState extends State<CustomTable> {
   Widget _buildCell(String text) {
     return Container(
       padding: const EdgeInsets.all(10.0),
+      height: 40,
       alignment: Alignment.center, // Căn giữa dọc và ngang
       child: Center(
         child: (text == "Pass" || text == "Fail")
@@ -344,7 +464,7 @@ class _CustomTableState extends State<CustomTable> {
   }
 
   // Function to build a row of data
-  TableRow _buildRow(String no, String name, String school, String sex, String age, String address, String famsize, String pstatus, String medu, String fedu, String mjob, String fjob, String reason, String guardian, String travelTime, String studyTime, String failures, String schoolSup, String famSup, String paid, String activities, String nursery, String higher, String internet, String romantic, String famrel, String freeTime, String goOut, String dalc, String walc, String health, String absences, String g1, String g2, String result, int numOfRow) {
+  TableRow _buildRow(String no, String name, String school, String sex, String age, String address, String famsize, String pstatus, String medu, String fedu, String mjob, String fjob, String reason, String guardian, String travelTime, String studyTime, String failures, String schoolSup, String famSup, String paid, String activities, String nursery, String higher, String internet, String romantic, String famrel, String freeTime, String goOut, String dalc, String walc, String health, String absences, String g1, String g2, String result, int rowId, int numOfRow) {
     return TableRow(
       decoration: BoxDecoration(
         color: numOfRow % 2 == 0 ? Colors.white : Colors.lightBlue.shade50, // Dòng lẻ trắng, dòng chẵn xanh nhạt
@@ -390,8 +510,37 @@ class _CustomTableState extends State<CustomTable> {
     );
   }
 
-  TableRow _buildFixedRow(String no, String name, int numOfRow) {
-    return TableRow(
+  TableRow _buildFixedRow(String no, String name, int rowId, int numOfRow) {
+    if(_showCheckboxes){
+      return TableRow(
+        decoration: BoxDecoration(
+          color: numOfRow % 2 == 0 ? Colors.white : Colors.lightBlue.shade50, // Dòng lẻ trắng, dòng chẵn xanh nhạt
+        ),
+        children: [
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: 
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    checkboxes[rowId] = !(checkboxes[rowId] ?? false); // Đảo ngược trạng thái của dòng
+                    print("rowId: $rowId, checked: ${checkboxes[rowId]}");
+                  });
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10.0),
+                  child: _buildCheckBox(checkboxes[rowId] ?? false), // Lấy trạng thái từ Map
+                ),
+              ),
+          ),
+          _buildCell(no),
+          _buildCell(name),
+        ],
+      );
+    }else{
+      return TableRow(
       decoration: BoxDecoration(
         color: numOfRow % 2 == 0 ? Colors.white : Colors.lightBlue.shade50, // Dòng lẻ trắng, dòng chẵn xanh nhạt
       ),
@@ -400,6 +549,24 @@ class _CustomTableState extends State<CustomTable> {
         _buildCell(name),
       ],
     );
+    }
+  }
+
+  SvgPicture _buildCheckBox(bool isChecked) {
+    if (isChecked)
+    {
+      return  SvgPicture.asset(
+                'check-box-icon-checked.svg',
+                width: 14,
+                height: 14,
+              );
+    }else {
+      return  SvgPicture.asset(
+                'check-box-icon-unchecked.svg',
+                width: 14,
+                height: 14,
+              );
+    }
   }
 
   Widget _buildSortButton(int rotationDegree) {
@@ -532,5 +699,19 @@ class _CustomTableState extends State<CustomTable> {
       throw ArgumentError("Invalid buttonId: $buttonId");
   }
     return sortedData;
+  }
+
+  List<List<String>> search(List<List<String>> data, String value) {
+    List<List<String>> result = [];
+
+    // Duyệt qua mỗi danh sách trong data
+    for (var list in data) {
+      // Kiểm tra nếu tên (index 1) chứa chuỗi value
+      if (list[1].toLowerCase().contains(value.toLowerCase())) {
+        result.add(list); // Nếu có thì thêm vào kết quả
+      }
+    }
+    
+    return result;
   }
 }
