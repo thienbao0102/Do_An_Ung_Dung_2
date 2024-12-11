@@ -45,20 +45,6 @@ def TrainModel(data):
     train_model(version, data)
 
 
-#bien can thiet de ho tro loadmodel
-folder_path = "models"
-models = {index + 1: file for index, file in enumerate(sorted(os.listdir(folder_path))) if file.endswith(".pkl")}
-
-# load model theo version
-def loadModel_v(version):
-    model_path = os.path.join(folder_path, models[version])
-
-    with open(model_path, 'rb') as f:
-        model = load(f)
-    
-    print(f"Đã load model: {models[version]}")
-    return model
-
 # count file model
 def count_models():
     try:

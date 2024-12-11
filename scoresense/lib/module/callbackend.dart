@@ -17,7 +17,6 @@ Future<List<Predictions>> sendData(
   );
   if (response.statusCode == 200) {
     final jsonResponse = jsonDecode(response.body);
-    // print(jsonResponse);
     // Chuyển đổi danh sách các bản ghi JSON thành danh sách các đối tượng Prediction
     List<Predictions> predictionsList = (jsonResponse as List)
         .map((item) => Predictions.fromJson(item))
@@ -31,7 +30,6 @@ Future<List<Predictions>> sendData(
 Future<void> sendDataTrainModel(List<List<dynamic>> inputDataImport) async {
   // Chuyển đổi List thành JSON
   final jsonData = jsonEncode(inputDataImport);
-  // print(jsonData);
   // Gửi yêu cầu POST lên server
   final response = await http.post(
     Uri.parse('http://127.0.0.1:5000/trainmodel'),

@@ -17,7 +17,6 @@ class _AllModelTrainState extends State<AllModelTrain> {
     int num = await getTotalModel();
     setState(() {
       GlobalData().numModel = num;
-      // print("num: ${num}");
     });
   }
 
