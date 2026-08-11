@@ -87,7 +87,7 @@ class FormData2 extends StatelessWidget {
                     const SizedBox(height: 10),
                     MediaQuery.of(context).size.width > sizeChangeToSlideBar
                         ? UiDesign.buildRadioButtonGroupRow(
-                            "Father's education",
+                            "Mother's education",
                             [
                               'None',
                               'Primary',
@@ -130,7 +130,13 @@ class FormData2 extends StatelessWidget {
                     MediaQuery.of(context).size.width > sizeChangeToSlideBar
                         ? UiDesign.buildRadioButtonGroupRow(
                             "Mother's job",
-                            ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
+                            [
+                              'At_home',
+                              'Health',
+                              'Services',
+                              'Teacher',
+                              'Other'
+                            ],
                             GlobalData().motherJob,
                             (value) => GlobalData().motherJob = value,
                           )
@@ -161,14 +167,20 @@ class FormData2 extends StatelessWidget {
                               GlobalData().motherJob = value;
                             }),
                     const SizedBox(height: 30),
-                    MediaQuery.of(context).size.width > sizeChangeToSlideBar?
-                    UiDesign.buildRadioButtonGroupRow(
-                      "Father's job",
-                      ['At_home', 'Health', 'Services', 'Teacher', 'Other'],
-                      GlobalData().fatherJob,
-                      (value) => GlobalData().fatherJob = value,
-                    ):
-                    RatingSlider(
+                    MediaQuery.of(context).size.width > sizeChangeToSlideBar
+                        ? UiDesign.buildRadioButtonGroupRow(
+                            "Father's job",
+                            [
+                              'At_home',
+                              'Health',
+                              'Services',
+                              'Teacher',
+                              'Other'
+                            ],
+                            GlobalData().fatherJob,
+                            (value) => GlobalData().fatherJob = value,
+                          )
+                        : RatingSlider(
                             question: "Father's job",
                             labels: const [
                               'At_home',

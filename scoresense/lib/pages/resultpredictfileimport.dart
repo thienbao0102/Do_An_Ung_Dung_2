@@ -20,7 +20,7 @@ class Resultpredictfileimport extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('Background_OtherPage.png'),
+              image: AssetImage('assets/Background_OtherPage.png'),
               fit: BoxFit.cover)),
       child: const ShowResult(),
     ));
@@ -62,10 +62,11 @@ class _ShowResultState extends State<ShowResult> {
     if (dataInput.length == result.length) {
       for (int i = 0; i < dataInput.length; i++) {
         dataInput[i].insert(0, (i + 1).toString());
-        if(int.parse(result[i][1]) > 10) {
-          dataInput[i].add( "Pass");// Thêm giá trị vào cuối mỗi dòng của dataInput
+        if (int.parse(result[i][1]) > 10) {
+          dataInput[i]
+              .add("Pass"); // Thêm giá trị vào cuối mỗi dòng của dataInput
         } else {
-          dataInput[i].add( "Fail");
+          dataInput[i].add("Fail");
         }
       }
     } else {
@@ -187,15 +188,18 @@ class _ShowResultState extends State<ShowResult> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailedPage( data: dataInput,)),
+                                  builder: (context) => DetailedPage(
+                                        data: dataInput,
+                                      )),
                             );
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: const Color.fromARGB(255, 160, 233, 255)),
+                                color:
+                                    const Color.fromARGB(255, 160, 233, 255)),
                             child: const Row(
                               children: [
                                 Icon(Icons.add, size: 24),

@@ -14,16 +14,15 @@ class Review extends StatelessWidget {
       child: Center(
         child: Container(
           padding: EdgeInsets.only(
-            top: 50,
-            bottom: 100,
-            left: MediaQuery.of(context).size.width * 0.18,
-            right: MediaQuery.of(context).size.width * 0.18
-          ),
+              top: 50,
+              bottom: 100,
+              left: MediaQuery.of(context).size.width * 0.18,
+              right: MediaQuery.of(context).size.width * 0.18),
           //width: screenWidth > 600 ? screenWidth * 0.68 : screenWidth * 0.9,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const Text(
+              const Text(
                 'SCORESENSE',
                 style: TextStyle(
                   fontSize: 14,
@@ -31,21 +30,21 @@ class Review extends StatelessWidget {
                   color: Color(0xFF0062FF),
                 ),
               ),
-             const Text(
+              const Text(
                 'Each client is important',
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-             const Text(
+              const Text(
                 'Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics',
                 style: TextStyle(
                   fontSize: 14,
                   color: Color(0xFF737373),
                 ),
               ),
-              const SizedBox(height:80),
+              const SizedBox(height: 80),
               SizedBox(
                 height: 300,
                 child: ListView.builder(
@@ -68,7 +67,7 @@ class Review extends StatelessWidget {
 
   Widget buildReviewCard() {
     return Container(
-      width: 300 ,
+      width: 300,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 251, 252, 252),
@@ -91,7 +90,7 @@ class Review extends StatelessWidget {
             direction: Axis.horizontal,
             allowHalfRating: true,
             itemCount: 5,
-            itemSize: 20.0 ,
+            itemSize: 20.0,
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, _) => const Icon(
               Icons.star,
@@ -101,8 +100,8 @@ class Review extends StatelessWidget {
               print(rating);
             },
           ),
-         const SizedBox(height: 20),
-         const Text(
+          const SizedBox(height: 20),
+          const Text(
             'Slate helps you see how many more days you need to work to reach your financial goal for the month and year.',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -111,22 +110,22 @@ class Review extends StatelessWidget {
               color: Color(0xFF737373),
             ),
           ),
-          SizedBox(height:20),
-         const Row(
+          SizedBox(height: 20),
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            const  CircleAvatar(
-                radius:25 ,
-                backgroundImage: AssetImage('linh.jpg'),
+              const CircleAvatar(
+                radius: 25,
+                backgroundImage: AssetImage('assets/linh.jpg'),
               ),
               SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 const Text(
+                  const Text(
                     'Regina Miles',
                     style: TextStyle(
-                      fontSize:  14,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF00A9FF),
                     ),

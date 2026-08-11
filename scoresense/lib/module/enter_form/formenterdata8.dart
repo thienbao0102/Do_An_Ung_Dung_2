@@ -53,6 +53,10 @@ class FormData8 extends StatelessWidget {
                     const SizedBox(height: 30),
                     Column(
                       children: [
+                        UiDesign.buildRadioLevelsLabel(
+                          'Quality of family relationships',
+                          ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
+                        ),
                         UiDesign.buildRadioLevels(
                           'Quality of family relationships',
                           ['Very bad', 'Bad', 'Fair', 'Good', 'Excellent'],
@@ -105,11 +109,12 @@ class FormData8 extends StatelessWidget {
                           ['Course', 'Home', 'Reputation', 'Other'],
                           GlobalData().reason,
                           (value) => GlobalData().reason = value,
-                        ),const SizedBox(height: 30),
+                        ),
+                        const SizedBox(height: 30),
 
                         UiDesign.buildRadioButtonGroupRow(
                           "Your guardian",
-                          ['Mother','Father','Other'],
+                          ['Mother', 'Father', 'Other'],
                           GlobalData().guardian,
                           (value) => GlobalData().guardian = value,
                         )

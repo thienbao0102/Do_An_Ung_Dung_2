@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scoresense/pages/allmodeltrain.dart';
 import 'package:scoresense/pages/choosepredictmethod.dart';
 
 class Header extends StatefulWidget {
@@ -12,7 +11,7 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> {
   // Danh sách trạng thái hover cho từng mục
-  final List<bool> isHoveredList = [false, false, false, false, false];
+  final List<bool> isHoveredList = [false, false];
   // bool _isMenuOpen = false;
 
   @override
@@ -53,50 +52,10 @@ class _HeaderState extends State<Header> {
                     );
                   },
                 ),
-                const SizedBox(
-                  width: 30,
-                ),
-                // Fit Model
-                _buildNavItem(
-                  context,
-                  "Train Model",
-                  2,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AllModelTrain()),
-                    );
-                  },
-                ),
               ],
             ),
           ),
-          Expanded(
-              flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  //Sign in
-                  _buildNavItem(
-                    context,
-                    "Sign In",
-                    3,
-                    onTap: () {
-                      Navigator.pushNamed(context, "/");
-                    },
-                  ),
-                  //Sign in
-                  _buildNavItem(
-                    context,
-                    "Sign Up",
-                    4,
-                    onTap: () {
-                      Navigator.pushNamed(context, "/");
-                    },
-                  ),
-                ],
-              ))
+          const Spacer(flex: 2),
         ],
       ),
     );

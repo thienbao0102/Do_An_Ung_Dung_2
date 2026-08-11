@@ -59,7 +59,9 @@ class Activity extends StatelessWidget {
                           );
                         },
                         child: FractionallySizedBox(
-                          widthFactor: MediaQuery.of(context).size.width >800? 0.45: 1,
+                          widthFactor: MediaQuery.of(context).size.width > 800
+                              ? 0.45
+                              : 1,
                           child: Container(
                             constraints: const BoxConstraints(minWidth: 250),
                             height: 270,
@@ -69,7 +71,7 @@ class Activity extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Image(
-                                    image: AssetImage('Individual.png')),
+                                    image: AssetImage('assets/Individual.png')),
                                 const SizedBox(
                                   height: 20,
                                 ),
@@ -117,7 +119,9 @@ class Activity extends StatelessWidget {
                           );
                         },
                         child: FractionallySizedBox(
-                          widthFactor: MediaQuery.of(context).size.width >800? 0.45: 1,
+                          widthFactor: MediaQuery.of(context).size.width > 800
+                              ? 0.45
+                              : 1,
                           child: Container(
                             constraints: const BoxConstraints(minWidth: 250),
                             height: 270,
@@ -126,7 +130,8 @@ class Activity extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Image(image: AssetImage('public.png')),
+                                const Image(
+                                    image: AssetImage('assets/public.png')),
                                 const SizedBox(
                                   height: 20,
                                 ),

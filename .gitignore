@@ -1,0 +1,64 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.iml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# PyInstaller
+backend_scoresense/build/
+backend_scoresense/dist/
+backend_scoresense/*.spec
+
+# Flutter/Dart
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.pub/
+**/build/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+app.*.symbols
+app.*.map.json
+
+# Local release packages
+Scoresense_package/
+ScoreSense_Package/
+*.rar
+*.zip
+*.7z
+
+# Generated local binaries
+*.exe
+*.dll
+*.pdb
+
+# Firebase local state
+**/.firebase/
+
+# Local environment files
+.env
+.env.*
+!.env.example

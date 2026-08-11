@@ -16,11 +16,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _isLoading = true;
+  String? _errorMessage;
+
   Future<void> _loadData() async {
-    GlobalData().numModel = await getTotalModel();
     setState(() {
-      _isLoading = false;
+      _isLoading = true;
+      _errorMessage = null;
     });
+
+    try {
+      GlobalData().numModel = await getTotalModel();
+    } catch (_) {
+      _errorMessage =
+          'Unable to connect to ScoreSense. The free server may be starting; please try again.';
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -32,10 +47,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
       );
     }
+
+    if (_errorMessage != null) {
+      return Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(_errorMessage!, textAlign: TextAlign.center),
+                const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: _loadData,
+                  child: const Text('Try again'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return const Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

@@ -16,7 +16,7 @@ class ImportFilePredict extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('Background_OtherPage.png'),
+                  image: AssetImage('assets/Background_OtherPage.png'),
                   fit: BoxFit.cover)),
           child: const FormImportFile()),
     );
@@ -48,7 +48,8 @@ class _FormImportFileState extends State<FormImportFile> {
               //height: 400,
               margin: const EdgeInsets.only(
                   top: 140, left: 20, right: 20, bottom: 40),
-              padding: const EdgeInsets.only(right: 20, left: 20, top: 10, bottom: 20),
+              padding: const EdgeInsets.only(
+                  right: 20, left: 20, top: 10, bottom: 20),
               decoration: BoxDecoration(
                 color: const Color(0xFFFBFBFB),
                 borderRadius: BorderRadius.circular(20),
@@ -177,7 +178,6 @@ class _FormImportFileState extends State<FormImportFile> {
                           maxFontSize: 16,
                         ),
                       ),
-                      
                     ],
                   )
                 ],

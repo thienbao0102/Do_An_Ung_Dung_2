@@ -11,7 +11,6 @@ class ContentAndTry extends StatefulWidget {
 }
 
 class _ContentAndTryState extends State<ContentAndTry> {
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,11 +19,10 @@ class _ContentAndTryState extends State<ContentAndTry> {
       padding: const EdgeInsets.only(left: 0, bottom: 160),
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('3214599-2.png'),
+          image: AssetImage('assets/3214599-2.png'),
           fit: BoxFit.fitWidth,
         ),
       ),
-
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.centerLeft,
@@ -32,10 +30,13 @@ class _ContentAndTryState extends State<ContentAndTry> {
           const Positioned(
             top: 0,
             left: 0,
-            child: Header(setColor: Colors.white,),
+            child: Header(
+              setColor: Colors.white,
+            ),
           ),
           Container(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35, left: 100),
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.35, left: 100),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -95,7 +96,7 @@ class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right:  20.0),
+      padding: const EdgeInsets.only(right: 20.0),
       child: Wrap(
         children: [
           ElevatedButton(
@@ -105,7 +106,8 @@ class ActionButtons extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
-              elevation: 3,  // Điều chỉnh giá trị này để thay đổi độ cao của bóng
+              elevation:
+                  3, // Điều chỉnh giá trị này để thay đổi độ cao của bóng
             ),
             onPressed: () {
               Navigator.push(
@@ -119,7 +121,7 @@ class ActionButtons extends StatelessWidget {
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color:  Color.fromARGB(255, 9, 5, 43)),
+                  color: Color.fromARGB(255, 9, 5, 43)),
             ),
           ),
           const SizedBox(width: 10),
@@ -130,7 +132,8 @@ class ActionButtons extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4), // chinh border
               ),
-              elevation: 5,  // Điều chỉnh giá trị này để thay đổi độ cao của bóng
+              elevation:
+                  5, // Điều chỉnh giá trị này để thay đổi độ cao của bóng
             ),
             onPressed: () {},
             child: const Text(

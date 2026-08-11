@@ -24,16 +24,16 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
       );
     } else if (userChoose == 2) {
       if (GlobalData().inputDataImport.isEmpty) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ImportFilePredict()),
-          );
-      }
-      else{
         Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Resultpredictfileimport()),
-      );
+          context,
+          MaterialPageRoute(builder: (context) => const ImportFilePredict()),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const Resultpredictfileimport()),
+        );
       }
     }
   }
@@ -51,7 +51,7 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('Background_OtherPage.png'),
+                image: AssetImage('assets/Background_OtherPage.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -139,7 +139,7 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
                                             height: 35,
                                             width: 35,
                                             child: SvgPicture.asset(
-                                              'person-outline.svg',
+                                              'assets/person-outline.svg',
                                               fit: BoxFit.contain,
                                               color: userChoose == 1
                                                   ? Colors.white
@@ -235,7 +235,7 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
                                             height: 35,
                                             width: 35,
                                             child: SvgPicture.asset(
-                                              'business-outline.svg',
+                                              'assets/business-outline.svg',
                                               fit: BoxFit.contain,
                                               color: userChoose == 2
                                                   ? Colors.white
@@ -304,7 +304,9 @@ class _ChoosepredictmethodState extends State<Choosepredictmethod> {
                       Container(
                         margin: const EdgeInsets.only(top: 180),
                         child: Image.asset(
-                          userChoose == 1 ? '5214641.png' : '2808347.png',
+                          userChoose == 1
+                              ? 'assets/5214641.png'
+                              : 'assets/2808347.png',
                           width: MediaQuery.of(context).size.width * 0.4,
                           height: 500,
                           fit: BoxFit

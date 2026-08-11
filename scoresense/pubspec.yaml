@@ -81,11 +81,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/chevron-back-outline.svg
-    - assets/chevron-forward-outline.svg
-    - assets/star-filled.svg
-    - assets/star-bordered.svg
-    - assets/3214599-2.png
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
