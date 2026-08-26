@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ScoreSense - Nền sáng Open Sans</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;background:#eaf4fb;font-family:'Open Sans',Arial,sans-serif;color:#102a43}
+    .slide{width:1600px;height:900px;background:#fff;position:relative;overflow:hidden;padding:64px 76px;display:flex;flex-direction:column;gap:28px}
+    .slide::before{content:"";position:absolute;right:-90px;top:-90px;width:330px;height:330px;border-radius:50%;background:#e5f6ff;z-index:0}
+    .slide::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:12px;background:linear-gradient(90deg,#0b5fff,#27c2e8)}
+    .slide>*{position:relative;z-index:1}
+    h1,h2,h3,p,ul{margin:0} h1{font-size:32pt;line-height:1.14;font-weight:800;color:#073b74} h2{font-size:32pt;line-height:1.16;font-weight:800;color:#0b5fff} h3{font-size:22pt;line-height:1.25;font-weight:700;color:#073b74}
+    p,li,.body{font-size:22pt;line-height:1.34}.small{font-size:22pt}.tiny{font-size:22pt}.muted{color:#486581}.blue{color:#0b5fff}.cyan{color:#008fb7}.green{color:#087f5b}.red{color:#c92a2a}.bold{font-weight:800}
+    .eyebrow{font-size:22pt;font-weight:800;letter-spacing:.06em;color:#008fb7;text-transform:uppercase}.footer{position:absolute;left:76px;right:76px;bottom:26px;display:flex;justify-content:space-between;font-size:22pt;color:#627d98}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{background:#f5fbff;border:2px solid #cfeaf7;border-radius:22px;padding:28px}.card.white{background:#fff}.card.accent{border-left:10px solid #0b5fff}.card.warn{background:#fff7ed;border-color:#ffd8a8}.card.good{background:#eefbf5;border-color:#a9e5ce}
+    .kpi{font-size:46pt;font-weight:800;color:#0b5fff;line-height:1}.kpi-label{font-size:22pt;font-weight:700;color:#486581;margin-top:10px}.quote{background:#eef7ff;border-left:12px solid #0b5fff;border-radius:12px;padding:22px 28px;font-size:22pt;font-weight:700;color:#073b74}
+    .flow{display:flex;align-items:center;justify-content:center;gap:13px;flex:1;flex-wrap:wrap}.step{min-width:155px;padding:21px 18px;background:#f1f8ff;border:2px solid #9ed3f5;border-radius:18px;text-align:center;font-size:22pt;font-weight:700}.arrow{font-size:28pt;color:#0b5fff;font-weight:800}
+    .pill{display:inline-block;padding:8px 16px;border-radius:999px;background:#e7f5ff;color:#075985;font-size:22pt;font-weight:800}.list{padding-left:30px;display:flex;flex-direction:column;gap:12px}.list li::marker{color:#0b5fff}
+    table{width:100%;border-collapse:separate;border-spacing:0;font-size:22pt;overflow:hidden;border:2px solid #cfe1ee;border-radius:18px} th{background:#0b5fff;color:#fff;padding:15px;text-align:left;font-size:22pt} td{padding:13px 15px;border-top:1px solid #d9e8f2;font-size:22pt;background:#fff} tr:nth-child(even) td{background:#f7fbff}
+    .donut{width:250px;height:250px;border-radius:50%;background:conic-gradient(#0b5fff 0 80%,#27c2e8 80% 100%);position:relative;margin:auto}.donut::after{content:"80 / 20";position:absolute;inset:52px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28pt;font-weight:800;color:#073b74}
+    .barrow{display:grid;grid-template-columns:250px 1fr 145px;align-items:center;gap:18px;margin:18px 0;font-size:22pt}.track{height:34px;background:#e6eef5;border-radius:999px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,#0b5fff,#27c2e8);border-radius:999px}.bar.cyanbar{background:#27c2e8}.value{font-size:22pt;font-weight:800;color:#073b74}
+    .screen-grid{display:grid;grid-template-columns:1.1fr .8fr 1.1fr;gap:18px;flex:1;align-items:center}.screen{background:#fff;border:3px solid #bdd9ea;border-radius:18px;padding:10px;box-shadow:0 10px 28px rgba(30,90,130,.12)}.screen img{width:100%;height:100%;object-fit:contain;border-radius:10px}.screen.tall{height:520px}.screen.wide{height:395px}
+    .arch{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;align-items:center;flex:1}.node{padding:24px 12px;text-align:center;background:#f5fbff;border:2px solid #add9ee;border-radius:18px;font-size:22pt;font-weight:700}.node.model{background:#e9f3ff;border-color:#6aaef0}.node.out{background:#eefbf5;border-color:#83d8ba}
+    .title-center{justify-content:center;text-align:center;align-items:center;padding-left:120px;padding-right:120px}.title-center h1{max-width:1280px}.team{font-size:22pt;line-height:1.5;color:#334e68}.metric-note{font-size:22pt;background:#fff4e6;border:2px solid #ffd8a8;border-radius:15px;padding:16px 20px;color:#8a3b12;font-weight:800}
+    .formula{font-family:'Open Sans',Arial,sans-serif;font-size:26pt;font-weight:800;color:#073b74;background:#f5fbff;border:2px solid #cfeaf7;border-radius:18px;padding:22px;text-align:center}
+  </style>
+</head>
+<body>
+
+<section class="slide title-center" data-document-role="page" data-label="Trang tiêu đề">
+  <div class="eyebrow">Nghiên cứu khoa học sinh viên cấp trường · 2026</div>
+  <h1>XÂY DỰNG HỆ THỐNG DỰ ĐOÁN ĐIỂM SỐ HỌC TẬP CỦA SINH VIÊN DỰA TRÊN CÁC YẾU TỐ NHÂN KHẨU HỌC VÀ HÀNH VI HỌC TẬP BẰNG DECISION TREE</h1>
+  <div style="width:160px;height:8px;background:#27c2e8;border-radius:8px"></div>
+  <div class="team"><b>Nhóm thực hiện:</b> Mạch Lâm Quốc Hoài · Nguyễn Võ Thiên Bảo · Đặng Giao Ngân Linh<br><b>GVHD:</b> ThS. Nguyễn Thị Thanh<br>Khoa Kỹ thuật Cơ - Điện và Máy tính · Trường Đại học Văn Lang</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Bối cảnh và vấn đề">
+  <div class="eyebrow">01 · Bài toán & động cơ</div><h2>Bối cảnh & vấn đề nghiên cứu</h2>
+  <div class="grid3">
+    <div class="card accent"><h3>Hiện trạng</h3><p style="margin-top:22px">Kết quả thường chỉ được nhìn thấy sau khi quá trình học đã kết thúc.</p></div>
+    <div class="card accent"><h3>Vấn đề</h3><p style="margin-top:22px">Khó phát hiện sớm người học có nguy cơ suy giảm kết quả.</p></div>
+    <div class="card accent"><h3>Mục tiêu</h3><p style="margin-top:22px">Kết hợp dữ liệu học tập, bối cảnh cá nhân và hành vi để dự đoán điểm số.</p></div>
+  </div>
+  <div class="quote">Dự đoán để hỗ trợ can thiệp sớm, không thay thế đánh giá của giảng viên.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Mục tiêu và câu hỏi nghiên cứu">
+  <div class="eyebrow">01 · Bài toán & động cơ</div><h2>Mục tiêu & câu hỏi nghiên cứu</h2>
+  <div class="grid2">
+    <div class="card"><h3>Bốn mục tiêu</h3><ul class="list" style="margin-top:20px"><li>Xác định nhóm yếu tố liên quan.</li><li>Xây dựng mô hình dự đoán G3.</li><li>Đánh giá trên dữ liệu chưa quan sát.</li><li>Tích hợp thành ứng dụng ScoreSense.</li></ul></div>
+    <div class="card good" style="display:flex;flex-direction:column;justify-content:center"><h3>Câu hỏi nghiên cứu</h3><p style="margin-top:24px;font-weight:700">Có thể dự đoán G3 từ đặc trưng học tập, nhân khẩu học và hành vi với mức sai số có giá trị tham khảo hay không?</p></div>
+  </div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Khoảng trống và đóng góp">
+  <div class="eyebrow">01 · Bài toán & động cơ</div><h2>Khoảng trống & đóng góp</h2>
+  <div class="grid2">
+    <div class="card warn"><h3>Khoảng trống</h3><ul class="list" style="margin-top:20px"><li>Phụ thuộc nhiều vào điểm số và dữ liệu học vụ.</li><li>Ít kết hợp đồng thời dữ liệu đa nhóm.</li><li>Mô hình phức tạp khó giải thích trong tư vấn.</li></ul></div>
+    <div class="card good"><h3>Đóng góp của đề tài</h3><div class="flow" style="flex-direction:column"><div class="step">DATA<br><span class="muted">Bộ biến đa nhóm</span></div><div class="arrow">↓</div><div class="step">MODEL<br><span class="muted">Decision Tree Regressor</span></div><div class="arrow">↓</div><div class="step">APPLICATION<br><span class="muted">ScoreSense</span></div></div></div>
+  </div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Dataset nguồn và quy mô">
+  <div class="eyebrow">02 · Data</div><h2>Dataset: nguồn & quy mô</h2>
+  <div class="grid2">
+    <div><div class="card accent"><h3>UCI Student Performance</h3><p style="margin-top:16px"><b>Tệp:</b> student-mat.csv<br><b>Ngữ cảnh gốc:</b> học sinh trung học tại Bồ Đào Nha, môn Toán.</p></div><div class="metric-note" style="margin-top:20px">Dùng để kiểm chứng quy trình — không phải dữ liệu sinh viên Văn Lang.</div></div>
+    <div class="grid4" style="grid-template-columns:1fr 1fr"><div class="card"><div class="kpi">395</div><div class="kpi-label">bản ghi</div></div><div class="card"><div class="kpi">33</div><div class="kpi-label">cột ban đầu</div></div><div class="card"><div class="kpi">32</div><div class="kpi-label">biến đầu vào</div></div><div class="card"><div class="kpi">41</div><div class="kpi-label">feature sau encoding</div></div></div>
+  </div>
+  <div class="footer"><span>Cortez, P. (2008) · DOI 10.24432/C5TG7T</span><span>Train 316 · Test 79</span></div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Data Dictionary">
+  <div class="eyebrow">02 · Data</div><h2>Data Dictionary: 5 nhóm biến</h2>
+  <table><thead><tr><th>Nhóm</th><th>Ví dụ</th><th>Ý nghĩa</th></tr></thead><tbody>
+    <tr><td>Nhân khẩu học</td><td>age, sex, address</td><td>Đặc điểm cá nhân</td></tr><tr><td>Gia đình</td><td>Medu, Fedu, Mjob, Fjob</td><td>Bối cảnh gia đình</td></tr><tr><td>Hành vi học tập</td><td>studytime, absences, failures</td><td>Yếu tố có thể điều chỉnh</td></tr><tr><td>Hỗ trợ & môi trường</td><td>schoolsup, famsup, internet</td><td>Điều kiện hỗ trợ</td></tr><tr><td>Thành tích trước đó</td><td>G1, G2</td><td>Tín hiệu gần nhất</td></tr>
+  </tbody></table>
+  <div class="quote">TARGET: G3 — điểm cuối kỳ, thang 0–20.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="G3 là target hồi quy">
+  <div class="eyebrow">02 · Data</div><h2>Vì sao G3 là target hồi quy?</h2>
+  <div class="flow"><div class="step">INPUT<br><span class="muted">G1, G2 + bối cảnh</span></div><div class="arrow">→</div><div class="step">TARGET<br><span class="muted">G3 [0–20]</span></div><div class="arrow">→</div><div class="step">PROBLEM<br><span class="muted">Regression</span></div><div class="arrow">→</div><div class="step">MODEL<br><span class="muted">Decision Tree Regressor</span></div></div>
+  <div class="quote">Nhãn đạt / chưa đạt chỉ là lớp hiển thị sau khi dự đoán điểm.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Data preprocessing">
+  <div class="eyebrow">02 · Data</div><h2>Data preprocessing</h2>
+  <div class="flow"><div class="step">Raw Data</div><div class="arrow">→</div><div class="step">Validation</div><div class="arrow">→</div><div class="step">One-hot Encoding</div><div class="arrow">→</div><div class="step">Feature Alignment</div><div class="arrow">→</div><div class="step">Train / Test</div></div>
+  <div class="grid4"><div class="card"><h3>0</h3><p>missing ở cột huấn luyện</p></div><div class="card"><h3>drop_first</h3><p>giảm cột dư thừa</p></div><div class="card"><h3>32 → 41</h3><p>đặc trưng sau encoding</p></div><div class="card"><h3>Schema</h3><p>lưu cấu trúc cho inference</p></div></div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Quy trình huấn luyện">
+  <div class="eyebrow">03 · Machine Learning</div><h2>Quy trình huấn luyện</h2>
+  <div class="flow"><div class="step">Dataset</div><div class="arrow">→</div><div class="step">Preprocess</div><div class="arrow">→</div><div class="step">Split</div><div class="arrow">→</div><div class="step">Decision Tree</div><div class="arrow">→</div><div class="step">Evaluate</div><div class="arrow">→</div><div class="step">REST API</div></div>
+  <div class="grid3"><div class="card"><div class="kpi">316</div><div class="kpi-label">Train · 80%</div></div><div class="card"><div class="kpi">79</div><div class="kpi-label">Test · 20%</div></div><div class="card"><div class="kpi">42</div><div class="kpi-label">random_state</div></div></div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Tại sao chọn Decision Tree">
+  <div class="eyebrow">03 · Machine Learning</div><h2>Tại sao chọn Decision Tree?</h2>
+  <div class="grid3"><div class="card accent"><div class="kpi">01</div><h3>Interpretability</h3><p style="margin-top:14px">Theo dõi điều kiện từ root đến leaf.</p></div><div class="card accent"><div class="kpi">02</div><h3>Mixed Features</h3><p style="margin-top:14px">Phù hợp dữ liệu số và categorical sau encoding.</p></div><div class="card accent"><div class="kpi">03</div><h3>Application-oriented</h3><p style="margin-top:14px">Gọn, suy luận nhanh, dễ đóng gói.</p></div></div>
+  <div class="quote">Cân bằng hiệu năng — khả năng giải thích — khả năng triển khai.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Kết quả mô hình">
+  <div class="eyebrow">03 · Machine Learning</div><h2>Kết quả mô hình trên test set</h2>
+  <div class="grid4"><div class="card"><div class="kpi">6,33</div><div class="kpi-label">MSE</div></div><div class="card"><div class="kpi">2,52</div><div class="kpi-label">RMSE · điểm</div></div><div class="card"><div class="kpi">1,43</div><div class="kpi-label">MAE · điểm</div></div><div class="card"><div class="kpi">0,69</div><div class="kpi-label">R²</div></div></div>
+  <div class="grid2"><div class="card good"><h3>MAE = 1,43</h3><p style="margin-top:12px">Sai lệch tuyệt đối trung bình khoảng 1,43 điểm.</p></div><div class="card"><h3>R² = 0,69</h3><p style="margin-top:12px">Giải thích khoảng 69% biến thiên G3 trên 79 mẫu test.</p></div></div>
+  <div class="metric-note">R² = 0,69 ≠ Accuracy = 69%.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Khả năng tổng quát hóa">
+  <div class="eyebrow">03 · Machine Learning</div><h2>Khả năng tổng quát hóa</h2>
+  <div class="grid2">
+    <div class="card good"><h3>Đạt được</h3><div class="donut" style="margin-top:35px"></div><p style="text-align:center;margin-top:20px"><b>316 train</b> · <b>79 unseen test</b></p></div>
+    <div class="card warn"><h3>Giới hạn đánh giá</h3><ul class="list" style="margin-top:22px"><li>Chỉ 395 bản ghi.</li><li>Một lần chia hold-out 80/20.</li><li>Chưa có cross-validation và baseline.</li><li>Dữ liệu gốc khác đối tượng triển khai.</li></ul></div>
+  </div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Yếu tố nổi bật">
+  <div class="eyebrow">03 · Machine Learning</div><h2>Những nhóm yếu tố nổi bật</h2>
+  <div class="grid3"><div class="card"><h3>Tín hiệu gần nhất</h3><p style="margin-top:18px"><span class="pill">G1</span> <span class="pill">G2</span></p></div><div class="card"><h3>Tín hiệu hành vi</h3><p style="margin-top:18px">absences · failures · studytime</p></div><div class="card"><h3>Bối cảnh bổ sung</h3><p style="margin-top:18px">gia đình · hỗ trợ · môi trường</p></div></div>
+  <div class="quote">Feature importance không đồng nghĩa quan hệ nhân quả.</div>
+  <p class="muted">G1/G2 là tín hiệu mạnh nhưng làm thời điểm cảnh báo gần cuối kỳ hơn.</p>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Kiến trúc hệ thống">
+  <div class="eyebrow">04 · Application</div><h2>Kiến trúc hệ thống ScoreSense</h2>
+  <div class="arch"><div class="node">Sinh viên<br>Giảng viên</div><div class="arrow">→</div><div class="node">Flutter Web</div><div class="arrow">→</div><div class="node model">REST API<br>Flask</div><div class="arrow">→</div><div class="node">pandas<br>Feature alignment</div><div class="arrow">→</div><div class="node model">Model .pkl<br>Schema .json</div><div class="arrow">→</div><div class="node out">Prediction<br>Visualization</div></div>
+  <div class="quote">Frontend: Firebase Hosting · API: Render + Gunicorn</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Ứng dụng ScoreSense">
+  <div class="eyebrow">04 · Application</div><h2>Ứng dụng ScoreSense</h2>
+  <div class="screen-grid"><div class="screen wide"><img src="assets/image1.png" alt="Chọn phương thức dự đoán"></div><div class="screen tall"><img src="assets/image3.png" alt="Kết quả dự đoán cá nhân"></div><div class="screen wide"><img src="assets/image4.png" alt="Kết quả dự đoán hàng loạt"></div></div>
+  <div class="grid2"><div class="card"><h3>INDIVIDUAL</h3><p>Nhập biểu mẫu → dự đoán → xem kết quả.</p></div><div class="card"><h3>BATCH</h3><p>Upload CSV → dự đoán nhiều bản ghi → tổng hợp.</p></div></div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Kiểm thử hệ thống">
+  <div class="eyebrow">04 · Application</div><h2>Kết quả kiểm thử hệ thống</h2>
+  <div class="grid2"><div class="card"><ul class="list"><li>Input JSON / bảng hợp lệ.</li><li>Dự đoán nhiều sinh viên.</li><li>Tách và ghép lại cột name.</li></ul></div><div class="card"><ul class="list"><li>Giữ originalIndex để đối chiếu.</li><li>Reindex schema và điền 0.</li><li>Nạp mô hình theo phiên bản.</li></ul></div></div>
+  <div class="quote">Category vắng mặt ở inference không làm sai số lượng hoặc thứ tự feature.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Hạn chế và hướng phát triển">
+  <div class="eyebrow">05 · Đánh giá</div><h2>Hạn chế & hướng phát triển</h2>
+  <div class="grid2"><div class="card warn"><h3>Hạn chế hiện tại</h3><ul class="list" style="margin-top:18px"><li>395 bản ghi; khác bối cảnh triển khai.</li><li>Self-reported data, tiềm ẩn bias.</li><li>Cây đơn nhạy với dữ liệu.</li><li>Chưa CV, tuning, baseline.</li></ul></div><div class="card good"><h3>Hướng phát triển</h3><ul class="list" style="margin-top:18px"><li><b>DATA:</b> nội bộ đa khoa / khóa / học kỳ.</li><li><b>MODEL:</b> RF, GBM, XGBoost, ensemble.</li><li><b>EVALUATION:</b> CV, tuning, fairness.</li><li><b>SYSTEM:</b> RBAC, privacy, monitoring.</li></ul></div></div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Kết luận">
+  <div class="eyebrow">05 · Kết luận</div><h2>Kết luận</h2>
+  <div class="grid3"><div class="card"><div class="kpi">395</div><div class="kpi-label">bản ghi</div></div><div class="card"><div class="kpi">41</div><div class="kpi-label">feature sau encoding</div></div><div class="card"><div class="kpi">0,69</div><div class="kpi-label">R² trên test set</div></div></div>
+  <div class="grid2"><div class="card"><ul class="list"><li>Tổ chức và xử lý dữ liệu.</li><li>Xây dựng Decision Tree Regressor.</li><li>Đánh giá trên test set 20%.</li></ul></div><div class="card"><ul class="list"><li>Version hóa model và schema.</li><li>Tích hợp REST API + ScoreSense.</li><li>Kiểm thử individual và batch.</li></ul></div></div>
+  <div class="quote">Biến dự đoán học tập thành tín hiệu cảnh báo sớm và hỗ trợ tư vấn — không thay thế quyết định của giảng viên.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Backup 1 - Full Data Dictionary">
+  <div class="eyebrow">Backup 1</div><h2>Full Data Dictionary</h2>
+  <div class="grid2"><div class="card"><h3>Cá nhân & gia đình</h3><p style="margin-top:15px">school, sex, age, address, famsize, Pstatus, Medu, Fedu, Mjob, Fjob, reason, guardian</p><h3 style="margin-top:24px">Hỗ trợ</h3><p style="margin-top:15px">schoolsup, famsup, paid, activities, nursery, higher, internet, romantic</p></div><div class="card"><h3>Hành vi & môi trường</h3><p style="margin-top:15px">traveltime, studytime, failures, famrel, freetime, goout, Dalc, Walc, health, absences</p><h3 style="margin-top:24px">Thành tích</h3><p style="margin-top:15px">G1, G2 · <b class="blue">Target: G3</b></p></div></div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Backup 2 - Decision Tree">
+  <div class="eyebrow">Backup 2</div><h2>Decision Tree: từ root đến leaf</h2>
+  <div class="flow"><div class="step">ROOT<br><span class="muted">G2?</span></div><div class="arrow">→</div><div class="step">NODE<br><span class="muted">G1?</span></div><div class="arrow">→</div><div class="step">NODE<br><span class="muted">absences?</span></div><div class="arrow">→</div><div class="step">LEAF<br><span class="muted">Predicted G3</span></div></div>
+  <div class="metric-note">Minh họa cơ chế — không gán ngưỡng giả hoặc giá trị không có nguồn.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Backup 3 - Metrics">
+  <div class="eyebrow">Backup 3</div><h2>Đọc đúng metric hồi quy</h2>
+  <div class="grid3"><div><div class="formula">MAE = mean |y − ŷ|</div><p style="margin-top:20px">Cùng đơn vị điểm; dễ diễn giải.</p></div><div><div class="formula">RMSE = √mean (y − ŷ)²</div><p style="margin-top:20px">Phạt mạnh hơn sai số lớn.</p></div><div><div class="formula">R² = 1 − SSres / SStot</div><p style="margin-top:20px">Mức biến thiên được giải thích.</p></div></div>
+  <div class="metric-note">MAE 1,43 · RMSE 2,52 · R² 0,69 — R² không phải accuracy.</div>
+</section>
+
+<section class="slide" data-document-role="page" data-label="Backup 4 - REST API">
+  <div class="eyebrow">Backup 4</div><h2>REST API & luồng inference</h2>
+  <div class="grid2"><div class="card"><h3>POST /predict</h3><p style="margin-top:18px"><b>Input:</b> inputDataImport + version</p><div class="flow" style="margin-top:25px"><div class="step">DataFrame</div><div class="arrow">→</div><div class="step">get_dummies</div><div class="arrow">→</div><div class="step">reindex</div><div class="arrow">→</div><div class="step">predict</div></div></div><div class="card"><h3>Output JSON</h3><p style="margin-top:18px">name · prediction · originalIndex</p><h3 style="margin-top:30px">Health & version</h3><p style="margin-top:18px">GET /health<br>GET /totalmodel</p></div></div>
+  <div class="quote">Flask + Gunicorn + Render · Flutter Web + Firebase Hosting</div>
+</section>
+
+</body></html>

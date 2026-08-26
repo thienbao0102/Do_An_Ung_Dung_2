@@ -1,0 +1,346 @@
+NỘI DUNG THUYẾT TRÌNH ĐỀ TÀI SCORESENSE
+Thời lượng mục tiêu: khoảng 15 phút
+Gồm 18 slide chính và 4 slide dự phòng
+
+LƯU Ý KHI TRÌNH BÀY
+- Đây là lời nói gợi ý, không cần học thuộc từng chữ.
+- Mỗi slide chỉ cần nhớ một ý chính.
+- Nói chậm, ngắt câu và nhìn Hội đồng sau mỗi ý quan trọng.
+- Các từ trong ngoặc là hướng dẫn, không cần đọc thành tiếng.
+
+============================================================
+SLIDE 1 - TRANG TIÊU ĐỀ
+============================================================
+Nội dung trên slide:
+XÂY DỰNG HỆ THỐNG DỰ ĐOÁN ĐIỂM SỐ HỌC TẬP CỦA SINH VIÊN DỰA TRÊN CÁC YẾU TỐ NHÂN KHẨU HỌC VÀ HÀNH VI HỌC TẬP BẰNG DECISION TREE
+
+Nhóm thực hiện: Mạch Lâm Quốc Hoài, Nguyễn Võ Thiên Bảo, Đặng Giao Ngân Linh
+GVHD: ThS. Nguyễn Thị Thanh
+Khoa Kỹ thuật Cơ - Điện và Máy tính, Trường Đại học Văn Lang
+Nghiên cứu khoa học sinh viên cấp trường - Năm 2026
+
+Lời thuyết trình gợi ý:
+Kính thưa Hội đồng và quý thầy cô. Em xin đại diện nhóm trình bày đề tài ScoreSense. Đây là hệ thống sử dụng mô hình Decision Tree để dự đoán điểm cuối kỳ dựa trên thông tin học tập, hoàn cảnh và thói quen của người học. Trong phần trình bày hôm nay, nhóm em sẽ lần lượt giới thiệu bài toán, dữ liệu, cách xây dựng mô hình, kết quả đạt được và ứng dụng ScoreSense mà nhóm đã triển khai.
+
+============================================================
+SLIDE 2 - BỐI CẢNH VÀ VẤN ĐỀ NGHIÊN CỨU
+============================================================
+Nội dung trên slide:
+Hiện trạng: Kết quả thường chỉ được nhìn thấy sau khi quá trình học đã kết thúc.
+Vấn đề: Khó phát hiện sớm người học có nguy cơ suy giảm kết quả.
+Mục tiêu: Kết hợp nhiều nhóm thông tin để dự đoán điểm số.
+Thông điệp: Dự đoán để hỗ trợ sớm, không thay thế đánh giá của giảng viên.
+
+Lời thuyết trình gợi ý:
+Lý do nhóm chọn đề tài này là vì điểm tổng kết thường chỉ có khi môn học gần kết thúc. Lúc đó, nếu sinh viên đang gặp khó khăn thì thời gian hỗ trợ cũng không còn nhiều. Vì vậy, nhóm muốn tạo ra một tín hiệu sớm hơn để giảng viên và sinh viên có thể chủ động điều chỉnh. Tuy nhiên, kết quả dự đoán chỉ mang tính tham khảo, chứ không thay thế nhận xét và quyết định của giảng viên.
+
+============================================================
+SLIDE 3 - MỤC TIÊU VÀ CÂU HỎI NGHIÊN CỨU
+============================================================
+Nội dung trên slide:
+1. Xác định các nhóm yếu tố liên quan đến kết quả học tập.
+2. Xây dựng mô hình dự đoán điểm cuối kỳ G3.
+3. Kiểm tra mô hình trên dữ liệu chưa dùng để huấn luyện.
+4. Tích hợp mô hình vào ứng dụng ScoreSense.
+
+Câu hỏi nghiên cứu:
+Có thể dự đoán G3 với mức sai số đủ để làm thông tin tham khảo hay không?
+
+Lời thuyết trình gợi ý:
+Đề tài có bốn mục tiêu chính. Đầu tiên, nhóm tìm hiểu những thông tin nào có thể liên quan đến kết quả học tập. Sau đó, nhóm xây dựng mô hình dự đoán điểm G3 và kiểm tra mô hình bằng dữ liệu mà nó chưa từng học. Cuối cùng, nhóm đưa mô hình vào ứng dụng ScoreSense. Câu hỏi nhóm muốn trả lời là: kết quả dự đoán có đủ gần với điểm thực tế để dùng làm một tín hiệu tham khảo hay không?
+
+============================================================
+SLIDE 4 - KHOẢNG TRỐNG VÀ ĐÓNG GÓP
+============================================================
+Nội dung trên slide:
+Khoảng trống:
+- Nhiều cách dự báo chủ yếu dựa vào điểm số.
+- Chưa kết hợp đầy đủ thông tin học tập, gia đình và hành vi.
+- Mô hình phức tạp thường khó giải thích.
+
+Đóng góp: DATA → MODEL → APPLICATION
+- Dữ liệu gồm nhiều nhóm yếu tố.
+- Decision Tree Regressor dễ giải thích.
+- Ứng dụng ScoreSense có thể sử dụng trực tiếp.
+
+Lời thuyết trình gợi ý:
+Nhóm nhận thấy một hệ thống dự đoán thực tế cần đáp ứng ba điều. Thứ nhất là sử dụng nhiều nhóm thông tin, không chỉ dựa vào điểm. Thứ hai là kết quả phải tương đối dễ giải thích. Và thứ ba là mô hình phải được đưa vào một ứng dụng có thể sử dụng. Vì vậy, đóng góp của đề tài gồm ba phần nối tiếp nhau: chuẩn bị dữ liệu, xây dựng mô hình và phát triển ứng dụng ScoreSense.
+
+============================================================
+SLIDE 5 - DATASET: NGUỒN VÀ QUY MÔ
+============================================================
+Nội dung trên slide:
+Nguồn: UCI Machine Learning Repository - Student Performance, tệp student-mat.csv.
+Ngữ cảnh gốc: học sinh trung học tại Bồ Đào Nha, môn Toán.
+
+395 bản ghi | 33 cột ban đầu | 32 biến đầu vào | Target G3
+41 đặc trưng sau mã hóa | Train 316 (80%) | Test 79 (20%)
+
+Footer nguồn:
+Cortez, P. (2008), Student Performance, UCI ML Repository, DOI: 10.24432/C5TG7T.
+
+Lời thuyết trình gợi ý:
+Nhóm sử dụng bộ dữ liệu Student Performance được công bố trên UCI. Dữ liệu gồm 395 học sinh trung học tại Bồ Đào Nha, học môn Toán. Trong 33 cột dữ liệu, G3 là điểm cuối kỳ cần dự đoán, còn 32 cột còn lại là thông tin đầu vào. Nhóm chia 80 phần trăm dữ liệu để huấn luyện và 20 phần trăm để kiểm tra. Một điểm cần lưu ý là đây không phải dữ liệu của sinh viên Văn Lang, nên kết quả hiện tại chủ yếu dùng để kiểm chứng giải pháp kỹ thuật.
+
+============================================================
+SLIDE 6 - DATA DICTIONARY: NĂM NHÓM BIẾN
+============================================================
+Nội dung trên slide:
+Nhân khẩu học: age, sex, address.
+Gia đình: Medu, Fedu, Mjob, Fjob.
+Hành vi học tập: studytime, absences, failures.
+Hỗ trợ và môi trường: schoolsup, famsup, internet.
+Thành tích trước đó: G1, G2.
+Target: G3 - điểm cuối kỳ, thang 0-20.
+
+Lời thuyết trình gợi ý:
+Để dễ theo dõi, nhóm chia 32 thông tin đầu vào thành năm nhóm. Đó là thông tin cá nhân, gia đình, hành vi học tập, điều kiện hỗ trợ và điểm số trước đó. Trong đó, G1 và G2 là điểm của hai giai đoạn trước, còn G3 là điểm cuối kỳ cần dự đoán. Những thông tin này chỉ giúp mô hình tìm ra quy luật dự báo; nhóm không kết luận rằng một yếu tố riêng lẻ chắc chắn gây ra kết quả học tập.
+
+============================================================
+SLIDE 7 - VÌ SAO G3 LÀ TARGET HỒI QUY?
+============================================================
+Nội dung trên slide:
+INPUT
+G1 + G2 + thông tin cá nhân + gia đình + hành vi + môi trường
+↓
+TARGET
+G3 - điểm cuối kỳ [0-20]
+↓
+PROBLEM
+Regression - bài toán hồi quy
+↓
+MODEL
+Decision Tree Regressor
+
+Lời thuyết trình gợi ý:
+G3 là một con số từ 0 đến 20. Vì đầu ra cần dự đoán là một giá trị điểm cụ thể nên đây là bài toán hồi quy. Mô hình được sử dụng là Decision Tree Regressor, hay cây quyết định dành cho bài toán dự đoán số. Sau khi có điểm dự đoán, ứng dụng có thể hiển thị thêm kết quả đạt hoặc chưa đạt để người dùng dễ hiểu. Tuy nhiên, bản chất của mô hình vẫn là dự đoán điểm số.
+
+============================================================
+SLIDE 8 - DATA PREPROCESSING
+============================================================
+Nội dung trên slide:
+Raw Data → Kiểm tra → Mã hóa → Đồng bộ cột → Chia dữ liệu → Mô hình
+
+- Không có giá trị thiếu trong dữ liệu huấn luyện.
+- Mã hóa các câu trả lời dạng chữ thành dạng số.
+- 32 biến đầu vào trở thành 41 đặc trưng.
+- Lưu danh sách cột để dữ liệu mới luôn đúng cấu trúc.
+
+Lời thuyết trình gợi ý:
+Trước khi huấn luyện, dữ liệu cần được xử lý để mô hình có thể đọc được. Nhóm kiểm tra dữ liệu thiếu, sau đó chuyển các câu trả lời dạng chữ, ví dụ như có hoặc không, thành các cột số. Sau bước này, 32 biến ban đầu trở thành 41 đặc trưng. Nhóm cũng lưu lại danh sách và thứ tự các cột. Nhờ vậy, khi có dữ liệu mới, hệ thống luôn sắp xếp đầu vào đúng giống như lúc huấn luyện.
+
+============================================================
+SLIDE 9 - QUY TRÌNH HUẤN LUYỆN
+============================================================
+Nội dung trên slide:
+Dataset → Xử lý dữ liệu → Chia Train/Test → Huấn luyện → Dự đoán → Đánh giá → REST API
+
+80% Train = 316 mẫu
+20% Test = 79 mẫu
+random_state = 42
+
+Lời thuyết trình gợi ý:
+Sau khi xử lý, dữ liệu được chia thành hai phần. Mô hình học từ 316 mẫu huấn luyện và được kiểm tra bằng 79 mẫu còn lại. Việc đặt random state bằng 42 giúp nhóm có thể chia lại dữ liệu theo đúng kết quả cũ. Sau khi huấn luyện, điểm dự đoán được so sánh với điểm thật bằng bốn chỉ số. Mô hình sau đó được lưu thành tệp để backend có thể nạp và sử dụng mà không cần huấn luyện lại mỗi lần.
+
+============================================================
+SLIDE 10 - TẠI SAO CHỌN DECISION TREE?
+============================================================
+Nội dung trên slide:
+01 - DỄ GIẢI THÍCH
+Có thể theo dõi các điều kiện từ gốc đến kết quả.
+
+02 - PHÙ HỢP DỮ LIỆU
+Xử lý được nhiều loại đặc trưng sau khi mã hóa.
+
+03 - DỄ TRIỂN KHAI
+Mô hình gọn và dự đoán nhanh.
+
+Lời thuyết trình gợi ý:
+Nhóm chọn Decision Tree vì ba lý do. Đầu tiên, cách mô hình đưa ra kết quả khá dễ hình dung: dữ liệu lần lượt đi qua các nhánh điều kiện cho đến khi ra điểm dự đoán. Tiếp theo, mô hình phù hợp với bộ dữ liệu có nhiều loại thông tin. Cuối cùng, cây quyết định có kích thước gọn, dự đoán nhanh và dễ đưa vào backend. Nhóm chọn mô hình này để cân bằng giữa kết quả, khả năng giải thích và khả năng triển khai.
+
+============================================================
+SLIDE 11 - KẾT QUẢ MÔ HÌNH TRÊN TEST SET
+============================================================
+Nội dung trên slide:
+MSE  = 6,33
+RMSE = 2,52 điểm
+MAE  = 1,43 điểm
+R²   = 0,69
+
+Diễn giải:
+- Sai lệch tuyệt đối trung bình khoảng 1,43 điểm.
+- Mô hình giải thích khoảng 69% sự thay đổi của G3 trên tập kiểm tra.
+- R² = 0,69 không phải Accuracy = 69%.
+
+Lời thuyết trình gợi ý:
+Đây là kết quả chính của mô hình trên 79 mẫu kiểm tra. Chỉ số dễ hiểu nhất là MAE bằng 1,43. Có nghĩa là trung bình điểm dự đoán lệch khoảng 1,43 điểm so với điểm thật. R bình phương đạt 0,69, cho thấy mô hình giải thích được khoảng 69 phần trăm sự thay đổi của điểm G3 trong tập kiểm tra này. Tuy nhiên, đây không phải là độ chính xác 69 phần trăm. Kết quả hiện tại cho thấy mô hình có giá trị tham khảo, nhưng chưa thể khẳng định đây là mô hình tốt nhất.
+
+============================================================
+SLIDE 12 - KHẢ NĂNG TỔNG QUÁT HÓA
+============================================================
+Nội dung trên slide:
+316 mẫu huấn luyện → Mô hình → 79 mẫu chưa từng học → Đánh giá
+
+Điểm đạt được:
+Tập kiểm tra không tham gia huấn luyện.
+
+Giới hạn:
+- Chỉ có 395 bản ghi.
+- Mới chia dữ liệu một lần theo tỷ lệ 80/20.
+- Chưa so sánh với nhiều mô hình khác.
+- Dữ liệu gốc khác với đối tượng dự kiến áp dụng.
+
+Lời thuyết trình gợi ý:
+Mô hình được kiểm tra bằng dữ liệu không tham gia huấn luyện, nên kết quả khách quan hơn so với việc kiểm tra lại trên dữ liệu đã học. Dù vậy, nghiên cứu vẫn còn một số giới hạn. Bộ dữ liệu chỉ có 395 bản ghi, nhóm mới thử một cách chia dữ liệu và chưa so sánh với nhiều mô hình khác. Quan trọng hơn, dữ liệu đến từ học sinh Bồ Đào Nha. Vì vậy, trước khi áp dụng cho sinh viên Văn Lang, cần thu thập và đánh giá lại bằng dữ liệu thực tế của trường.
+
+============================================================
+SLIDE 13 - NHỮNG NHÓM YẾU TỐ NỔI BẬT
+============================================================
+Nội dung trên slide:
+Tín hiệu gần nhất: G1, G2.
+Tín hiệu hành vi: absences, failures, studytime.
+Bối cảnh bổ sung: gia đình, hỗ trợ học tập, môi trường cá nhân.
+
+Thông điệp:
+Biến quan trọng đối với dự đoán không có nghĩa là nguyên nhân trực tiếp.
+
+Lời thuyết trình gợi ý:
+Trong mô hình, G1 và G2 thường là hai thông tin nổi bật vì đây là các điểm số gần với G3 nhất. Bên cạnh đó, số lần vắng học, số môn từng không đạt và thời gian học cũng cung cấp thêm thông tin hữu ích. Các yếu tố gia đình và môi trường giúp bổ sung bối cảnh. Tuy nhiên, một biến được mô hình sử dụng nhiều không có nghĩa biến đó trực tiếp gây ra điểm cao hay thấp. Đây chỉ là mối liên hệ được tìm thấy trong dữ liệu.
+
+============================================================
+SLIDE 14 - KIẾN TRÚC HỆ THỐNG SCORESENSE
+============================================================
+Nội dung trên slide:
+Sinh viên / Giảng viên
+↓
+Giao diện Flutter Web
+↓
+Flask REST API
+↓
+Xử lý và đồng bộ dữ liệu
+↓
+Mô hình Decision Tree + cấu trúc cột
+↓
+Kết quả dự đoán và biểu đồ
+
+Lời thuyết trình gợi ý:
+ScoreSense được chia thành hai phần chính. Phần giao diện được xây dựng bằng Flutter Web, nơi người dùng nhập thông tin hoặc tải tệp CSV. Dữ liệu sau đó được gửi đến backend Flask. Backend xử lý dữ liệu, sắp xếp đúng các cột rồi đưa vào mô hình Decision Tree. Kết quả được gửi trở lại giao diện dưới dạng điểm số và biểu đồ. Việc tách hai phần giúp nhóm dễ sửa giao diện, thay mô hình và triển khai hệ thống độc lập.
+
+============================================================
+SLIDE 15 - ỨNG DỤNG SCORESENSE
+============================================================
+Nội dung trên slide:
+DỰ ĐOÁN CÁ NHÂN
+Nhập biểu mẫu nhiều bước → dự đoán một người học → xem kết quả.
+
+DỰ ĐOÁN HÀNG LOẠT
+Tải CSV → dự đoán nhiều bản ghi → xem bảng và biểu đồ tổng hợp.
+
+Lời thuyết trình gợi ý:
+Ứng dụng có hai cách sử dụng. Với dự đoán cá nhân, người dùng nhập thông tin qua từng bước và nhận kết quả của một người học. Với dự đoán hàng loạt, giảng viên có thể tải lên một tệp CSV để nhận kết quả cho nhiều người cùng lúc. Cả hai cách đều dùng chung một backend và một quy trình xử lý, vì vậy kết quả được tạo ra theo cùng một nguyên tắc.
+
+============================================================
+SLIDE 16 - KẾT QUẢ KIỂM THỬ HỆ THỐNG
+============================================================
+Nội dung trên slide:
+✓ Nhận dữ liệu hợp lệ từ biểu mẫu hoặc bảng.
+✓ Dự đoán nhiều người học trong một lần.
+✓ Giữ lại tên và vị trí dòng ban đầu.
+✓ Tự bổ sung các cột dữ liệu còn thiếu.
+✓ Nạp đúng mô hình theo phiên bản.
+
+Lời thuyết trình gợi ý:
+Nhóm tập trung kiểm tra những lỗi có thể làm kết quả bị sai. Hệ thống có thể nhận dữ liệu dạng bảng và dự đoán nhiều dòng cùng lúc. Nếu dữ liệu có tên, backend sẽ tách tên ra trước khi dự đoán rồi ghép lại vào kết quả. Hệ thống cũng giữ vị trí dòng ban đầu để dễ đối chiếu. Đặc biệt, dữ liệu mới luôn được sắp xếp lại theo đúng cấu trúc đã dùng khi huấn luyện, tránh trường hợp sai hoặc thiếu cột.
+
+============================================================
+SLIDE 17 - HẠN CHẾ VÀ HƯỚNG PHÁT TRIỂN
+============================================================
+Nội dung trên slide:
+Hạn chế hiện tại:
+- Dữ liệu ít và khác với bối cảnh Việt Nam.
+- Một số thông tin do người học tự cung cấp.
+- Chưa thử nhiều cách chia dữ liệu và nhiều mô hình.
+- Chưa phù hợp để ra quyết định tự động.
+
+Hướng phát triển:
+DATA: Thu thập dữ liệu phù hợp tại Việt Nam.
+MODEL: So sánh Decision Tree với các mô hình khác.
+EVALUATION: Đánh giá nhiều lần, kiểm tra độ ổn định và công bằng.
+SYSTEM: Bổ sung đăng nhập, phân quyền và bảo vệ dữ liệu.
+
+Lời thuyết trình gợi ý:
+Hạn chế lớn nhất của đề tài là bộ dữ liệu chưa đại diện cho sinh viên Việt Nam. Ngoài ra, nhóm mới thử nghiệm một mô hình trên một lần chia dữ liệu. Trong tương lai, nhóm muốn thu thập dữ liệu phù hợp hơn, có sự đồng ý của người tham gia và bảo vệ thông tin cá nhân. Nhóm cũng sẽ so sánh thêm Random Forest, Gradient Boosting và các mô hình khác. Về ứng dụng, hệ thống cần bổ sung đăng nhập, phân quyền và theo dõi hoạt động trước khi có thể sử dụng trong thực tế.
+
+============================================================
+SLIDE 18 - KẾT LUẬN
+============================================================
+Nội dung trên slide:
+395 bản ghi | 41 đặc trưng sau mã hóa | R² = 0,69 trên tập kiểm tra
+
+Đề tài đã hoàn thành:
+- Xử lý và tổ chức dữ liệu.
+- Xây dựng Decision Tree Regressor.
+- Đánh giá trên 20% dữ liệu kiểm tra.
+- Tích hợp mô hình vào REST API và ứng dụng ScoreSense.
+- Hỗ trợ dự đoán cá nhân và hàng loạt.
+
+Thông điệp cuối:
+Dự đoán để hỗ trợ cảnh báo sớm, không thay thế quyết định của giảng viên.
+
+Lời thuyết trình gợi ý:
+Tóm lại, nhóm đã hoàn thành một quy trình đầy đủ từ dữ liệu, mô hình cho đến ứng dụng. Trên bộ dữ liệu 395 bản ghi, mô hình đạt R bình phương bằng 0,69 trên tập kiểm tra. Điểm nổi bật của đề tài không chỉ là xây dựng mô hình, mà còn đưa mô hình vào một ứng dụng có thể dự đoán cá nhân và hàng loạt. ScoreSense hiện là sản phẩm thử nghiệm và vẫn cần được phát triển thêm trước khi áp dụng thực tế. Mục tiêu cuối cùng của hệ thống là hỗ trợ phát hiện sớm khó khăn trong học tập, chứ không thay thế vai trò của giảng viên. Nhóm em xin cảm ơn Hội đồng và sẵn sàng trả lời câu hỏi.
+
+============================================================
+BACKUP 1 - FULL DATA DICTIONARY
+============================================================
+Nội dung trên slide:
+Toàn bộ 33 trường: school, sex, age, address, famsize, Pstatus, Medu, Fedu, Mjob, Fjob, reason, guardian, traveltime, studytime, failures, schoolsup, famsup, paid, activities, nursery, higher, internet, romantic, famrel, freetime, goout, Dalc, Walc, health, absences, G1, G2, G3.
+
+Lời trả lời gợi ý khi được hỏi:
+Đây là toàn bộ 33 cột của bộ dữ liệu. G3 là điểm cuối kỳ cần dự đoán, còn 32 cột khác là dữ liệu đầu vào. Các câu trả lời dạng chữ được chuyển thành cột số, nên sau khi xử lý mô hình sử dụng 41 đặc trưng. Nếu áp dụng tại Văn Lang, nhóm sẽ không sao chép nguyên bộ biến này mà cần lựa chọn lại những thông tin thật sự cần thiết và phù hợp với quy định bảo vệ dữ liệu cá nhân.
+
+============================================================
+BACKUP 2 - DECISION TREE: TỪ ROOT ĐẾN LEAF
+============================================================
+Nội dung trên slide:
+Điều kiện đầu tiên → các nhánh tiếp theo → nút lá → điểm G3 dự đoán.
+Minh họa một đường đi với G2, G1 và absences.
+
+Lời trả lời gợi ý khi được hỏi:
+Có thể hiểu Decision Tree giống như một chuỗi câu hỏi. Ở mỗi bước, mô hình kiểm tra một điều kiện, chẳng hạn G2 lớn hơn hay nhỏ hơn một mức nào đó. Dựa trên câu trả lời, dữ liệu đi sang một nhánh khác. Quá trình tiếp tục cho đến nút cuối cùng, gọi là nút lá. Giá trị tại nút lá chính là điểm mà mô hình dự đoán.
+
+============================================================
+BACKUP 3 - CÁCH ĐỌC CÁC METRIC HỒI QUY
+============================================================
+Nội dung trên slide:
+MAE = độ lệch tuyệt đối trung bình.
+RMSE = độ lệch có chú ý nhiều hơn đến các lỗi lớn.
+R² = mức độ mô hình giải thích sự thay đổi của điểm G3.
+
+Lời trả lời gợi ý khi được hỏi:
+MAE là chỉ số dễ hiểu nhất. MAE bằng 1,43 nghĩa là trung bình điểm dự đoán lệch khoảng 1,43 điểm so với điểm thật. RMSE phạt mạnh hơn những trường hợp dự đoán sai nhiều, nên thường lớn hơn MAE. R bình phương cho biết mô hình giải thích được bao nhiêu sự thay đổi của dữ liệu. R bình phương không phải tỷ lệ dự đoán đúng và cũng không phải accuracy.
+
+============================================================
+BACKUP 4 - REST API VÀ LUỒNG DỰ ĐOÁN
+============================================================
+Nội dung trên slide:
+POST /predict
+Input: dữ liệu cần dự đoán + phiên bản mô hình
+Xử lý: DataFrame → tách name → mã hóa → đồng bộ cột → model.predict
+Output: name + prediction + originalIndex
+
+GET /health
+GET /totalmodel
+
+Lời trả lời gợi ý khi được hỏi:
+API predict nhận dữ liệu cần dự đoán và số phiên bản mô hình. Backend chuyển dữ liệu thành bảng, tách tên nếu có, mã hóa các câu trả lời và sắp xếp lại đúng cấu trúc huấn luyện. Sau đó mô hình trả về điểm dự đoán. Backend ghép lại tên và vị trí dòng ban đầu rồi gửi kết quả cho giao diện. Hiện backend Flask được triển khai trên Render và Flutter Web được triển khai trên Firebase Hosting. Chức năng huấn luyện trực tuyến đang được tắt để hệ thống an toàn và ổn định hơn.
+
+============================================================
+GHI CHÚ QUAN TRỌNG TRƯỚC KHI NGHIỆM THU
+============================================================
+1. Nguồn dữ liệu là UCI Student Performance, tệp student-mat.csv, của học sinh trung học Bồ Đào Nha. Không nói đây là dữ liệu sinh viên Văn Lang.
+2. Mô hình cuối cùng là Decision Tree Regressor. Không gọi là classifier.
+3. R² = 0,69. Không nói “accuracy bằng 69%”.
+4. Backend hiện tại sử dụng Flask REST API, không phải FastAPI.
+5. G1 và G2 giúp dự đoán tốt nhưng không được giải thích là nguyên nhân trực tiếp tạo ra G3.
+6. Kết quả hiện tại là sản phẩm thử nghiệm, chưa dùng để tự động đưa ra quyết định về người học.
